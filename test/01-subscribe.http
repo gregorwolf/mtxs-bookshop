@@ -1,0 +1,6 @@
+###
+POST http://localhost:4004/-/cds/deployment/subscribe
+Content-Type: application/json
+Authorization: Basic yves:
+
+{ "tenant": "t1" }
