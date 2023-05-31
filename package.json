@@ -17,11 +17,13 @@
     "start": "cds-serve"
   },
   "cds": {
-    "profile": "with-mtx-sidecar",
     "requires": {
       "multitenancy": true,
       "toggles": true,
-      "extensibility": true
+      "extensibility": true,
+      "db": {
+        "kind": "sql-mt"
+      }
     }
   }
 }
