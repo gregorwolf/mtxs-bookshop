@@ -1,0 +1,16 @@
+###
+GET http://localhost:4004/catalog
+Authorization: Basic erin:
+###
+GET http://localhost:4004/catalog/Books
+Authorization: Basic erin:
+###
+POST http://localhost:4004/catalog/Books
+Authorization: Basic erin:
+Content-Type: application/json
+
+{
+  "ID": 3,
+  "title": "Machts gut und danke für den Fisch",
+  "stock": 500
+}

@@ -1,0 +1,16 @@
+###
+GET http://localhost:4004/catalog
+Authorization: Basic carol:
+###
+GET http://localhost:4004/catalog/Books
+Authorization: Basic carol:
+###
+POST http://localhost:4004/catalog/Books
+Authorization: Basic carol:
+Content-Type: application/json
+
+{
+  "ID": 42,
+  "title": "Per Anhalter durch die Galaxis",
+  "stock": 500
+}
