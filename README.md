@@ -1,6 +1,6 @@
-# Getting Started
+# MTXS Bookshop
 
-Welcome to your new project.
+Welcome this CAP project.
 
 It contains these folders and files, following our recommended project layout:
 
@@ -12,12 +12,17 @@ It contains these folders and files, following our recommended project layout:
 | `package.json` | project metadata and configuration   |
 | `readme.md`    | this getting started guide           |
 
-## Next Steps
+## Create Service Manager & Service Key
 
-- Open a new terminal and run `cds watch`
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start adding content, for example, a [db/schema.cds](db/schema.cds).
+```bash
+cf cs service-manager container mtxs-bookshop-db
+cf csk mtxs-bookshop-db mtxs-bookshop-db-key
+```
 
-## Learn More
+## Run with dynamic binding
 
-Learn more at https://cap.cloud.sap/docs/get-started/.
+When running with `cds watch --profile hybrid` the deployment of tenant containers fail. So please use:
+
+```bash
+cds bind --exec -- cds run --profile hybrid
+```
