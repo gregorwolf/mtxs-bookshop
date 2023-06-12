@@ -19,6 +19,12 @@ cf cs service-manager container mtxs-bookshop-db
 cf csk mtxs-bookshop-db mtxs-bookshop-db-key
 ```
 
+## Bind the CAP App to the service
+
+```bash
+cds bind -2 mtxs-bookshop-db
+```
+
 ## Run with dynamic binding
 
 When running with `cds watch --profile hybrid` the deployment of tenant containers fail. So please use:
