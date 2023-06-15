@@ -15,13 +15,24 @@
     "sqlite3": "^5"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "start:hybrid": "cds build --production && cp gen/srv/resources.tgz . && cds bind --exec cds-serve --profile hybrid"
   },
   "cds": {
     "requires": {
       "multitenancy": true,
       "toggles": true,
       "extensibility": true,
+      "[hybrid]": {
+        "db": {
+          "kind": "hana-cloud"
+        }
+      },
+      "[production]": {
+        "db": {
+          "kind": "hana-cloud"
+        }
+      },
       "db": {
         "kind": "sql"
       }

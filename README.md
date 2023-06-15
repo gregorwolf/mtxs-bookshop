@@ -30,5 +30,5 @@ cds bind -2 mtxs-bookshop-db
 When running with `cds watch --profile hybrid` the deployment of tenant containers fail. So please use:
 
 ```bash
-cds bind --exec -- cds run --profile hybrid
+npm run start:hybrid
 ```
