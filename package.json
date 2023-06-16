@@ -6,10 +6,14 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@sap-cloud-sdk/connectivity": "^2.15.0",
+    "@sap-cloud-sdk/http-client": "^2.15.0",
+    "@sap-cloud-sdk/util": "^2.15.0",
     "@sap/cds": "^6",
     "@sap/cds-mtxs": "^1",
     "express": "^4",
-    "hdb": "^0.19.0"
+    "hdb": "^0.19.0",
+    "passport": "^0.6.0"
   },
   "devDependencies": {
     "sqlite3": "^5"
@@ -24,6 +28,9 @@
       "toggles": true,
       "extensibility": true,
       "[hybrid]": {
+        "auth": {
+          "kind": "mocked"
+        },
         "db": {
           "kind": "hana-cloud"
         }
@@ -35,6 +42,15 @@
       },
       "db": {
         "kind": "sql"
+      },
+      "cfapi": {
+        "kind": "rest",
+        "credentials": {
+          "destination": "CFAPI"
+        },
+        "destinationOptions": {
+          "selectionStrategy": "alwaysProvider"
+        }
       }
     }
   }

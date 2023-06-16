@@ -12,17 +12,23 @@ It contains these folders and files, following our recommended project layout:
 | `package.json` | project metadata and configuration   |
 | `readme.md`    | this getting started guide           |
 
-## Create Service Manager & Service Key
+## Create Services & Service Keys
 
 ```bash
 cf cs service-manager container mtxs-bookshop-db
+cf cs destination lite mtxs-bookshop-destination
+cf cs xsuaa broker mtxs-bookshop-uaa -c xs-security.json
 cf csk mtxs-bookshop-db mtxs-bookshop-db-key
+cf csk mtxs-bookshop-destination mtxs-bookshop-destination-key
+cf csk mtxs-bookshop-uaa mtxs-bookshop-uaa-key
 ```
 
 ## Bind the CAP App to the service
 
 ```bash
 cds bind -2 mtxs-bookshop-db
+cds bind -2 mtxs-bookshop-destination
+cds bind -2 mtxs-bookshop-uaa
 ```
 
 ## Run with dynamic binding

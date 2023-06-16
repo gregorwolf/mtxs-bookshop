@@ -1,0 +1,48 @@
+{
+  "xsappname": "mtxs-bookshop-${space}",
+  "tenant-mode": "shared",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.cds.ExtensionDeveloper",
+      "description": "Extend CDS application"
+    },
+    {
+      "name": "$XSAPPNAME.MtxDiagnose",
+      "description": "Diagnose MTX sidecar"
+    },
+    {
+      "name": "$XSAPPNAME.mtdeployment",
+      "description": "Deploy applications"
+    },
+    {
+      "name": "$XSAPPNAME.mtcallback",
+      "description": "Subscribe to applications",
+      "grant-as-authority-to-apps": [
+        "$XSAPPNAME(application,sap-provisioning,tenant-onboarding)"
+      ]
+    }
+  ],
+  "authorities": [
+    "$XSAPPNAME.MtxDiagnose",
+    "$XSAPPNAME.mtdeployment",
+    "$XSAPPNAME.mtcallback"
+  ],
+  "role-templates": [
+    {
+      "name": "MultitenancyAdministrator",
+      "description": "Administrate multitenant applications",
+      "scope-references": [
+        "$XSAPPNAME.MtxDiagnose",
+        "$XSAPPNAME.mtdeployment",
+        "$XSAPPNAME.mtcallback"
+      ]
+    },
+    {
+      "name": "ExtensionDeveloper",
+      "description": "Extend application",
+      "scope-references": [
+        "$XSAPPNAME.cds.ExtensionDeveloper"
+      ]
+    }
+  ]
+}

@@ -24,8 +24,24 @@ modules:
           mtx-url: ${default-url}
     requires:
       - name: mtxs-bookshop-db
+      - name: mtxs-bookshop-destination
+      - name: mtxs-bookshop-uaa
 
 resources:
+  - name: mtxs-bookshop-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: broker  
+      path: ./xs-security.json
+      config:
+        xsappname: mtxs-bookshop-${space}
+        tenant-mode: shared  
+  - name: mtxs-bookshop-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
   - name: mtxs-bookshop-db
     type: org.cloudfoundry.managed-service
     parameters:
