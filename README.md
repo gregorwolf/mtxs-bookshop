@@ -33,6 +33,14 @@ cds bind -2 mtxs-bookshop-uaa
 
 ## Run with dynamic binding
 
+To run with mocked authentication also in hybrid mode you have to remove the line
+
+```
+"kind": "xsuaa",
+```
+
+from the `.cdsrc-private.json` file.
+
 When running with `cds watch --profile hybrid` the deployment of tenant containers fail. So please use:
 
 ```bash
