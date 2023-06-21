@@ -1,0 +1,6 @@
+VIEW MY_BOOKSHOP_CS1TAB AS SELECT
+  "SalesOrderId"        AS SalesOrderId,
+  "ProductId" AS ProductId,
+  "Quantity" AS Quantity,
+  "DeliveryDate" AS DeliveryDate
+FROM "SYNCS1TAB"

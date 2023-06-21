@@ -1,0 +1,14 @@
+{
+    "ServiceName_1": {
+        "object_owner": {
+            "container_roles": [
+                "CS1XHDIO#"
+            ]
+        },
+        "application_user": {
+            "container_roles": [
+                "CS1XHDIA"
+            ]
+        }
+    }
+}

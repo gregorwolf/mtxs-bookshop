@@ -1,0 +1,8 @@
+{
+    "SYNCS1TAB": {
+        "target": {
+            "schema.configure": "ServiceName_1/schema",
+            "object": "CS1TAB"
+        }
+    }
+}

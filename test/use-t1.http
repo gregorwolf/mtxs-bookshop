@@ -14,3 +14,7 @@ Content-Type: application/json
   "title": "Per Anhalter durch die Galaxis",
   "stock": 500
 }
+
+###
+GET http://localhost:4004/catalog/CS1TAB
+Authorization: Basic carol:

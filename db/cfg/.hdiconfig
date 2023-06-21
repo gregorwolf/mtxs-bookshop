@@ -1,0 +1,8 @@
+{
+	"minimum_feature_version": "1006",
+	"file_suffixes": {
+		"hdbsynonymconfig": {
+			"plugin_name": "com.sap.hana.di.synonym.config"
+		}
+	}
+}
