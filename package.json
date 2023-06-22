@@ -5,6 +5,9 @@
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
   "private": true,
+  "engines": {
+    "node": "^18"
+  },
   "dependencies": {
     "@sap-cloud-sdk/connectivity": "^2.15.0",
     "@sap-cloud-sdk/http-client": "^2.15.0",
