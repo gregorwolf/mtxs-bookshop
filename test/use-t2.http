@@ -2,7 +2,11 @@
 GET http://localhost:4004/catalog
 Authorization: Basic erin:
 ###
+GET http://localhost:4004/catalog/$metadata
+Authorization: Basic erin:
+###
 GET http://localhost:4004/catalog/Books
+#  ?$select=ID,title
 Authorization: Basic erin:
 ###
 POST http://localhost:4004/catalog/Books

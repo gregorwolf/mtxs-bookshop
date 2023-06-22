@@ -2,6 +2,9 @@
 GET http://localhost:4004/catalog
 Authorization: Basic carol:
 ###
+GET http://localhost:4004/catalog/$metadata
+Authorization: Basic carol:
+###
 GET http://localhost:4004/catalog/Books
 Authorization: Basic carol:
 ###
