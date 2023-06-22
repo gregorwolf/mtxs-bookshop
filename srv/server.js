@@ -1,12 +1,8 @@
 const cds = require("@sap/cds");
 const LOG = cds.log("mtxs-custom");
 
-cds.on("served", () => {
-  const { "cds.xt.ModelProviderService": mps } = cds.services;
-  const { "cds.xt.DeploymentService": ds } = cds.services;
-
-  ds.before("subscribe", async (req) => {
-    LOG.info("subscribe");
+async function fillServiceReplacement(req) {
+  if (req.data.tenant !== "t0") {
     const cfapi = await cds.connect.to("cfapi");
     const vcap = JSON.parse(process.env.VCAP_SERVICES);
     const upsName = req.data.tenant + "_CS1HDIAdb";
@@ -21,6 +17,10 @@ cds.on("served", () => {
       const upsGetResult = await cfapi.get(
         `/v3/service_instances?type=user-provided&names=${upsName}`
       );
+      if (upsGetResult.resources[0] === undefined) {
+        LOG.error("UPS not found", upsName);
+        throw new Error("UPS not found");
+      }
       upsGuid = upsGetResult.resources[0].guid;
       upsCredentials = await cfapi.get(
         `/v3/service_instances/${upsGuid}/credentials`
@@ -52,9 +52,20 @@ cds.on("served", () => {
       },
     ]);
     LOG.debug("SERVICE_REPLACEMENTS", process.env.SERVICE_REPLACEMENTS);
+  }
+}
+
+cds.on("served", () => {
+  const { "cds.xt.ModelProviderService": mps } = cds.services;
+  const { "cds.xt.DeploymentService": ds } = cds.services;
+
+  ds.before("subscribe", async (req) => {
+    LOG.info("subscribe");
+    await fillServiceReplacement(req);
   });
-  ds.before("upgrade", (req) => {
+  ds.before("upgrade", async (req) => {
     LOG.info("upgrade");
+    await fillServiceReplacement(req);
   });
   mps.after("getCsn", (csn) => {
     LOG.info("getCsn");
