@@ -1,0 +1,13 @@
+#clientSecret=<< Existing password/certificate removed on export >>
+#Password=<< Existing password/certificate removed on export >>
+#
+#Thu Jun 22 15:08:15 UTC 2023
+Type=HTTP
+clientId=cf
+Authentication=OAuth2Password
+Name=CFAPI
+tokenServiceURL=https\://login.cf.eu20.hana.ondemand.com/oauth/token
+ProxyType=Internet
+URL=https\://api.cf.eu20.hana.ondemand.com
+tokenServiceURLType=Dedicated
+User=your@email.com
