@@ -5,7 +5,8 @@ xsenv.loadEnv();
 const services = xsenv.getServices({
   dest: { tag: "destination" },
 });
-const dependencies = [services.dest.xsappname];
+const dependencies = [];
+dependencies.push(services.dest.xsappname);
 cds.env.requires["cds.xt.SaasProvisioningService"] = { dependencies };
 
 async function fillServiceReplacement(req) {
