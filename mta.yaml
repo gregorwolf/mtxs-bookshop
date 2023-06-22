@@ -14,6 +14,7 @@ modules:
     type: nodejs
     path: gen/srv
     parameters:
+      memory: 256M
       buildpack: nodejs_buildpack
     build-parameters:
       builder: npm-ci
@@ -21,6 +22,8 @@ modules:
       - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
           srv-url: ${default-url}
+      - name: mtx-api # required by SaaS Registry
+        properties:
           mtx-url: ${default-url}
     requires:
       - name: mtxs-bookshop-db
@@ -47,6 +50,8 @@ resources:
     parameters:
       service: service-manager
       service-plan: container
+    properties:
+      hdi-service-name: ${service-name}
   - name: mtxs-bookshop-registry
     type: org.cloudfoundry.managed-service
     requires:
@@ -55,8 +60,8 @@ resources:
       service: saas-registry
       service-plan: application
       config:
-        xsappname: mtxs-bookshop-${org}-${space}
-        appName: mtxs-bookshop-${org}-${space}
+        xsappname: mtxs-bookshop-${space}
+        appName: mtxs-bookshop
         displayName: mtxs-bookshop
         description: MTXS Bookshop
         category: 'Category'
