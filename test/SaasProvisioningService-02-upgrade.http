@@ -1,0 +1,28 @@
+###
+POST http://localhost:4004/-/cds/saas-provisioning/upgrade HTTP/1.1
+Content-Type: application/json
+Authorization: Basic yves:
+prefer: respond-async
+
+{
+  "tenants": ["t1"]
+}
+
+###
+POST http://localhost:4004/-/cds/saas-provisioning/upgrade HTTP/1.1
+Content-Type: application/json
+Authorization: Basic yves:
+prefer: respond-async
+
+{
+  "tenants": ["t1","t2"]
+}
+###
+POST http://localhost:4004/-/cds/saas-provisioning/upgrade HTTP/1.1
+Content-Type: application/json
+Authorization: Basic yves:
+prefer: respond-async
+
+{
+  "tenants": ["*"]
+}

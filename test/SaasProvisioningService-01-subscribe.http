@@ -1,0 +1,28 @@
+###
+GET http://localhost:4004/-/cds/saas-provisioning/tenant/t1 HTTP/1.1
+Content-Type: application/json
+Authorization: Basic yves:
+###
+GET http://localhost:4004/-/cds/saas-provisioning/tenant HTTP/1.1
+Content-Type: application/json
+Authorization: Basic yves:
+###
+PUT http://localhost:4004/-/cds/saas-provisioning/tenant/t1 HTTP/1.1
+Content-Type: application/json
+Authorization: Basic yves:
+
+{
+  "subscribedTenantId": "t1",
+  "subscribedSubdomain": "subdomain1",
+  "eventType": "CREATE"
+}
+###
+PUT http://localhost:4004/-/cds/saas-provisioning/tenant/t1 HTTP/1.1
+Content-Type: application/json
+Authorization: Basic erin:
+
+{
+  "subscribedTenantId": "t2",
+  "subscribedSubdomain": "subdomain2",
+  "eventType": "CREATE"
+}
