@@ -4,3 +4,10 @@ Content-Type: application/json
 Authorization: Basic yves:
 
 { "tenant": "t1" }
+###
+POST http://localhost:4004/-/cds/deployment/upgrade
+Content-Type: application/json
+Authorization: Basic erin:
+prefer: respond-async
+
+{ "tenant": "t2" }
