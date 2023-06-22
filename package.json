@@ -31,14 +31,10 @@
         "auth": {
           "kind": "mocked"
         },
-        "db": {
-          "kind": "hana-cloud"
-        }
+        "db": "hana-mt"
       },
       "[production]": {
-        "db": {
-          "kind": "hana-cloud"
-        }
+        "db": "hana-mt"
       },
       "db": {
         "kind": "sql"
