@@ -13,7 +13,7 @@ Authorization: Basic yves:
 
 {
   "subscribedTenantId": "t1",
-  "subscribedSubdomain": "subdomain1",
+  "subscribedSubdomain": "dev-azure-sub1",
   "eventType": "CREATE"
 }
 ###
