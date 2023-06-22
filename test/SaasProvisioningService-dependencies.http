@@ -1,0 +1,4 @@
+###
+GET http://localhost:4004/-/cds/saas-provisioning/dependencies
+Content-Type: application/json
+Authorization: Basic yves:

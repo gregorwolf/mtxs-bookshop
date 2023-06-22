@@ -1,5 +1,12 @@
 const cds = require("@sap/cds");
 const LOG = cds.log("mtxs-custom");
+const xsenv = require("@sap/xsenv");
+xsenv.loadEnv();
+const services = xsenv.getServices({
+  dest: { tag: "destination" },
+});
+const dependencies = [services.dest.xsappname];
+cds.env.requires["cds.xt.SaasProvisioningService"] = { dependencies };
 
 async function fillServiceReplacement(req) {
   if (req.data.tenant !== "t0") {
