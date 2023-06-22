@@ -5,7 +5,12 @@ async function fillServiceReplacement(req) {
   if (req.data.tenant !== "t0") {
     const cfapi = await cds.connect.to("cfapi");
     const vcap = JSON.parse(process.env.VCAP_SERVICES);
-    const upsName = req.data.tenant + "_CS1HDIAdb";
+    let upsName = "";
+    if (req.data.metadata) {
+      upsName = req.data.metadata.subscribedSubdomain + "_CS1HDIAdb";
+    } else {
+      upsName = req.data.tenant + "_CS1HDIAdb";
+    }
     // Check if UPS is existing in vcap
     let upsContent = vcap["user-provided"]?.filter((ups) => {
       ups.name === upsName;
