@@ -30,6 +30,7 @@ modules:
       - name: mtxs-bookshop-db
       - name: mtxs-bookshop-destination
       - name: mtxs-bookshop-uaa
+      - name: mtxs-bookshop-registry
 
 resources:
   - name: mtxs-bookshop-uaa
