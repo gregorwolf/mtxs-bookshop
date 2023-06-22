@@ -2,7 +2,8 @@ namespace my.bookshop;
 
 entity Books {
   key ID    : Integer;
-      title : String;
+      title : String(200);
+      // description : String(5000);
       stock : Integer;
 }
 
