@@ -10,15 +10,23 @@
       "type": "node",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "cds",
-      "args": ["serve", "--with-mocks", "--in-memory?"],
-      "skipFiles": ["<node_internals>/**"]
+      "args": [
+        "serve",
+        "--with-mocks",
+        "--in-memory?"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
     },
     {
       "command": "cds bind --exec cds-serve --profile hybrid",
       "name": "cds run hybrid",
       "request": "launch",
       "type": "node-terminal",
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
     }
   ]
 }
