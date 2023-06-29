@@ -1,5 +1,12 @@
 const cds = require("@sap/cds");
 const LOG = cds.log("mtxs-custom");
+
+const executeHttpRequest =
+  require("@sap-cloud-sdk/http-client").executeHttpRequest;
+const destinationSelectionStrategies =
+  require("@sap-cloud-sdk/connectivity").DestinationSelectionStrategies;
+
+// Red xsappname using xsenv
 const xsenv = require("@sap/xsenv");
 xsenv.loadEnv();
 const services = xsenv.getServices({
@@ -11,7 +18,6 @@ cds.env.requires["cds.xt.SaasProvisioningService"] = { dependencies };
 
 async function fillServiceReplacement(req) {
   if (req.data.tenant !== "t0") {
-    const cfapi = await cds.connect.to("cfapi");
     const vcap = JSON.parse(process.env.VCAP_SERVICES);
     let upsName = "";
     if (req.data.metadata) {
@@ -27,17 +33,44 @@ async function fillServiceReplacement(req) {
       // Use Cloud Foundry API to read details of UPS
       // Local Test with CF CLI:
       // cf curl "v3/service_instances?type=user-provided&names=anonymous_CS1HDIAdb"
-      const upsGetResult = await cfapi.get(
-        `/v3/service_instances?type=user-provided&names=${upsName}`
-      );
-      if (upsGetResult.resources[0] === undefined) {
+      let upsGetResult = {};
+      try {
+        upsGetResult = await executeHttpRequest(
+          {
+            destinationName: "CFAPI",
+            selectionStrategy: destinationSelectionStrategies.alwaysProvider,
+          },
+          {
+            method: "get",
+            url: `/v3/service_instances?type=user-provided&names=${upsName}`,
+            params: {},
+          }
+        );
+      } catch (error) {
+        LOG.error("Error message: " && error.message);
+      }
+
+      if (upsGetResult.data.resources[0] === undefined) {
         LOG.error("UPS not found", upsName);
         throw new Error("UPS not found");
       }
-      upsGuid = upsGetResult.resources[0].guid;
-      upsCredentials = await cfapi.get(
-        `/v3/service_instances/${upsGuid}/credentials`
-      );
+      upsGuid = upsGetResult.data.resources[0].guid;
+      let upsCredentials = {};
+      try {
+        upsCredentials = await executeHttpRequest(
+          {
+            destinationName: "CFAPI",
+            selectionStrategy: destinationSelectionStrategies.alwaysProvider,
+          },
+          {
+            method: "get",
+            url: `/v3/service_instances/${upsGuid}/credentials`,
+            params: {},
+          }
+        );
+      } catch (error) {
+        LOG.error("Error message: " && error.message);
+      }
       upsContent = {
         label: "user-provided",
         name: upsName,
@@ -45,7 +78,7 @@ async function fillServiceReplacement(req) {
         instance_guid: upsGuid,
         instance_name: upsName,
         binding_name: null,
-        credentials: upsCredentials,
+        credentials: upsCredentials.data,
         syslog_drain_url: null,
         volume_mounts: [],
       };
