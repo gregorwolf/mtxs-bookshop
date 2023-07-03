@@ -1,0 +1,12 @@
+ID: mtxs-bookshop.freetier
+_schema-version: "3.3.0"
+version: 0.0.1
+extends: mtxs-bookshop
+
+modules:
+  - name: mtxs-bookshop-api-sb
+    properties:
+      SBF_BROKER_CREDENTIALS_HASH:  >
+        {
+          "broker-user": "<paste your hash credentials here>"
+        }

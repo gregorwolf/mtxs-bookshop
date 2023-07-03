@@ -31,6 +31,42 @@ modules:
       - name: mtxs-bookshop-destination
       - name: mtxs-bookshop-uaa
       - name: mtxs-bookshop-registry
+  - name: mtxs-bookshop-api-sb
+    type: nodejs
+    path: broker/
+    build-parameters:
+      builder: npm-ci
+      ignore: ['node_modules/', 'default-*.json', 'manifest*.yml']
+    parameters:
+      app-name: mtxs-bookshop-api-sb-${space}
+      memory: 64MB
+      disk-quota: 265MB
+    requires:
+      - name: mtxs-bookshop-uaa
+      - name: srv-api
+        properties:
+          SBF_SERVICE_CONFIG:
+              MTXS Bookshop API:
+                extend_credentials:
+                  shared:
+                    apiUrl: ~{srv-url}
+                # extend_xssecurity:
+                #   per_plan:
+                #     default: 
+                #       authorities: 
+                #       - $XSMASTERAPPNAME.plan_default
+                #     premium: 
+                #       authorities: 
+                #       - $XSMASTERAPPNAME.plan_premium
+                extend_catalog:
+                  metadata:
+                     displayName : MTXS Bookshop API ${space}
+          SBF_ENABLE_AUDITLOG: false
+    provides:
+      - name: mtxs-bookshop-api-sb-srv
+        properties:
+          app-name: ${app-name}
+          srv-url: ${default-url}
 
 resources:
   - name: mtxs-bookshop-uaa

@@ -1,0 +1,22 @@
+{
+  "services": [
+    {
+      "name": "MTXS Bookshop API",
+      "description": "API for MTXS Bookshop App",
+      "bindable": true,
+      "plans": [
+        {
+          "name": "default",
+          "description": "Standard Plan",
+          "id": "aedd8658-e906-43a6-9f0c-4c64d290dd2c"
+        },
+        {
+          "name": "premium",
+          "description": "Premium Plan",
+          "id": "c3b71a64-7c05-4d24-9690-dd07df203234"
+        }
+      ],
+      "id": "4776be25-65f1-4021-b45c-04190dd87344"
+    }
+  ]
+}
