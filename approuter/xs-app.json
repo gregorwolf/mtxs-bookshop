@@ -1,0 +1,24 @@
+{
+  "welcomeFile": "/app/",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout",
+    "logoutPage": "/app/logout.html"
+  },
+  "whitelistService": {
+    "endpoint": "/allowlist/service"
+  },
+  "routes": [
+    {
+      "source": "/catalog/(.*)$",
+      "target": "/catalog/$1",
+      "destination": "srv",
+      "csrfProtection": true
+    },
+    {
+      "source": "^/app/(.*)$",
+      "target": "$1",
+      "localDir": "webapp"
+    }
+  ]
+}

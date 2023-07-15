@@ -1,0 +1,16 @@
+{
+  "name": "mtxs-bookshop-approuter",
+  "version": "0.0.2",
+  "description": "",
+  "dependencies": {
+    "@sap/approuter": "^14"
+  },
+  "engines": {
+    "node": "^18"
+  },
+  "scripts": {
+    "start:extended": "node approuter.js",
+    "start": "node node_modules/@sap/approuter/approuter.js",
+    "update": "npm update"
+  }
+}

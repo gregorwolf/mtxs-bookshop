@@ -10,6 +10,33 @@ build-parameters:
       commands:
         - npx -p @sap/cds-dk cds build --production
 modules:
+  - name: mtxs-bookshop
+    type: html5
+    path: approuter
+    build-parameters:
+      ignore: ["node_modules/"]
+    parameters:
+      memory: 128M
+      disk-quota: 512M
+      keep-existing-routes: true
+    properties:
+      TENANT_HOST_PATTERN: '^(.*)-${app-name}.${default-domain}'
+      SEND_XFRAMEOPTIONS: false
+      CJ_PROTECT_WHITELIST: >
+        [
+          {
+            "protocol": "https",
+            "host": "*.ondemand.com"
+          }
+        ]
+    requires:
+    - name: mtxs-bookshop-uaa
+    - name: srv-api
+      group: destinations
+      properties:
+        name: srv
+        url: ~{srv-url}
+        forwardAuthToken: true
   - name: mtxs-bookshop-srv
     type: nodejs
     path: gen/srv
