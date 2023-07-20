@@ -46,7 +46,8 @@ async function fillServiceReplacement(req) {
       // cf curl "v3/service_instances?type=user-provided&names=anonymous_CS1HDIAdb"
       let upsGetResult = {};
       try {
-        let urlFindUps = `/v3/service_instances?organization_guids=${appEnv.app.organization_id}&space_guids=${appEnv.app.space_id}` +
+        let urlFindUps =
+          `/v3/service_instances?organization_guids=${appEnv.app.organization_id}&space_guids=${appEnv.app.space_id}` +
           `&type=user-provided&names=${upsName}`;
         LOG.info("urlFindUps", urlFindUps);
         upsGetResult = await executeHttpRequest(
@@ -121,10 +122,18 @@ cds.on("served", () => {
   LOG.debug("CDS served");
   const { "cds.xt.ModelProviderService": mps } = cds.services;
   const { "cds.xt.DeploymentService": ds } = cds.services;
+  const { "cds.xt.SaasProvisioningService": provisioning } = cds.services;
+  // Add provisioning logic if only multitenancy is there..
+  if (provisioning) {
+    let tenantProvisioning = require("./provisioning");
+    provisioning.prepend(tenantProvisioning);
+  } else {
+    LOG.info("There is no service, therefore does not serve multitenancy!");
+  }
 
   ds.before("subscribe", async (req) => {
     LOG.info("subscribe");
-    await fillServiceReplacement(req);
+    await await fillServiceReplacement(req);
   });
   ds.before("upgrade", async (req) => {
     LOG.info("upgrade");

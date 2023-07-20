@@ -10,6 +10,7 @@ build-parameters:
       commands:
         - npx -p @sap/cds-dk cds build --production
 modules:
+  # --------------------- APPROUTER MODULE -------------------------------------
   - name: mtxs-bookshop
     type: html5
     path: approuter
@@ -19,8 +20,10 @@ modules:
       memory: 128M
       disk-quota: 512M
       keep-existing-routes: true
+      tenant-separator: '-'
+      app-domain: ${app-name}.${default-domain}
     properties:
-      TENANT_HOST_PATTERN: '^(.*)-${app-name}.${default-domain}'
+      TENANT_HOST_PATTERN: '^(.*)${tenant-separator}${app-name}.${default-domain}'
       SEND_XFRAMEOPTIONS: false
       CJ_PROTECT_WHITELIST: >
         [
@@ -37,12 +40,28 @@ modules:
         name: srv
         url: ~{srv-url}
         forwardAuthToken: true
+    provides:
+      - name: mtxs-bookshop-approuter
+        properties:
+           app-url: ${default-url}
+           application: ${app-name}
+           tenant-separator: ${tenant-separator}
+           app-domain: ${app-domain}
+  # --------------------- SERVER MODULE -------------------------------------
   - name: mtxs-bookshop-srv
     type: nodejs
     path: gen/srv
     parameters:
       memory: 256M
       buildpack: nodejs_buildpack
+    properties:
+      tenantSeparator: ~{mtxs-bookshop-approuter/tenant-separator}
+      appDomain: ~{mtxs-bookshop-approuter/app-domain}
+      approuterUrl: ~{mtxs-bookshop-approuter/app-url}
+      appName: ~{mtxs-bookshop-approuter/application}
+      brokerName: ~{mtxs-bookshop-api-sb-srv/app-name}
+      brokerUrl: ~{mtxs-bookshop-api-sb-srv/srv-url}
+      srvUrl: 'https://${app-name}.${default-domain}'
     build-parameters:
       builder: npm-ci
       ignore: ["node_modules/"]
@@ -58,6 +77,10 @@ modules:
       - name: mtxs-bookshop-destination
       - name: mtxs-bookshop-uaa
       - name: mtxs-bookshop-registry
+      - name: mtxs-bookshop-approuter
+      - name: mtxs-bookshop-api-sb-srv
+      - name: mtxs-bookshop-credstore
+# --------------------- BROKER MODULE -------------------------------------
   - name: mtxs-bookshop-api-sb
     type: nodejs
     path: broker/
@@ -137,3 +160,14 @@ resources:
           onUnSubscriptionAsync: true
           onUpdateDependenciesAsync: true
           callbackTimeoutMillis: 300000 # Increase if your deployments are taking longer than that
+  # ----------------- CREDENTIAL STORE  -----------------------
+  - name: mtxs-bookshop-credstore
+  # -----------------------------------------------------------
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: credstore
+      service-name: mtxs-bookshop-credstore-${space}
+      service-plan: free
+      config: 
+         authentication:
+              type: basic
