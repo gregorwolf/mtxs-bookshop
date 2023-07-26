@@ -56,22 +56,21 @@ async function createRouteCAP(tenantHost, domain, uiAppName) {
 }
 
 async function createRouteCloudSDK(tenantHost, domain, uiAppName) {
-  let appGetResult = {};
+  let routeGetResult = {};
   try {
-    let urlFindApp =
-      `/v3/apps` +
-      `?organization_guids=${appEnv.app.organization_id}` +
+    let urlFindRoute =
+      `/v3/routes?organization_guids=${appEnv.app.organization_id}` +
       `&space_guids=${appEnv.app.space_id}` +
-      `&names=${uiAppName}`;
-    LOG.info("urlFindApp", urlFindApp);
-    appGetResult = await executeHttpRequest(
+      `&hosts=${tenantHost}`;
+    LOG.info("urlFindRoute", urlFindRoute);
+    routeGetResult = await executeHttpRequest(
       {
         destinationName: "CFAPI",
         selectionStrategy: destinationSelectionStrategies.alwaysProvider,
       },
       {
         method: "get",
-        url: urlFindApp,
+        url: urlFindRoute,
         params: {},
       }
     );
@@ -79,8 +78,12 @@ async function createRouteCloudSDK(tenantHost, domain, uiAppName) {
     LOG.error("Error message: " && error.message);
   }
 
-  const uiappGuid = appGetResult?.data?.resources[0].guid;
-  LOG.info("UI App GUID: ", uiappGuid);
+  const routeGuid = routeGetResult?.data?.resources[0].guid;
+  LOG.info("Route GUID: ", routeGuid);
+  if (routeGuid) {
+    LOG.info("Route already exists");
+    return;
+  }
 
   let domainGetResult = {};
   try {
@@ -132,6 +135,27 @@ async function createRouteCloudSDK(tenantHost, domain, uiAppName) {
       }
     );
     LOG.info("Route created GUID: ", createRouteResult.data.guid);
+
+    let urlFindApp =
+      `/v3/apps` +
+      `?organization_guids=${appEnv.app.organization_id}` +
+      `&space_guids=${appEnv.app.space_id}` +
+      `&names=${uiAppName}`;
+    LOG.info("urlFindApp", urlFindApp);
+    let appGetResult = await executeHttpRequest(
+      {
+        destinationName: "CFAPI",
+        selectionStrategy: destinationSelectionStrategies.alwaysProvider,
+      },
+      {
+        method: "get",
+        url: urlFindApp,
+        params: {},
+      }
+    );
+    const uiAppGuid = appGetResult?.data?.resources[0].guid;
+    LOG.info("UI App GUID: ", uiAppGuid);
+
     mapRouteToAppResult = await executeHttpRequest(
       {
         destinationName: "CFAPI",
@@ -145,7 +169,7 @@ async function createRouteCloudSDK(tenantHost, domain, uiAppName) {
           destinations: [
             {
               app: {
-                guid: uiappGuid,
+                guid: uiAppGuid,
               },
             },
           ],
