@@ -35,7 +35,8 @@ async function fillServiceReplacementCloudSDK(req) {
       let upsGetResult = {};
       try {
         let urlFindUps =
-          `/v3/service_instances?organization_guids=${appEnv.app.organization_id}&space_guids=${appEnv.app.space_id}` +
+          `/v3/service_instances?organization_guids=${appEnv.app.organization_id}` +
+          `&space_guids=${appEnv.app.space_id}` +
           `&type=user-provided&names=${upsName}`;
         LOG.info("urlFindUps", urlFindUps);
         upsGetResult = await executeHttpRequest(
