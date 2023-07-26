@@ -27,6 +27,7 @@ async function fillServiceReplacement(req) {
     // Get enviroment variable
     const vcap = JSON.parse(process.env.VCAP_SERVICES);
     let upsName = "";
+    const cfapi = await cds.connect.to("cfapi");
 
     if (req.data.metadata) {
       // for SaasProvisioningService
@@ -45,49 +46,21 @@ async function fillServiceReplacement(req) {
       // Local Test with CF CLI:
       // cf curl "v3/service_instances?type=user-provided&names=anonymous_CS1HDIAdb"
       let upsGetResult = {};
-      try {
-        let urlFindUps =
-          `/v3/service_instances?organization_guids=${appEnv.app.organization_id}&space_guids=${appEnv.app.space_id}` +
-          `&type=user-provided&names=${upsName}`;
-        LOG.info("urlFindUps", urlFindUps);
-        upsGetResult = await executeHttpRequest(
-          {
-            destinationName: "CFAPI",
-            selectionStrategy: destinationSelectionStrategies.alwaysProvider,
-          },
-          {
-            method: "get",
-            url: urlFindUps,
-            params: {},
-          }
-        );
-      } catch (error) {
-        LOG.error("Error message: " && error.message);
-      }
+      upsGetResult = await cfapi.get(
+        `/v3/service_instances?organization_guids=${appEnv.app.organization_id}&space_guids=${appEnv.app.space_id}` +
+          `&type=user-provided&names=${upsName}`
+      );
 
-      if (upsGetResult.data.resources[0] === undefined) {
+      if (upsGetResult.resources[0] === undefined) {
         LOG.error("UPS not found", upsName);
         throw new Error("UPS not found");
       }
 
       // get credentials for user-provided service above
-      upsGuid = upsGetResult.data.resources[0].guid;
-      let upsCredentials = {};
-      try {
-        upsCredentials = await executeHttpRequest(
-          {
-            destinationName: "CFAPI",
-            selectionStrategy: destinationSelectionStrategies.alwaysProvider,
-          },
-          {
-            method: "get",
-            url: `/v3/service_instances/${upsGuid}/credentials`,
-            params: {},
-          }
-        );
-      } catch (error) {
-        LOG.error("Error message: " && error.message);
-      }
+      upsGuid = upsGetResult.resources[0].guid;
+      upsCredentials = await cfapi.get(
+        `/v3/service_instances/${upsGuid}/credentials`
+      );
       upsContent = {
         label: "user-provided",
         name: upsName,
@@ -95,7 +68,7 @@ async function fillServiceReplacement(req) {
         instance_guid: upsGuid,
         instance_name: upsName,
         binding_name: null,
-        credentials: upsCredentials.data,
+        credentials: upsCredentials,
         syslog_drain_url: null,
         volume_mounts: [],
       };
