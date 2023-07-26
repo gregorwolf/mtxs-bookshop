@@ -16,6 +16,12 @@
       "csrfProtection": true
     },
     {
+      "source": "/odata/v4/catalog/(.*)$",
+      "target": "/odata/v4/catalog/$1",
+      "destination": "srv",
+      "csrfProtection": true
+    },
+    {
       "source": "^/app/(.*)$",
       "target": "$1",
       "localDir": "webapp"
