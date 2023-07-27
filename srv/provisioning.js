@@ -14,7 +14,8 @@ module.exports = (service) => {
     let tenantHost = req.data.subscribedSubdomain + "-" + uiAppName;
     let domain = /\.(.*)/gm.exec(appEnv.app.application_uris[0])[1];
     let tenantURL = "https://" + tenantHost + "." + domain;
-
+    // TODO set application_url in header
+    req.headers["application_url"] = tenantURL;
     await next();
 
     cds.spawn({ tenant: tenant }, async (tx) => {
