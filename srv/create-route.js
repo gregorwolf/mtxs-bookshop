@@ -12,15 +12,19 @@ const appEnv = cfenv.getAppEnv();
 async function createRouteCAP(tenantHost, domain, uiAppName) {
   const cfapi = await cds.connect.to("cfapi");
 
-  const uiappGuid = (
-    await cfapi.get(
-      `/v3/apps` +
-        `?organization_guids=${appEnv.app.organization_id}` +
-        `&space_guids=${appEnv.app.space_id}` +
-        `&names=${uiAppName}`
-    )
-  ).resources[0].guid;
-  LOG.info("UI App GUID: ", uiappGuid);
+  let urlFindRoute =
+    `/v3/routes?organization_guids=${appEnv.app.organization_id}` +
+    `&space_guids=${appEnv.app.space_id}` +
+    `&hosts=${tenantHost}`;
+  LOG.info("urlFindRoute", urlFindRoute);
+  const routeGetResult = await cfapi.get(urlFindRoute);
+  const routeGuid = routeGetResult?.resources[0].guid;
+  LOG.info("Route GUID: ", routeGuid);
+  if (routeGuid) {
+    LOG.info("Route already exists");
+    return;
+  }
+
   const domainGuid = (await cfapi.get(`/v3/domains?names=${domain}`))
     .resources[0].guid;
   LOG.info("Domain GUID: ", domainGuid);
@@ -40,13 +44,24 @@ async function createRouteCAP(tenantHost, domain, uiAppName) {
     },
   });
   LOG.info("Route created GUID: ", createRoute.guid);
+
+  const uiAppGuid = (
+    await cfapi.get(
+      `/v3/apps` +
+        `?organization_guids=${appEnv.app.organization_id}` +
+        `&space_guids=${appEnv.app.space_id}` +
+        `&names=${uiAppName}`
+    )
+  ).resources[0].guid;
+  LOG.info("UI App GUID: ", uiAppGuid);
+
   const mapRouteToApp = await cfapi.post(
     `/v3/routes/${createRoute.guid}/destinations`,
     {
       destinations: [
         {
           app: {
-            guid: uiappGuid,
+            guid: uiAppGuid,
           },
         },
       ],
