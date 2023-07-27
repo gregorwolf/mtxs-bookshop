@@ -9,17 +9,21 @@ const { createRouteCAP, createRouteCloudSDK } = require("./create-route");
 module.exports = (service) => {
   service.on("UPDATE", "tenant", async (req, next) => {
     LOG.info("UPDATE tenant- Subscription data:", JSON.stringify(req.data));
-    await next();
+    let tenant = req.data.subscribedTenantId;
     const uiAppName = "mtxs-bookshop";
     let tenantHost = req.data.subscribedSubdomain + "-" + uiAppName;
     let domain = /\.(.*)/gm.exec(appEnv.app.application_uris[0])[1];
     let tenantURL = "https://" + tenantHost + "." + domain;
 
-    if (process.env?.CREATE_ROUTE === "SDK") {
-      await createRouteCloudSDK(tenantHost, domain, uiAppName);
-    } else {
-      await createRouteCAP(tenantHost, domain, uiAppName);
-    }
+    await next();
+
+    cds.spawn({ tenant: tenant }, async (tx) => {
+      if (process.env?.CREATE_ROUTE === "SDK") {
+        await createRouteCloudSDK(tenantHost, domain, uiAppName);
+      } else {
+        await createRouteCAP(tenantHost, domain, uiAppName);
+      }
+    });
     return tenantURL;
   });
 
