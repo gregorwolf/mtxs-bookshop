@@ -19,6 +19,7 @@ async function fillServiceReplacementCAP(req) {
       // for CAP deployment service (/-/cds/deployment/subscribe)
       upsName = req.data.tenant + "_CS1HDIAdb";
     }
+    LOG.info("Searching for upsName", upsName);
     // Check if UPS is existing in vcap
     // to be able to test without access to the cf-api
     let upsContent = vcap["user-provided"]?.filter((ups) => {
