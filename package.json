@@ -27,7 +27,8 @@
     "start:hybrid": "cds build --production && cp gen/srv/resources.tgz . && cds bind --exec cds-serve --profile hybrid",
     "deploy": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e deployment/free-tier-private.mtaext",
     "deploy:srv": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e deployment/free-tier-private.mtaext -m mtxs-bookshop-srv",
-    "deploy:ui": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e deployment/free-tier-private.mtaext -m mtxs-bookshop"
+    "deploy:ui": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e deployment/free-tier-private.mtaext -m mtxs-bookshop",
+    "undeploy": "cf undeploy mtxs-bookshop --delete-service-keys --delete-services --delete-service-brokers"
   },
   "cds": {
     "log": {
