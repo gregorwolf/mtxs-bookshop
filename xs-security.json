@@ -44,5 +44,14 @@
         "$XSAPPNAME.cds.ExtensionDeveloper"
       ]
     }
-  ]
+  ],
+  "oauth2-configuration": {
+    "credential-types": [
+      "binding-secret"
+    ],
+    "redirect-uris": [
+      "https://*.hana.ondemand.com/**",
+      "http://localhost:*/**"
+    ]
+  }
 }
