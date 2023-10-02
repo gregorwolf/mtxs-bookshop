@@ -1,15 +1,15 @@
 ###
-GET http://localhost:4004/catalog
+GET http://localhost:4004/odata/v4/catalog
 Authorization: Basic erin:
 ###
-GET http://localhost:4004/catalog/$metadata
+GET http://localhost:4004/odata/v4/catalog/$metadata
 Authorization: Basic erin:
 ###
-GET http://localhost:4004/catalog/Books
+GET http://localhost:4004/odata/v4/catalog/Books
 #  ?$select=ID,title
 Authorization: Basic erin:
 ###
-POST http://localhost:4004/catalog/Books
+POST http://localhost:4004/odata/v4/catalog/Books
 Authorization: Basic erin:
 Content-Type: application/json
 

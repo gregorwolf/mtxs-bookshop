@@ -1,14 +1,14 @@
 ###
-GET http://localhost:4004/catalog
+GET http://localhost:4004/odata/v4/catalog
 Authorization: Basic carol:
 ###
-GET http://localhost:4004/catalog/$metadata
+GET http://localhost:4004/odata/v4/catalog/$metadata
 Authorization: Basic carol:
 ###
-GET http://localhost:4004/catalog/Books
+GET http://localhost:4004/odata/v4/catalog/Books
 Authorization: Basic carol:
 ###
-POST http://localhost:4004/catalog/Books
+POST http://localhost:4004/odata/v4/catalog/Books
 Authorization: Basic carol:
 Content-Type: application/json
 
@@ -19,5 +19,5 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:4004/catalog/CS1TAB
+GET http://localhost:4004/odata/v4/catalog/CS1TAB
 Authorization: Basic carol:
