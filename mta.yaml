@@ -21,12 +21,35 @@ modules:
       keep-existing-routes: true
     properties:
       TENANT_HOST_PATTERN: '^(.*)-${app-name}.${default-domain}'
-      SEND_XFRAMEOPTIONS: false
       CJ_PROTECT_WHITELIST: >
         [
           {
             "protocol": "https",
             "host": "*.ondemand.com"
+          },
+          {
+            "protocol": "https",
+            "host": "*.sap.com"
+          }
+        ]
+      COOKIES: >
+        { "SameSite":"None" }
+      httpHeaders: >
+        [
+          {
+            "X-Frame-Options": "TRUSTED"
+          },
+          {
+            "Content-Security-Policy": "frame-ancestors iframe frame object embed 'self' https://*.ondemand.com;"
+          },
+          {
+            "Access-Control-Allow-Origin": "https://*.ondemand.com"
+          },
+          {
+            "Access-Control-Allow-Credentials": "true"
+          },
+          {
+            "Access-Control-Allow-Headers": "Authorization,Content-Type"
           }
         ]
     requires:
@@ -145,6 +168,36 @@ modules:
           artifacts:
             - cswdemomtxsbooks.zip
           target-path: resources/
+  - name: mtxs-bookshop-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: mtxs-bookshop-destination
+        parameters:
+          content-target: true
+      - name: mtxs-bookshop-html5-repo-host
+        parameters:
+          service-key:
+            name: mtxs-bookshop-html5-repo-host-key
+      - name: mtxs-bookshop-uaa
+        parameters:
+          service-key:
+            name: mtxs-bookshop-uaa-key
+    parameters:
+      content:
+        subaccount:
+          destinations:
+            - Name: mtxs_bookshop_html5_repo_host
+              ServiceInstanceName: mtxs-bookshop-html5-repo-host
+              ServiceKeyName: mtxs-bookshop-html5-repo-host-key
+              sap.cloud.service: csw.demo.mtxs.books
+            - Name: mtxs_bookshop_uaa
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: mtxs-bookshop-uaa
+              ServiceKeyName: mtxs-bookshop-uaa-key
+              sap.cloud.service: csw.demo.mtxs.books
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
 
 resources:
   - name: mtxs-bookshop-uaa
