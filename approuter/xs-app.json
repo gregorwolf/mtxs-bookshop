@@ -25,6 +25,12 @@
       "source": "^/app/(.*)$",
       "target": "$1",
       "localDir": "webapp"
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
     }
   ]
 }
