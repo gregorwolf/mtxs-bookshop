@@ -33,3 +33,5 @@ mta_archives/
 resources.tgz
 .env
 *-private.mtaext
+
+dist/
