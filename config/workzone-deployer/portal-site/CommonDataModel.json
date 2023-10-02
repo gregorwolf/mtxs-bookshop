@@ -1,0 +1,98 @@
+{
+    "identification": {
+        "id": "8c3a1d38-a78c-48b7-91a6-c28ab0460c6a",
+        "entityType": "bundle"
+    },
+    "payload": {
+        "catalogs": [
+            {
+                "identification": {
+                    "id": "BookshopCatalog",
+                    "title": "{{catalog1.title}}",
+                    "entityType": "catalog",
+                    "i18n": "i18n/i18n.properties"
+                },
+                "payload": {
+                    "viz": [
+                        {
+                            "id": "books",
+                            "appId": "csw.demo.mtxs.books",
+                            "vizId": "books-display"
+                        }
+                    ]
+                }
+            }
+        ],
+        "groups": [
+            {
+                "identification": {
+                    "id": "BookshopGroup",
+                    "title": "{{groups1.title}}",
+                    "entityType": "group",
+                    "i18n": "i18n/i18n.properties"
+                },
+                "payload": {
+                    "viz": [
+                        {
+                            "id": "books",
+                            "appId": "csw.demo.mtxs.books",
+                            "vizId": "books-display"
+                        }
+                    ]
+                }
+            }
+        ],
+        "sites": [
+            {
+                "identification": {
+                    "id": "578116bc-6bd1-4e5f-ad1d-f23f5fc7eeae",
+                    "entityType": "site",
+                    "title": "MTXS Bookshop",
+                    "description": ""
+                },
+                "payload": {
+                    "config": {
+                        "ushellConfig": {
+                            "bootstrapPlugins": {
+                                "KeyUserPlugin": {
+                                    "component": "sap.ushell.plugins.rta"
+                                },
+                                "PersonalizePlugin": {
+                                    "component": "sap.ushell.plugins.rta-personalize"
+                                }
+                            },
+                            "renderers": {
+                                "fiori2": {
+                                    "componentData": {
+                                        "config": {
+                                            "applications": {
+                                                "Shell-home": {}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "groupsOrder": [
+                        "BookshopGroup"
+                    ],
+                    "sap.cloud.portal": {
+                        "config": {
+                            "theme.id": "sap_horizon",
+                            "theme.active": [
+                                "sap_horizon",
+                                "sap_horizon_hcb",
+                                "sap_horizon_hcw",
+                                "sap_belize",
+                                "sap_belize_hcb",
+                                "sap_belize_hcw"
+                            ],
+                            "ui5LibraryUrl": "https://ui5.sap.com/"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

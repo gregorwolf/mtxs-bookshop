@@ -30,13 +30,19 @@ modules:
           }
         ]
     requires:
-    - name: mtxs-bookshop-uaa
-    - name: srv-api
-      group: destinations
-      properties:
-        name: srv
-        url: ~{srv-url}
-        forwardAuthToken: true
+      - name: mtxs-bookshop-workzone
+      - name: mtxs-bookshop-repo-runtime
+      - name: mtxs-bookshop-uaa
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv
+          url: ~{srv-url}
+          forwardAuthToken: true
+    provides:
+      - name: approuter-properties
+        properties:
+          app-name: ${app-name}
   - name: mtxs-bookshop-srv
     type: nodejs
     path: gen/srv
@@ -54,6 +60,8 @@ modules:
         properties:
           mtx-url: ${default-url}
     requires:
+      - name: mtxs-bookshop-workzone
+      - name: mtxs-bookshop-repo-runtime
       - name: mtxs-bookshop-db
       - name: mtxs-bookshop-destination
       - name: mtxs-bookshop-uaa
@@ -94,6 +102,49 @@ modules:
         properties:
           app-name: ${app-name}
           srv-url: ${default-url}
+  - name: mtxs-bookshop-workzone-deployer
+    type: com.sap.application.content
+    path: config/workzone-deployer
+    requires:
+      - name: approuter-properties
+      - name: mtxs-bookshop-workzone
+        parameters:
+          content-target: true
+          service-key:
+            name: content-deploy-key
+            config:
+              content-endpoint: developer
+      - name: mtxs-bookshop-html5-repo-host
+      - name: mtxs-bookshop-uaa
+      - name: mtxs-bookshop-registry
+    parameters:
+      app-name: mtxs-bookshop-workzone-deployer
+      config:
+        TENANT_HOST_PATTERN: '^(.*)-~{approuter-properties/app-name}.${default-domain}'
+  - name: cswdemomtxsbooks
+    type: html5
+    path: app/books
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: []
+  - name: mtxs-bookshop-app-content
+    type: com.sap.application.content
+    path: app
+    requires:
+      - name: mtxs-bookshop-html5-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - name: cswdemomtxsbooks
+          artifacts:
+            - cswdemomtxsbooks.zip
+          target-path: resources/
 
 resources:
   - name: mtxs-bookshop-uaa
@@ -137,3 +188,18 @@ resources:
           onUnSubscriptionAsync: true
           onUpdateDependenciesAsync: true
           callbackTimeoutMillis: 300000 # Increase if your deployments are taking longer than that
+  - name: mtxs-bookshop-workzone
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: build-workzone-advanced
+      service-plan: standard
+  - name: mtxs-bookshop-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: mtxs-bookshop-repo-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo

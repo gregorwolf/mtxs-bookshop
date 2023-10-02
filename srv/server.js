@@ -7,10 +7,14 @@ const xsenv = require("@sap/xsenv");
 xsenv.loadEnv();
 const services = xsenv.getServices({
   dest: { tag: "destination" },
+  html5rt: { tag: "html5appsrepo" },
+  workzone: { tag: "build-workzone-advanced" },
 });
 // fill dependencies for cds.env.requires
 const dependencies = [];
 dependencies.push(services.dest.xsappname);
+dependencies.push(services.html5rt.uaa.xsappname);
+dependencies.push(services.workzone.uaa.xsappname);
 cds.env.requires["cds.xt.SaasProvisioningService"] = { dependencies };
 
 async function fillServiceReplacement(req) {
