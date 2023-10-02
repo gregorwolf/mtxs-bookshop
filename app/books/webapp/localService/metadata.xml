@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CatalogService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Books" EntityType="CatalogService.Books"/>
+                <EntitySet Name="CS1TAB" EntityType="CatalogService.CS1TAB"/>
+            </EntityContainer>
+            <EntityType Name="Books">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="title" Type="Edm.String" MaxLength="200"/>
+                <Property Name="stock" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="CS1TAB">
+                <Key>
+                    <PropertyRef Name="SalesOrderId"/>
+                </Key>
+                <Property Name="SalesOrderId" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="ProductId" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Quantity" Type="Edm.Int32"/>
+                <Property Name="DeliveryDate" Type="Edm.Date"/>
+            </EntityType>
+            <Annotations Target="CatalogService.EntityContainer/CS1TAB">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record Type="Capabilities.DeleteRestrictionsType">
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record Type="Capabilities.InsertRestrictionsType">
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
