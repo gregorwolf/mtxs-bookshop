@@ -54,6 +54,7 @@ modules:
         ]
     requires:
       - name: mtxs-bookshop-workzone
+      - name: mtxs-bookshop-logging
       - name: mtxs-bookshop-repo-runtime
       - name: mtxs-bookshop-uaa
       - name: srv-api
@@ -84,6 +85,7 @@ modules:
           mtx-url: ${default-url}
     requires:
       - name: mtxs-bookshop-workzone
+      - name: mtxs-bookshop-logging
       - name: mtxs-bookshop-repo-runtime
       - name: mtxs-bookshop-db
       - name: mtxs-bookshop-destination
@@ -101,6 +103,7 @@ modules:
       disk-quota: 265MB
     requires:
       - name: mtxs-bookshop-uaa
+      - name: mtxs-bookshop-logging
       - name: srv-api
         properties:
           SBF_SERVICE_CONFIG:
@@ -256,3 +259,8 @@ resources:
     parameters:
       service-plan: app-runtime
       service: html5-apps-repo
+  - name: mtxs-bookshop-logging
+    type: org.cloudfoundry.managed-service
+    parameters:
+       service: application-logs
+       service-plan: lite
