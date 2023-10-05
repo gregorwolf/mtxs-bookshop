@@ -1,0 +1,8 @@
+###
+DELETE http://localhost:4004/-/cds/saas-provisioning/tenant/t1 HTTP/1.1
+Content-Type: application/json
+Authorization: Basic yves:
+###
+DELETE http://localhost:4004/-/cds/saas-provisioning/tenant/t2 HTTP/1.1
+Content-Type: application/json
+Authorization: Basic erin:
