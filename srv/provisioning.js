@@ -30,12 +30,13 @@ module.exports = (service) => {
 
   service.on("DELETE", "tenant", async (req, next) => {
     LOG.info("DELETE tenant");
+    LOG.info(req.data);
     await next();
     return req.data.subscribedTenantId;
   });
 
-  service.on("upgradeTenant", async (req, next) => {
-    LOG.info("upgradeTenant");
+  service.on("upgrade", async (req, next) => {
+    LOG.info("provisioning.js: upgrade");
     await next();
   });
 };
