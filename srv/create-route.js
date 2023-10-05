@@ -93,7 +93,7 @@ async function createRouteCloudSDK(tenantHost, domain, uiAppName) {
     LOG.error("Error message: " && error.message);
   }
 
-  const routeGuid = routeGetResult?.data?.resources[0].guid;
+  const routeGuid = routeGetResult?.data?.resources[0]?.guid;
   LOG.info("Route GUID: ", routeGuid);
   if (routeGuid) {
     LOG.info("Route already exists");
