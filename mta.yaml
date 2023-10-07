@@ -91,6 +91,7 @@ modules:
       - name: mtxs-bookshop-destination
       - name: mtxs-bookshop-uaa
       - name: mtxs-bookshop-registry
+      - name: mtxs-bookshop-credstore
   - name: mtxs-bookshop-api-sb
     type: nodejs
     path: broker/
@@ -100,7 +101,12 @@ modules:
     parameters:
       app-name: mtxs-bookshop-api-sb-${space}
       memory: 64MB
-      disk-quota: 265MB
+      disk-quota: 2GB
+    properties:
+      SBF_BROKER_CREDENTIALS_HASH: >
+        {
+          "broker-user": "<is replaced by config in mtaext>"
+        }
     requires:
       - name: mtxs-bookshop-uaa
       - name: mtxs-bookshop-logging
@@ -264,3 +270,12 @@ resources:
     parameters:
        service: application-logs
        service-plan: lite
+  - name: mtxs-bookshop-credstore
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: credstore
+      service-plan: free
+      service-name: mtxs-bookshop-credstore-${space}
+      config: 
+         authentication:
+              type: basic
