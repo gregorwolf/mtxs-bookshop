@@ -8,6 +8,14 @@ Authorization: Basic carol:
 GET http://localhost:4004/odata/v4/catalog/Books
 Authorization: Basic carol:
 ###
+GET http://localhost:4004/odata/v4/catalog/Books
+  ?$expand=author
+Authorization: Basic carol:
+###
+GET http://localhost:4004/odata/v4/catalog/Authors
+  ?$expand=books
+Authorization: Basic carol:
+###
 POST http://localhost:4004/odata/v4/catalog/Books
 Authorization: Basic carol:
 Content-Type: application/json

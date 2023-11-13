@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@sap/ux-specification": "^1.108.15",
+    "cds-launchpad-plugin": "^2.0.0",
     "sqlite3": "^5"
   },
   "scripts": {
@@ -61,6 +62,14 @@
         },
         "destinationOptions": {
           "selectionStrategy": "alwaysProvider"
+        }
+      },
+      "srv.external.CatalogService": {
+        "kind": "odata",
+        "model": "srv/external/CatalogService",
+        "credentials": {
+          "destination": "CatalogService",
+          "path": "/catalog"
         }
       }
     }

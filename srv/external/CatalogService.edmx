@@ -1,0 +1,1790 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference
+    Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/CodeList.xml">
+    <edmx:Include Alias="CodeList" Namespace="com.sap.vocabularies.CodeList.v1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.xml">
+    <edmx:Include Alias="Measures" Namespace="Org.OData.Measures.V1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+    <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1" />
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="CatalogService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="Books" EntityType="CatalogService.Books">
+          <NavigationPropertyBinding Path="genre" Target="Genres" />
+          <NavigationPropertyBinding Path="currency" Target="Currencies" />
+          <NavigationPropertyBinding Path="author" Target="Authors" />
+          <NavigationPropertyBinding Path="publisher" Target="Publishers" />
+          <NavigationPropertyBinding Path="plants" Target="BookPlants" />
+          <NavigationPropertyBinding Path="to_BooksAuthorsAssignment"
+            Target="BooksAuthorsAssignment" />
+          <NavigationPropertyBinding Path="texts" Target="Books_texts" />
+          <NavigationPropertyBinding Path="localized" Target="Books_texts" />
+        </EntitySet>
+        <EntitySet Name="BooksAuthorsAssignment" EntityType="CatalogService.BooksAuthorsAssignment">
+          <NavigationPropertyBinding Path="ASSOC_Book" Target="Books" />
+          <NavigationPropertyBinding Path="ASSOC_Author" Target="Authors" />
+        </EntitySet>
+        <EntitySet Name="Authors" EntityType="CatalogService.Authors">
+          <NavigationPropertyBinding Path="country" Target="Countries" />
+          <NavigationPropertyBinding Path="BooksAuthorsAssignment_ASSOC_Authors"
+            Target="BooksAuthorsAssignment" />
+        </EntitySet>
+        <EntitySet Name="Publishers" EntityType="CatalogService.Publishers">
+          <NavigationPropertyBinding Path="book" Target="Books" />
+        </EntitySet>
+        <EntitySet Name="Orders" EntityType="CatalogService.Orders">
+          <NavigationPropertyBinding Path="Items" Target="OrderItems" />
+          <NavigationPropertyBinding Path="ShippingAddress" Target="OrderShippingAddress" />
+          <NavigationPropertyBinding Path="orderstatus" Target="Orderstatuses" />
+          <NavigationPropertyBinding Path="deliverystatus" Target="Deliverystatuses" />
+          <NavigationPropertyBinding Path="currency" Target="Currencies" />
+        </EntitySet>
+        <Singleton Name="UserScopes" Type="CatalogService.UserScopes" />
+        <EntitySet Name="SEPMRA_I_Product_E" EntityType="CatalogService.SEPMRA_I_Product_E" />
+        <Singleton Name="Userdetails" Type="CatalogService.Userdetails">
+          <NavigationPropertyBinding Path="authorizations" Target="Authorizations" />
+        </Singleton>
+        <Singleton Name="Authorizations" Type="CatalogService.Authorizations" />
+        <EntitySet Name="Genres" EntityType="CatalogService.Genres">
+          <NavigationPropertyBinding Path="parent" Target="Genres" />
+          <NavigationPropertyBinding Path="children" Target="Genres" />
+          <NavigationPropertyBinding Path="texts" Target="Genres_texts" />
+          <NavigationPropertyBinding Path="localized" Target="Genres_texts" />
+        </EntitySet>
+        <EntitySet Name="Currencies" EntityType="CatalogService.Currencies">
+          <NavigationPropertyBinding Path="texts" Target="Currencies_texts" />
+          <NavigationPropertyBinding Path="localized" Target="Currencies_texts" />
+        </EntitySet>
+        <EntitySet Name="BookPlants" EntityType="CatalogService.BookPlants">
+          <NavigationPropertyBinding Path="book" Target="Books" />
+          <NavigationPropertyBinding Path="plant" Target="Plant" />
+        </EntitySet>
+        <EntitySet Name="Countries" EntityType="CatalogService.Countries">
+          <NavigationPropertyBinding Path="texts" Target="Countries_texts" />
+          <NavigationPropertyBinding Path="localized" Target="Countries_texts" />
+        </EntitySet>
+        <EntitySet Name="OrderItems" EntityType="CatalogService.OrderItems">
+          <NavigationPropertyBinding Path="parent" Target="Orders" />
+          <NavigationPropertyBinding Path="book" Target="Books" />
+        </EntitySet>
+        <EntitySet Name="OrderShippingAddress" EntityType="CatalogService.OrderShippingAddress" />
+        <EntitySet Name="Orderstatuses" EntityType="CatalogService.Orderstatuses">
+          <NavigationPropertyBinding Path="texts" Target="Orderstatuses_texts" />
+          <NavigationPropertyBinding Path="localized" Target="Orderstatuses_texts" />
+        </EntitySet>
+        <EntitySet Name="Deliverystatuses" EntityType="CatalogService.Deliverystatuses">
+          <NavigationPropertyBinding Path="texts" Target="Deliverystatuses_texts" />
+          <NavigationPropertyBinding Path="localized" Target="Deliverystatuses_texts" />
+        </EntitySet>
+        <EntitySet Name="Plant" EntityType="CatalogService.Plant">
+          <NavigationPropertyBinding Path="texts" Target="Plant_texts" />
+          <NavigationPropertyBinding Path="localized" Target="Plant_texts" />
+        </EntitySet>
+        <EntitySet Name="Books_texts" EntityType="CatalogService.Books_texts" />
+        <EntitySet Name="Genres_texts" EntityType="CatalogService.Genres_texts" />
+        <EntitySet Name="Currencies_texts" EntityType="CatalogService.Currencies_texts" />
+        <EntitySet Name="Countries_texts" EntityType="CatalogService.Countries_texts" />
+        <EntitySet Name="Orderstatuses_texts" EntityType="CatalogService.Orderstatuses_texts" />
+        <EntitySet Name="Deliverystatuses_texts" EntityType="CatalogService.Deliverystatuses_texts" />
+        <EntitySet Name="Plant_texts" EntityType="CatalogService.Plant_texts" />
+        <FunctionImport Name="getBooks" Function="CatalogService.getBooks" EntitySet="Books" />
+        <FunctionImport Name="getNumberOfBooksForDynamicTile"
+          Function="CatalogService.getNumberOfBooksForDynamicTile" />
+        <FunctionImport Name="hello" Function="CatalogService.hello" />
+        <ActionImport Name="submitOrder" Action="CatalogService.submitOrder" />
+        <ActionImport Name="multipleOrders" Action="CatalogService.multipleOrders" />
+      </EntityContainer>
+      <EntityType Name="Books">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="title" Type="Edm.String" MaxLength="111" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1111" />
+        <NavigationProperty Name="genre" Type="CatalogService.Genres">
+          <ReferentialConstraint Property="genre_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="genre_ID" Type="Edm.Int32" />
+        <Property Name="stock" Type="Edm.Int32" />
+        <Property Name="price" Type="Edm.Decimal" Scale="variable" />
+        <NavigationProperty Name="currency" Type="CatalogService.Currencies">
+          <ReferentialConstraint Property="currency_code" ReferencedProperty="code" />
+        </NavigationProperty>
+        <Property Name="currency_code" Type="Edm.String" MaxLength="3" />
+        <Property Name="virtualFromDB" Type="Edm.String" DefaultValue="Value from DB" />
+        <Property Name="semanticURLtoPublisher" Type="Edm.String" />
+        <Property Name="weight" Type="Edm.Decimal" Scale="variable" />
+        <Property Name="height" Type="Edm.Double" />
+        <Property Name="width" Type="Edm.Decimal" Scale="2" Precision="9" />
+        <Property Name="visible" Type="Edm.Boolean" />
+        <Property Name="releaseDate" Type="Edm.DateTimeOffset" />
+        <Property Name="readingTime" Type="Edm.TimeOfDay" />
+        <NavigationProperty Name="author" Type="CatalogService.Authors">
+          <ReferentialConstraint Property="author_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="author_ID" Type="Edm.Int32" />
+        <NavigationProperty Name="publisher" Type="CatalogService.Publishers" Partner="book">
+          <ReferentialConstraint Property="publisher_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="publisher_ID" Type="Edm.Int32" />
+        <NavigationProperty Name="plants" Type="Collection(CatalogService.BookPlants)"
+          Partner="book" />
+        <NavigationProperty Name="to_BooksAuthorsAssignment"
+          Type="CatalogService.BooksAuthorsAssignment" Partner="ASSOC_Book">
+          <ReferentialConstraint Property="ID" ReferencedProperty="ASSOC_Book_ID" />
+        </NavigationProperty>
+        <NavigationProperty Name="texts" Type="Collection(CatalogService.Books_texts)">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="CatalogService.Books_texts">
+          <ReferentialConstraint Property="ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="VirtualFromSrv" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="BooksAuthorsAssignment">
+        <Key>
+          <PropertyRef Name="Role" />
+          <PropertyRef Name="ASSOC_Book_ID" />
+          <PropertyRef Name="ASSOC_Author_ID" />
+        </Key>
+        <Property Name="Role" Type="Edm.String" MaxLength="50" Nullable="false" />
+        <NavigationProperty Name="ASSOC_Book" Type="CatalogService.Books"
+          Partner="to_BooksAuthorsAssignment">
+          <ReferentialConstraint Property="ASSOC_Book_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="ASSOC_Book_ID" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="ASSOC_Author" Type="CatalogService.Authors"
+          Partner="BooksAuthorsAssignment_ASSOC_Authors">
+          <ReferentialConstraint Property="ASSOC_Author_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="ASSOC_Author_ID" Type="Edm.Int32" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Authors">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="name" Type="Edm.String" MaxLength="111" />
+        <Property Name="dateOfBirth" Type="Edm.Date" />
+        <Property Name="dateOfDeath" Type="Edm.Date" />
+        <Property Name="placeOfBirth" Type="Edm.String" />
+        <Property Name="placeOfDeath" Type="Edm.String" />
+        <Property Name="alive" Type="Edm.Boolean" />
+        <NavigationProperty Name="country" Type="CatalogService.Countries">
+          <ReferentialConstraint Property="country_code" ReferencedProperty="code" />
+        </NavigationProperty>
+        <Property Name="country_code" Type="Edm.String" MaxLength="3" />
+        <NavigationProperty Name="BooksAuthorsAssignment_ASSOC_Authors"
+          Type="Collection(CatalogService.BooksAuthorsAssignment)" Partner="ASSOC_Author" />
+      </EntityType>
+      <EntityType Name="Publishers">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="name" Type="Edm.String" MaxLength="111" />
+        <NavigationProperty Name="book" Type="Collection(CatalogService.Books)" Partner="publisher" />
+      </EntityType>
+      <EntityType Name="Orders">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="OrderNo" Type="Edm.String" />
+        <Property Name="salesOrganization" Type="Edm.String" MaxLength="4" Nullable="false" />
+        <Property Name="CustomerOrderNo" Type="Edm.String" MaxLength="80" />
+        <NavigationProperty Name="Items" Type="Collection(CatalogService.OrderItems)"
+          Partner="parent">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="ShippingAddress" Type="CatalogService.OrderShippingAddress">
+          <OnDelete Action="Cascade" />
+          <ReferentialConstraint Property="ShippingAddress_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="ShippingAddress_ID" Type="Edm.Guid" />
+        <Property Name="total" Type="Edm.Decimal" Scale="variable" />
+        <Property Name="totalTax" Type="Edm.Decimal" Scale="2" Precision="15" />
+        <Property Name="totalWithTax" Type="Edm.Double" />
+        <NavigationProperty Name="orderstatus" Type="CatalogService.Orderstatuses">
+          <ReferentialConstraint Property="orderstatus_code" ReferencedProperty="code" />
+        </NavigationProperty>
+        <Property Name="orderstatus_code" Type="Edm.String" MaxLength="1" />
+        <NavigationProperty Name="deliverystatus" Type="CatalogService.Deliverystatuses">
+          <ReferentialConstraint Property="deliverystatus_code" ReferencedProperty="code" />
+        </NavigationProperty>
+        <Property Name="deliverystatus_code" Type="Edm.String" MaxLength="1" />
+        <NavigationProperty Name="currency" Type="CatalogService.Currencies">
+          <ReferentialConstraint Property="currency_code" ReferencedProperty="code" />
+        </NavigationProperty>
+        <Property Name="currency_code" Type="Edm.String" MaxLength="3" />
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+      </EntityType>
+      <EntityType Name="UserScopes">
+        <Key>
+          <PropertyRef Name="username" />
+        </Key>
+        <Property Name="username" Type="Edm.String" Nullable="false" />
+        <Property Name="is_admin" Type="Edm.Boolean" />
+        <Property Name="is_roleadmin" Type="Edm.Boolean" />
+        <Property Name="is_booksadmin" Type="Edm.Boolean" />
+      </EntityType>
+      <EntityType Name="SEPMRA_I_Product_E">
+        <Key>
+          <PropertyRef Name="Product" />
+        </Key>
+        <Property Name="Product" Type="Edm.String" MaxLength="10" Nullable="false" />
+        <Property Name="ProductType" Type="Edm.String" MaxLength="2" />
+        <Property Name="ProductCategory" Type="Edm.String" MaxLength="40" />
+        <Property Name="CreatedByUser" Type="Edm.String" MaxLength="10" />
+        <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="10" />
+        <Property Name="Price" Type="Edm.Decimal" Scale="3" Precision="16" />
+        <Property Name="Currency" Type="Edm.String" MaxLength="5" />
+        <Property Name="Height" Type="Edm.Decimal" Scale="3" Precision="13" />
+        <Property Name="Width" Type="Edm.Decimal" Scale="3" Precision="13" />
+        <Property Name="Depth" Type="Edm.Decimal" Scale="3" Precision="13" />
+        <Property Name="DimensionUnit" Type="Edm.String" MaxLength="3" />
+        <Property Name="ProductPictureURL" Type="Edm.String" MaxLength="255" />
+        <Property Name="ProductValueAddedTax" Type="Edm.Int32" />
+        <Property Name="Supplier" Type="Edm.String" MaxLength="10" />
+        <Property Name="ProductBaseUnit" Type="Edm.String" MaxLength="3" />
+        <Property Name="Weight" Type="Edm.Decimal" Scale="3" Precision="13" />
+        <Property Name="WeightUnit" Type="Edm.String" MaxLength="3" />
+        <Property Name="OriginalLanguage" Type="Edm.String" MaxLength="2" />
+      </EntityType>
+      <EntityType Name="Userdetails">
+        <Key>
+          <PropertyRef Name="username" />
+        </Key>
+        <Property Name="username" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="authorizations" Type="CatalogService.Authorizations">
+          <ReferentialConstraint Property="authorizations_username" ReferencedProperty="username" />
+        </NavigationProperty>
+        <Property Name="authorizations_username" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="Authorizations">
+        <Key>
+          <PropertyRef Name="username" />
+        </Key>
+        <Property Name="username" Type="Edm.String" Nullable="false" />
+        <Property Name="is_admin" Type="Edm.Boolean" />
+        <Property Name="is_roleadmin" Type="Edm.Boolean" />
+        <Property Name="is_booksadmin" Type="Edm.Boolean" />
+      </EntityType>
+      <EntityType Name="Genres">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="parent" Type="CatalogService.Genres" Partner="children">
+          <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="parent_ID" Type="Edm.Int32" />
+        <NavigationProperty Name="children" Type="Collection(CatalogService.Genres)"
+          Partner="parent">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <Property Name="nodeType" Type="Edm.String" MaxLength="1" DefaultValue="F" />
+        <Property Name="nodeType_FC" Type="Edm.Int32" />
+        <Property Name="genreSemanticObject" Type="Edm.String" />
+        <NavigationProperty Name="texts" Type="Collection(CatalogService.Genres_texts)">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="CatalogService.Genres_texts">
+          <ReferentialConstraint Property="ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="Currencies">
+        <Key>
+          <PropertyRef Name="code" />
+        </Key>
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false" />
+        <Property Name="symbol" Type="Edm.String" MaxLength="5" />
+        <Property Name="minorUnit" Type="Edm.Int16" />
+        <Property Name="decimalPlaces" Type="Edm.Int32" />
+        <NavigationProperty Name="texts" Type="Collection(CatalogService.Currencies_texts)">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="CatalogService.Currencies_texts">
+          <ReferentialConstraint Property="code" ReferencedProperty="code" />
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="BookPlants">
+        <Key>
+          <PropertyRef Name="book_ID" />
+          <PropertyRef Name="plant_ID" />
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
+        <NavigationProperty Name="book" Type="CatalogService.Books" Partner="plants">
+          <ReferentialConstraint Property="book_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="book_ID" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="plant" Type="CatalogService.Plant">
+          <ReferentialConstraint Property="plant_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="plant_ID" Type="Edm.String" MaxLength="4" Nullable="false" />
+        <Property Name="purchasingGroup" Type="Edm.String" MaxLength="3" />
+      </EntityType>
+      <EntityType Name="Countries">
+        <Key>
+          <PropertyRef Name="code" />
+        </Key>
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false" />
+        <NavigationProperty Name="texts" Type="Collection(CatalogService.Countries_texts)">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="CatalogService.Countries_texts">
+          <ReferentialConstraint Property="code" ReferencedProperty="code" />
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="OrderItems">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+        <NavigationProperty Name="parent" Type="CatalogService.Orders" Nullable="false"
+          Partner="Items">
+          <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="parent_ID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="itemNo" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="book" Type="CatalogService.Books">
+          <ReferentialConstraint Property="book_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="book_ID" Type="Edm.Int32" />
+        <Property Name="product" Type="Edm.String" MaxLength="10" />
+        <Property Name="amount" Type="Edm.Int32" />
+        <Property Name="netAmount" Type="Edm.Decimal" Scale="2" Precision="9" />
+      </EntityType>
+      <EntityType Name="OrderShippingAddress">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
+        <Property Name="street" Type="Edm.String" MaxLength="60" />
+        <Property Name="city" Type="Edm.String" MaxLength="60" />
+      </EntityType>
+      <EntityType Name="Orderstatuses">
+        <Key>
+          <PropertyRef Name="code" />
+        </Key>
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="code" Type="Edm.String" MaxLength="1" Nullable="false" />
+        <NavigationProperty Name="texts" Type="Collection(CatalogService.Orderstatuses_texts)">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="CatalogService.Orderstatuses_texts">
+          <ReferentialConstraint Property="code" ReferencedProperty="code" />
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="Deliverystatuses">
+        <Key>
+          <PropertyRef Name="code" />
+        </Key>
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="code" Type="Edm.String" MaxLength="1" Nullable="false" />
+        <NavigationProperty Name="texts" Type="Collection(CatalogService.Deliverystatuses_texts)">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="CatalogService.Deliverystatuses_texts">
+          <ReferentialConstraint Property="code" ReferencedProperty="code" />
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="Plant">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
+        <Property Name="ID" Type="Edm.String" MaxLength="4" Nullable="false" />
+        <NavigationProperty Name="texts" Type="Collection(CatalogService.Plant_texts)">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="CatalogService.Plant_texts" />
+      </EntityType>
+      <EntityType Name="Books_texts">
+        <Key>
+          <PropertyRef Name="locale" />
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="title" Type="Edm.String" MaxLength="111" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1111" />
+      </EntityType>
+      <EntityType Name="Genres_texts">
+        <Key>
+          <PropertyRef Name="locale" />
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Currencies_texts">
+        <Key>
+          <PropertyRef Name="locale" />
+          <PropertyRef Name="code" />
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Countries_texts">
+        <Key>
+          <PropertyRef Name="locale" />
+          <PropertyRef Name="code" />
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Orderstatuses_texts">
+        <Key>
+          <PropertyRef Name="locale" />
+          <PropertyRef Name="code" />
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="code" Type="Edm.String" MaxLength="1" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Deliverystatuses_texts">
+        <Key>
+          <PropertyRef Name="locale" />
+          <PropertyRef Name="code" />
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="code" Type="Edm.String" MaxLength="1" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Plant_texts">
+        <Key>
+          <PropertyRef Name="ID_texts" />
+        </Key>
+        <Property Name="ID_texts" Type="Edm.Guid" Nullable="false" />
+        <Property Name="locale" Type="Edm.String" MaxLength="14" />
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="ID" Type="Edm.String" MaxLength="4" />
+      </EntityType>
+      <ComplexType Name="DynamicAppLauncher">
+        <Property Name="icon" Type="Edm.String" />
+        <Property Name="info" Type="Edm.String" />
+        <Property Name="infoState" Type="Edm.String" />
+        <Property Name="number" Type="Edm.Decimal" Scale="2" Precision="9" />
+        <Property Name="numberDigits" Type="Edm.Int32" />
+        <Property Name="numberFactor" Type="Edm.String" />
+        <Property Name="numberState" Type="Edm.String" />
+        <Property Name="numberUnit" Type="Edm.String" />
+        <Property Name="stateArrow" Type="Edm.String" />
+        <Property Name="subtitle" Type="Edm.String" />
+        <Property Name="title" Type="Edm.String" />
+      </ComplexType>
+      <Action Name="updateBook" IsBound="true">
+        <Parameter Name="in" Type="CatalogService.Books" />
+      </Action>
+      <Function Name="getBooks" IsBound="false" IsComposable="false">
+        <ReturnType Type="Collection(CatalogService.Books)" Nullable="false" />
+      </Function>
+      <Function Name="getNumberOfBooksForDynamicTile" IsBound="false" IsComposable="false">
+        <ReturnType Type="CatalogService.DynamicAppLauncher" />
+      </Function>
+      <Function Name="hello" IsBound="false" IsComposable="false">
+        <Parameter Name="to" Type="Edm.String" />
+        <ReturnType Type="Edm.String" />
+      </Function>
+      <Action Name="submitOrder" IsBound="false">
+        <Parameter Name="book" Type="Edm.Int32" />
+        <Parameter Name="amount" Type="Edm.Int32" />
+      </Action>
+      <Action Name="multipleOrders" IsBound="false">
+        <Parameter Name="numberOfOrders" Type="Edm.Int32" />
+      </Action>
+      <Annotations Target="CatalogService.Books">
+        <Annotation Term="UI.HeaderFacets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Description" />
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Descr" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.Facets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Details" />
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Price" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="Descr">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="descr" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="Price">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="price" />
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="currency/symbol" />
+                  <PropertyValue Property="Label" String="Currency" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.PresentationVariant">
+          <Record Type="UI.PresentationVariantType">
+            <PropertyValue Property="MaxItems" Int="10" />
+            <PropertyValue Property="SortOrder">
+              <Collection>
+                <Record Type="Common.SortOrderType">
+                  <PropertyValue Property="Property" PropertyPath="stock" />
+                  <PropertyValue Property="Descending" Bool="true" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="title" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>ID</PropertyPath>
+            <PropertyPath>title</PropertyPath>
+            <PropertyPath>author/name</PropertyPath>
+            <PropertyPath>stock</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="ID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="stock" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="title" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="author_ID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="author/name" />
+            </Record>
+            <Record Type="UI.DataFieldWithIntentBasedNavigation">
+              <PropertyValue Property="Value" Path="author/ID" />
+              <PropertyValue Property="Label" String="V2 Action for Navigation to Author" />
+              <PropertyValue Property="SemanticObject" String="Authors" />
+              <PropertyValue Property="Action" String="displayUI5latest" />
+              <PropertyValue Property="Mapping">
+                <Collection>
+                  <Record Type="Common.SemanticObjectMappingType">
+                    <PropertyValue Property="LocalProperty" PropertyPath="author_ID" />
+                    <PropertyValue Property="SemanticObjectProperty" String="ID" />
+                  </Record>
+                </Collection>
+              </PropertyValue>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="price" />
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="currency/symbol" />
+              <PropertyValue Property="Label" String="" />
+              <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High" />
+            </Record>
+            <Record Type="UI.DataFieldWithUrl">
+              <PropertyValue Property="Label" String="To Publisher Url" />
+              <PropertyValue Property="IconUrl" String="sap-icon://chain-link" />
+              <PropertyValue Property="Value" Path="publisher_ID" />
+              <PropertyValue Property="Url" Path="semanticURLtoPublisher" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.HeaderInfo">
+          <Record Type="UI.HeaderInfoType">
+            <PropertyValue Property="TypeName" String="Book" />
+            <PropertyValue Property="TypeNamePlural" String="Books" />
+            <PropertyValue Property="Title">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="title" />
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="ImageUrl"
+              String="https://raw.githubusercontent.com/gregorwolf/bookshop-demo/master/tests/Test.png" />
+            <PropertyValue Property="Description">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="author/name" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.EntityContainer/Books">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="true" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="true" />
+            <PropertyValue Property="Permissions">
+              <Collection>
+                <Record Type="Capabilities.PermissionType">
+                  <PropertyValue Property="Scopes">
+                    <Collection>
+                      <Record Type="Capabilities.ScopeType">
+                        <PropertyValue Property="Scope" String="admin" />
+                      </Record>
+                    </Collection>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="true" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="true" />
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.PresentationVariant">
+          <Record Type="UI.PresentationVariantType">
+            <PropertyValue Property="MaxItems" Int="10" />
+            <PropertyValue Property="SortOrder">
+              <Collection>
+                <Record Type="Common.SortOrderType">
+                  <PropertyValue Property="Property" PropertyPath="stock" />
+                  <PropertyValue Property="Descending" Bool="true" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Books/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Created On" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Changed On" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/ID">
+        <Annotation Term="Common.Text" Path="title">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+        </Annotation>
+        <Annotation Term="Common.Label" String="ID" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/title">
+        <Annotation Term="Common.Label" String="Title" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/descr">
+        <Annotation Term="UI.MultiLineText" Bool="true" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/genre_ID">
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Genres" />
+            <PropertyValue Property="CollectionPath" String="Genres" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="genre_ID" />
+                  <PropertyValue Property="ValueListProperty" String="ID" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Books/stock">
+        <Annotation Term="Common.Label" String="Stock" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/price">
+        <Annotation Term="Measures.ISOCurrency" Path="currency_code" />
+        <Annotation Term="Common.Label" String="Price" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/currency">
+        <Annotation Term="Common.Label" String="Currency" />
+        <Annotation Term="Core.Description" String="Currency code as specified by ISO 4217" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/currency_code">
+        <Annotation Term="Common.IsCurrency" Bool="true" />
+        <Annotation Term="Common.Label" String="Currency" />
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Currency" />
+            <PropertyValue Property="CollectionPath" String="Currencies" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="currency_code" />
+                  <PropertyValue Property="ValueListProperty" String="code" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Description" String="Currency code as specified by ISO 4217" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/virtualFromDB">
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/semanticURLtoPublisher">
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/weight">
+        <Annotation Term="Common.Label" String="Weight (DecimalFloat)" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/height">
+        <Annotation Term="Common.Label" String="Height (Double)" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/width">
+        <Annotation Term="Common.Label" String="Width (Decimal(9,2))" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/visible">
+        <Annotation Term="Common.Label" String="Visible (Boolean)" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/releaseDate">
+        <Annotation Term="Common.Label" String="Release Date (DateTime)" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/readingTime">
+        <Annotation Term="Common.Label" String="Reading Time (Time)" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/author">
+        <Annotation Term="Common.SemanticObject" String="V4Authors" />
+        <Annotation Term="Common.Label" String="Author ID" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/author_ID">
+        <Annotation Term="Common.SemanticObject" String="V4Authors" />
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Author ID" />
+            <PropertyValue Property="CollectionPath" String="Authors" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="author_ID" />
+                  <PropertyValue Property="ValueListProperty" String="ID" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.Label" String="Author ID" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books/VirtualFromSrv">
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="CatalogService.EntityContainer/BooksAuthorsAssignment">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false" />
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Authors">
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>ID</PropertyPath>
+            <PropertyPath>name</PropertyPath>
+            <PropertyPath>alive</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="ID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="dateOfBirth" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="placeOfBirth" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="dateOfDeath" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="placeOfDeath" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="country/name" />
+            </Record>
+            <Record Type="UI.DataFieldWithIntentBasedNavigation">
+              <PropertyValue Property="Label" String="To Books Intent Based" />
+              <PropertyValue Property="Value" Path="ID" />
+              <PropertyValue Property="SemanticObject" String="Books" />
+              <PropertyValue Property="Action" String="displayUI5latest" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.HeaderInfo">
+          <Record Type="UI.HeaderInfoType">
+            <PropertyValue Property="TypeName" String="Author" />
+            <PropertyValue Property="TypeNamePlural" String="Authors" />
+            <PropertyValue Property="Title">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="ID" />
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="Description">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="name" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.Facets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Details" />
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Details" />
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Books" />
+              <PropertyValue Property="Target"
+                AnnotationPath="BooksAuthorsAssignment_ASSOC_Authors/@UI.LineItem" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="Details">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="name" />
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="dateOfBirth" />
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="placeOfBirth" />
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="dateOfDeath" />
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="placeOfDeath" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.QuickViewFacets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Author" />
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#AuthorQuickView" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="AuthorQuickView">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="name" />
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="dateOfBirth" />
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="placeOfBirth" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.EntityContainer/Authors">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false" />
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Authors/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Created On" />
+      </Annotations>
+      <Annotations Target="CatalogService.Authors/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Changed On" />
+      </Annotations>
+      <Annotations Target="CatalogService.Authors/ID">
+        <Annotation Term="Common.Text" Path="name">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+        </Annotation>
+        <Annotation Term="Common.Label" String="ID" />
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+      </Annotations>
+      <Annotations Target="CatalogService.Authors/name">
+        <Annotation Term="Common.Label" String="Author''s Name" />
+      </Annotations>
+      <Annotations Target="CatalogService.Authors/country">
+        <Annotation Term="Common.Label" String="Country/Region" />
+        <Annotation Term="Core.Description" String="Country/region code as specified by ISO 3166-1" />
+      </Annotations>
+      <Annotations Target="CatalogService.Authors/country_code">
+        <Annotation Term="Common.Label" String="Country/Region" />
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Country/Region" />
+            <PropertyValue Property="CollectionPath" String="Countries" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="country_code" />
+                  <PropertyValue Property="ValueListProperty" String="code" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Description" String="Country/region code as specified by ISO 3166-1" />
+      </Annotations>
+      <Annotations Target="CatalogService.Publishers">
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>ID</PropertyPath>
+            <PropertyPath>name</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="ID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+            <Record Type="UI.DataFieldWithIntentBasedNavigation">
+              <PropertyValue Property="Label" String="To Books Intent Based" />
+              <PropertyValue Property="Value" Path="ID" />
+              <PropertyValue Property="SemanticObject" String="Books" />
+              <PropertyValue Property="Action" String="display" />
+              <PropertyValue Property="Mapping">
+                <Collection>
+                  <Record Type="Common.SemanticObjectMappingType">
+                    <PropertyValue Property="LocalProperty" PropertyPath="ID" />
+                    <PropertyValue Property="SemanticObjectProperty" String="publisher_ID" />
+                  </Record>
+                </Collection>
+              </PropertyValue>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.HeaderInfo">
+          <Record Type="UI.HeaderInfoType">
+            <PropertyValue Property="TypeName" String="Publisher" />
+            <PropertyValue Property="TypeNamePlural" String="Publishers" />
+            <PropertyValue Property="Title">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="ID" />
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="Description">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="name" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.Facets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Details" />
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Details" />
+            </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Books" />
+              <PropertyValue Property="Target" AnnotationPath="books/@UI.LineItem" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="Details">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="name" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.EntityContainer/Publishers">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false" />
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Publishers/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Created On" />
+      </Annotations>
+      <Annotations Target="CatalogService.Publishers/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Changed On" />
+      </Annotations>
+      <Annotations Target="CatalogService.Publishers/name">
+        <Annotation Term="Common.Label" String="Publisher" />
+        <Annotation Term="Core.Description" String="The Publisher of a Book" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/OrderNo">
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Common.Label" String="Order Number" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/salesOrganization">
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Description" String="Sales Organization" />
+        <Annotation Term="Core.LongDescription"
+          String="An organizational area for sales that combines the sales-relevant master data for customers, products, and price lists." />
+        <Annotation Term="Common.QuickInfo"
+          String="An organizational area for sales that combines the sales-relevant master data for customers, products, and price lists." />
+        <Annotation Term="Common.Label" String="Sales Organization" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/CustomerOrderNo">
+        <Annotation Term="Common.Label" String="Customer Order Number" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/Items">
+        <Annotation Term="Common.Label" String="Items" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/total">
+        <Annotation Term="Measures.ISOCurrency" Path="currency/code" />
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/totalTax">
+        <Annotation Term="Measures.ISOCurrency" Path="currency/code" />
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/totalWithTax">
+        <Annotation Term="Measures.ISOCurrency" Path="currency/code" />
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/orderstatus">
+        <Annotation Term="Common.Label" String="Orderstatus" />
+        <Annotation Term="UI.Hidden">
+          <If>
+            <Eq>
+              <Path>orderstatus_code</Path>
+              <String>N</String>
+            </Eq>
+            <Bool>false</Bool>
+            <Bool>true</Bool>
+          </If>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/orderstatus_code">
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="true" />
+        <Annotation Term="Common.Text" Path="orderstatus/descr">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly" />
+        </Annotation>
+        <Annotation Term="Common.Label" String="Orderstatus" />
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Orderstatus" />
+            <PropertyValue Property="CollectionPath" String="Orderstatuses" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="orderstatus_code" />
+                  <PropertyValue Property="ValueListProperty" String="code" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.Hidden">
+          <If>
+            <Eq>
+              <Path>orderstatus_code</Path>
+              <String>N</String>
+            </Eq>
+            <Bool>false</Bool>
+            <Bool>true</Bool>
+          </If>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/deliverystatus">
+        <Annotation Term="Common.Label" String="Deliverystatus" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/deliverystatus_code">
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="true" />
+        <Annotation Term="Common.Label" String="Deliverystatus" />
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Deliverystatus" />
+            <PropertyValue Property="CollectionPath" String="Deliverystatuses" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="deliverystatus_code" />
+                  <PropertyValue Property="ValueListProperty" String="code" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/currency">
+        <Annotation Term="Core.Description" String="Currency code as specified by ISO 4217" />
+        <Annotation Term="Common.Label" String="Currency" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/currency_code">
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Description" String="Currency code as specified by ISO 4217" />
+        <Annotation Term="Common.Label" String="Currency" />
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Currency" />
+            <PropertyValue Property="CollectionPath" String="Currencies" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="currency_code" />
+                  <PropertyValue Property="ValueListProperty" String="code" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Orders/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Core.Description" String="User's unique ID" />
+        <Annotation Term="Common.Label" String="Created By" />
+      </Annotations>
+      <Annotations Target="CatalogService.submitOrder()/book">
+        <Annotation Term="Common.Text" Path="title">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+        </Annotation>
+        <Annotation Term="Common.Label" String="ID" />
+      </Annotations>
+      <Annotations Target="CatalogService.EntityContainer/UserScopes">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false" />
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.EntityContainer/SEPMRA_I_Product_E">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false" />
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.EntityContainer/Userdetails">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false" />
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.EntityContainer/Authorizations">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false" />
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Genres">
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>name</PropertyPath>
+            <PropertyPath>parent_ID</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="ID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="parent_ID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="genreSemanticObject" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="nodeType" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="nodeType_FC" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.Facets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Details" />
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Details" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="Details">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="ID" />
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="name" />
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="genreSemanticObject" />
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="nodeType" />
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="nodeType_FC" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="Common.SemanticKey">
+          <Collection>
+            <PropertyPath>ID</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="Common.SemanticObject" String="genres" />
+      </Annotations>
+      <Annotations Target="CatalogService.EntityContainer/Genres">
+        <Annotation Term="Common.SemanticObject" String="genres" />
+      </Annotations>
+      <Annotations Target="CatalogService.Genres/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="CatalogService.Genres/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="CatalogService.Genres/ID">
+        <Annotation Term="Common.SemanticObject" Path="genreSemanticObject" />
+        <Annotation Term="Common.Label" String="genreID" />
+      </Annotations>
+      <Annotations Target="CatalogService.Genres/parent">
+        <Annotation Term="Common.Label" String="parent" />
+      </Annotations>
+      <Annotations Target="CatalogService.Genres/parent_ID">
+        <Annotation Term="Common.Label" String="parent" />
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="parent" />
+            <PropertyValue Property="CollectionPath" String="Genres" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="parent_ID" />
+                  <PropertyValue Property="ValueListProperty" String="ID" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Genres/nodeType">
+        <Annotation Term="Common.FieldControl" Path="nodeType_FC" />
+        <Annotation Term="Common.Label" String="nodeType" />
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="requested" />
+              <PropertyValue Property="Value" String="F" />
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="pending" />
+              <PropertyValue Property="Value" String="L" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Genres/nodeType_FC">
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="nodeType_FC" />
+      </Annotations>
+      <Annotations Target="CatalogService.Genres/genreSemanticObject">
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="SemanticObject" />
+      </Annotations>
+      <Annotations Target="CatalogService.Currencies">
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Currencies/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="CatalogService.Currencies/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="CatalogService.Currencies/code">
+        <Annotation Term="CodeList.StandardCode" PropertyPath="code" />
+        <Annotation Term="Common.UnitSpecificScale" Path="decimalPlaces" />
+        <Annotation Term="Common.Text" Path="name" />
+        <Annotation Term="Common.Label" String="Currency Code" />
+      </Annotations>
+      <Annotations Target="CatalogService.Currencies/symbol">
+        <Annotation Term="Common.Label" String="Currency Symbol" />
+      </Annotations>
+      <Annotations Target="CatalogService.Currencies/minorUnit">
+        <Annotation Term="Common.Label" String="Currency Minor Unit Fractions" />
+      </Annotations>
+      <Annotations Target="CatalogService.BookPlants/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Created On" />
+      </Annotations>
+      <Annotations Target="CatalogService.BookPlants/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Core.Description" String="User's unique ID" />
+        <Annotation Term="Common.Label" String="Created By" />
+      </Annotations>
+      <Annotations Target="CatalogService.BookPlants/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Changed On" />
+      </Annotations>
+      <Annotations Target="CatalogService.BookPlants/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Core.Description" String="User's unique ID" />
+        <Annotation Term="Common.Label" String="Changed By" />
+      </Annotations>
+      <Annotations Target="CatalogService.BookPlants/plant_ID">
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="Plant" />
+            <PropertyValue Property="CollectionPath" String="Plant" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="plant_ID" />
+                  <PropertyValue Property="ValueListProperty" String="ID" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="name" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Countries">
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Countries/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="CatalogService.Countries/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="CatalogService.Countries/code">
+        <Annotation Term="Common.Text" Path="name" />
+        <Annotation Term="Common.Label" String="Country/Region Code" />
+      </Annotations>
+      <Annotations Target="CatalogService.OrderItems/itemNo">
+        <Annotation Term="Common.Label" String="itemNo" />
+      </Annotations>
+      <Annotations Target="CatalogService.OrderShippingAddress/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Created On" />
+      </Annotations>
+      <Annotations Target="CatalogService.OrderShippingAddress/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Core.Description" String="User's unique ID" />
+        <Annotation Term="Common.Label" String="Created By" />
+      </Annotations>
+      <Annotations Target="CatalogService.OrderShippingAddress/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Changed On" />
+      </Annotations>
+      <Annotations Target="CatalogService.OrderShippingAddress/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Core.Description" String="User's unique ID" />
+        <Annotation Term="Common.Label" String="Changed By" />
+      </Annotations>
+      <Annotations Target="CatalogService.OrderShippingAddress/street">
+        <Annotation Term="UI.Placeholder" String="Street / House No." />
+        <Annotation Term="Common.Label" String="Street" />
+      </Annotations>
+      <Annotations Target="CatalogService.OrderShippingAddress/city">
+        <Annotation Term="Common.Label" String="City" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orderstatuses">
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Orderstatuses/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orderstatuses/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="CatalogService.Deliverystatuses">
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Deliverystatuses/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="CatalogService.Deliverystatuses/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="CatalogService.Plant">
+        <Annotation Term="Common.SemanticKey">
+          <Collection>
+            <PropertyPath>ID</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CatalogService.Plant/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="CatalogService.Plant/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="CatalogService.Plant/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Created On" />
+      </Annotations>
+      <Annotations Target="CatalogService.Plant/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Core.Description" String="User's unique ID" />
+        <Annotation Term="Common.Label" String="Created By" />
+      </Annotations>
+      <Annotations Target="CatalogService.Plant/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Changed On" />
+      </Annotations>
+      <Annotations Target="CatalogService.Plant/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Core.Description" String="User's unique ID" />
+        <Annotation Term="Common.Label" String="Changed By" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books_texts/ID">
+        <Annotation Term="Common.Text" Path="title">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+        </Annotation>
+        <Annotation Term="Common.Label" String="ID" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books_texts/title">
+        <Annotation Term="Common.Label" String="Title" />
+      </Annotations>
+      <Annotations Target="CatalogService.Books_texts/descr">
+        <Annotation Term="UI.MultiLineText" Bool="true" />
+      </Annotations>
+      <Annotations Target="CatalogService.Genres_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code" />
+      </Annotations>
+      <Annotations Target="CatalogService.Genres_texts/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="CatalogService.Genres_texts/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="CatalogService.Genres_texts/ID">
+        <Annotation Term="Common.SemanticObject" Path="genreSemanticObject" />
+        <Annotation Term="Common.Label" String="genreID" />
+      </Annotations>
+      <Annotations Target="CatalogService.Currencies_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code" />
+      </Annotations>
+      <Annotations Target="CatalogService.Currencies_texts/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="CatalogService.Currencies_texts/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="CatalogService.Currencies_texts/code">
+        <Annotation Term="CodeList.StandardCode" PropertyPath="code" />
+        <Annotation Term="Common.UnitSpecificScale" Path="decimalPlaces" />
+        <Annotation Term="Common.Text" Path="name" />
+        <Annotation Term="Common.Label" String="Currency Code" />
+      </Annotations>
+      <Annotations Target="CatalogService.Countries_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code" />
+      </Annotations>
+      <Annotations Target="CatalogService.Countries_texts/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="CatalogService.Countries_texts/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="CatalogService.Countries_texts/code">
+        <Annotation Term="Common.Text" Path="name" />
+        <Annotation Term="Common.Label" String="Country/Region Code" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orderstatuses_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orderstatuses_texts/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="CatalogService.Orderstatuses_texts/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="CatalogService.Deliverystatuses_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code" />
+      </Annotations>
+      <Annotations Target="CatalogService.Deliverystatuses_texts/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="CatalogService.Deliverystatuses_texts/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="CatalogService.Plant_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code" />
+      </Annotations>
+      <Annotations Target="CatalogService.Plant_texts/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="CatalogService.Plant_texts/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

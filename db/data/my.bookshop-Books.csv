@@ -1,3 +1,4 @@
-ID;title;stock
-1;Wuthering Heights;100
-2;Jane Eyre;500
+ID;title;author_ID;stock
+8c0e80fe-d429-400e-8c20-210e145ab197;Moby Dick;1;100
+f441486a-200a-47d2-81de-494bc266eca3;Jane Eyre;107;500
+bd346011-a9b8-4296-be81-aca12a92d305;Wuthering Heights;101;134
