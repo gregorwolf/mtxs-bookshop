@@ -53,6 +53,9 @@ For an easy creation of the services build the project using `mbt build` and dep
 cf csk mtxs-bookshop-db mtxs-bookshop-db-key
 cf csk mtxs-bookshop-destination mtxs-bookshop-destination-key
 cf csk mtxs-bookshop-uaa mtxs-bookshop-uaa-key
+cf csk mtxs-bookshop-workzone mtxs-bookshop-workzone-key
+cf csk mtxs-bookshop-repo-runtime mtxs-bookshop-repo-runtime-key
+cf csk mtxs-bookshop-credstore-dev mtxs-bookshop-credstore-dev-key
 ```
 
 ## Bind the CAP App to the service
@@ -61,6 +64,9 @@ cf csk mtxs-bookshop-uaa mtxs-bookshop-uaa-key
 cds bind -2 mtxs-bookshop-db
 cds bind -2 mtxs-bookshop-destination
 cds bind -2 mtxs-bookshop-uaa
+cds bind -2 mtxs-bookshop-workzone
+cds bind -2 mtxs-bookshop-repo-runtime
+cds bind -2 mtxs-bookshop-credstore-dev
 ```
 
 ## Run local with dynamic binding
