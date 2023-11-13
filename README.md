@@ -71,6 +71,19 @@ cds bind -2 mtxs-bookshop-credstore-dev
 
 ## Run local with dynamic binding
 
+To try with the central service create a `default-env.json` and point it to the port where [bookshop-demo](https://github.com/gregorwolf/bookshop-demo) is running.
+
+```JSON
+{
+  "destinations": [
+    {
+      "name": "CatalogService",
+      "url": "http://localhost:4003"
+    }
+  ]
+}
+```
+
 To run with mocked authentication also in hybrid mode you have to remove the line
 
 ```
