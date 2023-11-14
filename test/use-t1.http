@@ -12,8 +12,11 @@ GET http://localhost:4004/odata/v4/catalog/Books
   ?$expand=author
 Authorization: Basic carol:
 ###
+GET http://localhost:4004/odata/v4/catalog/Books(ID=8c0e80fe-d429-400e-8c20-210e145ab197,IsActiveEntity=true)/author
+Authorization: Basic carol:
+###
 GET http://localhost:4004/odata/v4/catalog/Authors
-  ?$expand=books
+#  ?$expand=books
 Authorization: Basic carol:
 ###
 POST http://localhost:4004/odata/v4/catalog/Books
