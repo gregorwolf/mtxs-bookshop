@@ -1,0 +1,13 @@
+{
+    "role": {
+        "name": "BOOKSHOP",
+        "schema_privileges": [
+            {
+                "privileges": [
+                    "SELECT",
+                    "SELECT METADATA"
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "role": {
+        "name": "BOOKSHOP_O#",
+        "object_privileges": [
+            {
+                "name": "MY_BOOKSHOP_BOOKS",
+                "type": "TABLE",
+                "privileges_with_grant_option": [
+                    "SELECT"
+                ]
+            }
+        ]
+    }
+}
