@@ -1,6 +1,6 @@
 {
   "name": "mtxs-bookshop",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "MTXS Bookshop",
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
@@ -8,6 +8,9 @@
   "engines": {
     "node": "^18"
   },
+  "files": [
+    "db/data-model.cds"
+  ],
   "dependencies": {
     "@sap-cloud-sdk/connectivity": "^3",
     "@sap-cloud-sdk/http-client": "^3",
