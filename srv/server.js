@@ -41,7 +41,7 @@ cds.on("served", () => {
   });
 
   ds.before("upgrade", async (req) => {
-    LOG.info("server.js: upgrade");
+    LOG.info("upgrade");
     await fillServiceReplacement(req);
   });
 

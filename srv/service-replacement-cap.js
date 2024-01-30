@@ -7,7 +7,7 @@ const appEnv = cfenv.getAppEnv();
 
 async function fillServiceReplacementCAP(req) {
   if (req.data.tenant !== "t0") {
-    // Get enviroment variable
+    // Get environment variable
     const vcap = JSON.parse(process.env.VCAP_SERVICES);
     let upsName = "";
     const cfapi = await cds.connect.to("cfapi");
