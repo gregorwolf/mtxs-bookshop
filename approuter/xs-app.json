@@ -10,6 +10,13 @@
   },
   "routes": [
     {
+      "source": "^/fesr$",
+      "target": "/fesr",
+      "destination": "srv",
+      "csrfProtection": false,
+      "authenticationType": "xsuaa"
+    },
+    {
       "source": "/catalog/(.*)$",
       "target": "/catalog/$1",
       "destination": "srv",

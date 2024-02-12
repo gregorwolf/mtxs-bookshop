@@ -1,4 +1,4 @@
-_schema-version: '3.1'
+_schema-version: "3.1"
 ID: mtxs-bookshop
 version: 0.0.1
 description: "MTXS Beershop"
@@ -8,7 +8,8 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npx -p @sap/cds-dk cds build --production
+        - npm install --omit=dev
+        - npx cds build --production
 modules:
   - name: mtxs-bookshop
     type: html5
@@ -20,7 +21,7 @@ modules:
       disk-quota: 512M
       keep-existing-routes: true
     properties:
-      TENANT_HOST_PATTERN: '^(.*)-${app-name}.${default-domain}'
+      TENANT_HOST_PATTERN: "^(.*)-${app-name}.${default-domain}"
       CJ_PROTECT_WHITELIST: >
         [
           {
@@ -73,9 +74,13 @@ modules:
     parameters:
       memory: 256M
       buildpack: nodejs_buildpack
+    properties:
+      SAP_CALM_SERVICE_NAME: mtxs-bookshop
+      SAP_CALM_SERVICE_TYPE: SAP_CP_CF
+      OTEL_RESOURCE_ATTRIBUTES: sap.tenancy.tenant_id=d3812a8d-54bb-4995-a452-fdcffed2ff81
+      NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
     build-parameters:
       builder: npm-ci
-      ignore: ["node_modules/"]
     provides:
       - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
@@ -97,7 +102,7 @@ modules:
     path: broker/
     build-parameters:
       builder: npm-ci
-      ignore: ['node_modules/', 'default-*.json', 'manifest*.yml']
+      ignore: ["node_modules/", "default-*.json", "manifest*.yml"]
     parameters:
       app-name: mtxs-bookshop-api-sb-${space}
       memory: 64MB
@@ -113,21 +118,21 @@ modules:
       - name: srv-api
         properties:
           SBF_SERVICE_CONFIG:
-              MTXS Bookshop API:
-                extend_credentials:
-                  shared:
-                    apiUrl: ~{srv-url}
-                # extend_xssecurity:
-                #   per_plan:
-                #     default: 
-                #       authorities: 
-                #       - $XSMASTERAPPNAME.plan_default
-                #     premium: 
-                #       authorities: 
-                #       - $XSMASTERAPPNAME.plan_premium
-                extend_catalog:
-                  metadata:
-                     displayName : MTXS Bookshop API ${space}
+            MTXS Bookshop API:
+              extend_credentials:
+                shared:
+                  apiUrl: ~{srv-url}
+              # extend_xssecurity:
+              #   per_plan:
+              #     default:
+              #       authorities:
+              #       - $XSMASTERAPPNAME.plan_default
+              #     premium:
+              #       authorities:
+              #       - $XSMASTERAPPNAME.plan_premium
+              extend_catalog:
+                metadata:
+                  displayName: MTXS Bookshop API ${space}
           SBF_ENABLE_AUDITLOG: false
     provides:
       - name: mtxs-bookshop-api-sb-srv
@@ -152,7 +157,7 @@ modules:
     parameters:
       app-name: mtxs-bookshop-workzone-deployer
       config:
-        TENANT_HOST_PATTERN: '^(.*)-~{approuter-properties/app-name}.${default-domain}'
+        TENANT_HOST_PATTERN: "^(.*)-~{approuter-properties/app-name}.${default-domain}"
   - name: cswdemomtxsbooks
     type: html5
     path: app/books
@@ -213,11 +218,11 @@ resources:
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
-      service-plan: broker  
+      service-plan: broker
       path: ./xs-security.json
       config:
         xsappname: mtxs-bookshop-${space}
-        tenant-mode: shared  
+        tenant-mode: shared
   - name: mtxs-bookshop-destination
     type: org.cloudfoundry.managed-service
     parameters:
@@ -242,7 +247,7 @@ resources:
         appName: mtxs-bookshop
         displayName: mtxs-bookshop
         description: MTXS Bookshop
-        category: 'Category'
+        category: "Category"
         appUrls:
           getDependencies: ~{mtx-api/mtx-url}/-/cds/saas-provisioning/dependencies
           onSubscription: ~{mtx-api/mtx-url}/-/cds/saas-provisioning/tenant/{tenantId}
@@ -268,14 +273,14 @@ resources:
   - name: mtxs-bookshop-logging
     type: org.cloudfoundry.managed-service
     parameters:
-       service: application-logs
-       service-plan: lite
+      service: application-logs
+      service-plan: lite
   - name: mtxs-bookshop-credstore
     type: org.cloudfoundry.managed-service
     parameters:
       service: credstore
       service-plan: free
       service-name: mtxs-bookshop-credstore-${space}
-      config: 
-         authentication:
-              type: basic
+      config:
+        authentication:
+          type: basic

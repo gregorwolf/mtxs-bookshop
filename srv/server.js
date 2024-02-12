@@ -1,6 +1,7 @@
 const cds = require("@sap/cds");
 // https://cap.cloud.sap/docs/node.js/cds-log#configuring-log-levels
 const LOG = cds.log("mtxs-custom");
+const fesr = require("@sap/fesr-to-otel-js");
 
 // Read xsappname of services using xsenv
 const xsenv = require("@sap/xsenv");
@@ -28,6 +29,10 @@ async function fillServiceReplacement(req) {
     return fillServiceReplacementCAP(req);
   }
 }
+
+cds.on("bootstrap", async (app) => {
+  fesr.registerFesrEndpoint(app);
+});
 
 cds.on("served", () => {
   LOG.debug("CDS served");
