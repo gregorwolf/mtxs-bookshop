@@ -34,13 +34,13 @@
     "sqlite3": "^5"
   },
   "scripts": {
-    "start": "node ${NODE_ARGS} ./node_modules/@sap/cds/bin/cds-serve",
+    "start": "cds-serve",
     "start:hybrid": "cds build --production && cp gen/srv/resources.tgz . && cds bind --exec cds-serve --profile hybrid",
-    "build": "mbt build && npm install",
-    "deploy": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e cf-service-broker-private.mtaext",
-    "deploy:srv": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e cf-service-broker-private.mtaext -m mtxs-bookshop-srv",
-    "deploy:ui": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e cf-service-broker-private.mtaext -m mtxs-bookshop",
-    "undeploy": "cf undeploy mtxs-bookshop --delete-service-keys --delete-services --delete-service-brokers"
+    "build:cf": "mbt build && npm install",
+    "deploy:cf": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e cf-service-broker-private.mtaext",
+    "deploy:cf:srv": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e cf-service-broker-private.mtaext -m mtxs-bookshop-srv",
+    "deploy:cf:ui": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e cf-service-broker-private.mtaext -m mtxs-bookshop",
+    "undeploy:cf": "cf undeploy mtxs-bookshop --delete-service-keys --delete-services --delete-service-brokers"
   },
   "cds": {
     "log": {
