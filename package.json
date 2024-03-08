@@ -34,7 +34,7 @@
     "sqlite3": "^5"
   },
   "scripts": {
-    "start": "cds-serve",
+    "start": "node ${NODE_ARGS} ./node_modules/@sap/cds/bin/cds-serve",
     "start:hybrid": "cds build --production && cp gen/srv/resources.tgz . && cds bind --exec cds-serve --profile hybrid",
     "build:cf": "mbt build && npm install",
     "deploy:cf": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e cf-service-broker-private.mtaext",

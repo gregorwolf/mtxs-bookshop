@@ -78,7 +78,7 @@ modules:
       SAP_CALM_SERVICE_NAME: mtxs-bookshop
       SAP_CALM_SERVICE_TYPE: SAP_CP_CF
       OTEL_RESOURCE_ATTRIBUTES: sap.tenancy.tenant_id=d3812a8d-54bb-4995-a452-fdcffed2ff81
-      NODE_OPTIONS: -r @sap/xotel-agent-ext-js/dist/common/tracer
+      NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
     build-parameters:
       builder: npm-ci
     provides:
