@@ -4,6 +4,10 @@ const LOG = cds.log("service-replacement-cap");
 
 const cfenv = require("cfenv");
 const appEnv = cfenv.getAppEnv();
+if (appEnv?.app?.organization_id === undefined) {
+  LOG.error("No appEnv found");
+  throw new Error("No appEnv found");
+}
 
 async function fillServiceReplacementCAP(req) {
   if (req.data.tenant !== "t0") {

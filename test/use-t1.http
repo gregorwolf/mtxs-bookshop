@@ -32,3 +32,26 @@ Content-Type: application/json
 ###
 GET http://localhost:4004/odata/v4/catalog/CS1TAB
 Authorization: Basic carol:
+
+###
+GET http://localhost:4004/odata/v4/books-api
+Authorization: Basic carol:
+###
+# @name getBooksFromAPI
+GET http://localhost:4004/odata/v4/books-api/Books
+Authorization: Basic carol:
+###
+@bookId={{getBooksFromAPI.response.body.$.value[0].ID}}
+@etag="2024-03-05T00:00:00.000Z"
+### Read Single Book
+GET http://localhost:4004/odata/v4/books-api/Books({{bookId}})
+Authorization: Basic carol:
+### Update Book
+PATCH http://localhost:4004/odata/v4/books-api/Books({{bookId}})
+Authorization: Basic carol:
+If-Match: {{etag}}
+Content-Type: application/json
+
+{
+  "stock": 150
+}
