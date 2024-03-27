@@ -1,26 +1,26 @@
 ###
 GET http://localhost:4004/odata/v4/catalog
-Authorization: Basic carol:
+Authorization: Basic carol:carol
 ###
 GET http://localhost:4004/odata/v4/catalog/$metadata
-Authorization: Basic carol:
+Authorization: Basic carol:carol
 ###
 GET http://localhost:4004/odata/v4/catalog/Books
-Authorization: Basic carol:
+Authorization: Basic carol:carol
 ###
 GET http://localhost:4004/odata/v4/catalog/Books
   ?$expand=author
-Authorization: Basic carol:
+Authorization: Basic carol:carol
 ###
 GET http://localhost:4004/odata/v4/catalog/Books(ID=8c0e80fe-d429-400e-8c20-210e145ab197,IsActiveEntity=true)/author
-Authorization: Basic carol:
+Authorization: Basic carol:carol
 ###
 GET http://localhost:4004/odata/v4/catalog/Authors
 #  ?$expand=books
-Authorization: Basic carol:
+Authorization: Basic carol:carol
 ###
 POST http://localhost:4004/odata/v4/catalog/Books
-Authorization: Basic carol:
+Authorization: Basic carol:carol
 Content-Type: application/json
 
 {
@@ -31,24 +31,27 @@ Content-Type: application/json
 
 ###
 GET http://localhost:4004/odata/v4/catalog/CS1TAB
-Authorization: Basic carol:
+Authorization: Basic carol:carol
 
 ###
 GET http://localhost:4004/odata/v4/books-api
-Authorization: Basic carol:
+Authorization: Basic carol:carol
+###
+GET http://localhost:4004/odata/v4/books-api/$metadata
+Authorization: Basic carol:carol
 ###
 # @name getBooksFromAPI
 GET http://localhost:4004/odata/v4/books-api/Books
-Authorization: Basic carol:
+Authorization: Basic carol:carol
 ###
 @bookId={{getBooksFromAPI.response.body.$.value[0].ID}}
 @etag="2024-03-05T00:00:00.000Z"
 ### Read Single Book
 GET http://localhost:4004/odata/v4/books-api/Books({{bookId}})
-Authorization: Basic carol:
+Authorization: Basic carol:carol
 ### Update Book
 PATCH http://localhost:4004/odata/v4/books-api/Books({{bookId}})
-Authorization: Basic carol:
+Authorization: Basic carol:carol
 If-Match: {{etag}}
 Content-Type: application/json
 
