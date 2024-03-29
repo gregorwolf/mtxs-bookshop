@@ -185,6 +185,7 @@ modules:
   - name: mtxs-bookshop-destination-content
     type: com.sap.application.content
     requires:
+      - name: srv-api
       - name: mtxs-bookshop-destination
         parameters:
           content-target: true
@@ -209,6 +210,11 @@ modules:
               ServiceInstanceName: mtxs-bookshop-uaa
               ServiceKeyName: mtxs-bookshop-uaa-key
               sap.cloud.service: csw.demo.mtxs.books
+            - Name: mtxs-bookshop
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: mtxs-bookshop-uaa
+              ServiceKeyName: mtxs-bookshop-uaa-key
+              URL: ~{srv-api/srv-url}
           existing_destinations_policy: update
     build-parameters:
       no-source: true
