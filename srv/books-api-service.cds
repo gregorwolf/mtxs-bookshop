@@ -8,6 +8,9 @@ service BooksApiService {
         };
 }
 
+/*
+// Deactivate etag so current CAP Client works
 annotate BooksApiService.Books with {
     modifiedAt @odata.etag
 }
+*/
