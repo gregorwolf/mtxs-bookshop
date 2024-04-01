@@ -45,8 +45,13 @@
     "undeploy:cf": "cf undeploy mtxs-bookshop --delete-service-keys --delete-services --delete-service-brokers"
   },
   "cds": {
+    "features": {
+      "kibana_formatter": false
+    },
     "log": {
+      "format": "plain",
       "levels": {
+        "mtx": "debug",
         "mtxs-custom": "debug"
       }
     },
