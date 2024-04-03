@@ -211,11 +211,11 @@ modules:
               ServiceInstanceName: mtxs-bookshop-uaa
               ServiceKeyName: mtxs-bookshop-uaa-key
               sap.cloud.service: csw.demo.mtxs.books
-            - Name: mtxs-bookshop
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: mtxs-bookshop-uaa
-              ServiceKeyName: mtxs-bookshop-uaa-key
-              URL: ~{srv-api/srv-url}
+            # - Name: mtxs-bookshop
+            #   Authentication: OAuth2UserTokenExchange
+            #   ServiceInstanceName: mtxs-bookshop-uaa
+            #   ServiceKeyName: mtxs-bookshop-uaa-key
+            #   URL: ~{srv-api/srv-url}
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -230,6 +230,21 @@ resources:
       config:
         xsappname: mtxs-bookshop-${space}
         tenant-mode: shared
+        scopes:
+          - name: $XSAPPNAME.admin
+            description: admin of the Books API
+            granted-apps:
+              - $XSAPPNAME(application,mtxs-reviews-${org}-${space})
+          - name: $XSAPPNAME.cds.ExtensionDeveloper
+            description: Extend CDS application
+          - name: $XSAPPNAME.MtxDiagnose
+            description: Diagnose MTX sidecar
+          - name: $XSAPPNAME.mtdeployment
+            description: Deploy applications
+          - name: $XSAPPNAME.mtcallback
+            description: Subscribe to applications
+            grant-as-authority-to-apps:
+              - $XSAPPNAME(application,sap-provisioning,tenant-onboarding)
   - name: mtxs-bookshop-destination
     type: org.cloudfoundry.managed-service
     parameters:

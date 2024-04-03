@@ -1,27 +1,4 @@
 {
-  "xsappname": "mtxs-bookshop-${space}",
-  "tenant-mode": "shared",
-  "scopes": [
-    {
-      "name": "$XSAPPNAME.cds.ExtensionDeveloper",
-      "description": "Extend CDS application"
-    },
-    {
-      "name": "$XSAPPNAME.MtxDiagnose",
-      "description": "Diagnose MTX sidecar"
-    },
-    {
-      "name": "$XSAPPNAME.mtdeployment",
-      "description": "Deploy applications"
-    },
-    {
-      "name": "$XSAPPNAME.mtcallback",
-      "description": "Subscribe to applications",
-      "grant-as-authority-to-apps": [
-        "$XSAPPNAME(application,sap-provisioning,tenant-onboarding)"
-      ]
-    }
-  ],
   "authorities": [
     "$XSAPPNAME.MtxDiagnose",
     "$XSAPPNAME.mtdeployment",
@@ -40,18 +17,11 @@
     {
       "name": "ExtensionDeveloper",
       "description": "Extend application",
-      "scope-references": [
-        "$XSAPPNAME.cds.ExtensionDeveloper"
-      ]
+      "scope-references": ["$XSAPPNAME.cds.ExtensionDeveloper"]
     }
   ],
   "oauth2-configuration": {
-    "credential-types": [
-      "binding-secret"
-    ],
-    "redirect-uris": [
-      "https://*.hana.ondemand.com/**",
-      "http://localhost:*/**"
-    ]
+    "credential-types": ["binding-secret"],
+    "redirect-uris": ["https://*.hana.ondemand.com/**", "http://localhost:*/**"]
   }
 }

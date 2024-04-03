@@ -1,5 +1,6 @@
 using my.bookshop as my from '../db/data-model';
 
+@(requires: 'admin')
 service BooksApiService {
     entity Books as
         projection on my.Books
