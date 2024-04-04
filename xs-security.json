@@ -18,6 +18,18 @@
       "name": "ExtensionDeveloper",
       "description": "Extend application",
       "scope-references": ["$XSAPPNAME.cds.ExtensionDeveloper"]
+    },
+    {
+      "name": "Admin",
+      "description": "Admin",
+      "scope-references": ["$XSAPPNAME.admin"]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "MTXSBookshopAdmin",
+      "description": "MTXS Bookshop Admin",
+      "role-template-references": ["$XSAPPNAME.Admin"]
     }
   ],
   "oauth2-configuration": {
