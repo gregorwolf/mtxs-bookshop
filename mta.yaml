@@ -58,7 +58,7 @@ modules:
       - name: mtxs-bookshop-logging
       - name: mtxs-bookshop-repo-runtime
       - name: mtxs-bookshop-uaa
-      - name: srv-api
+      - name: mtxs-bookshop-srv-api
         group: destinations
         properties:
           name: srv
@@ -83,7 +83,8 @@ modules:
     build-parameters:
       builder: npm-ci
     provides:
-      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+      - name: mtxs-bookshop-srv-api # required by consumers of CAP services (e.g. approuter)
+        public: true
         properties:
           srv-url: ${default-url}
       - name: mtx-api # required by SaaS Registry
@@ -116,7 +117,7 @@ modules:
     requires:
       - name: mtxs-bookshop-uaa
       - name: mtxs-bookshop-logging
-      - name: srv-api
+      - name: mtxs-bookshop-srv-api
         properties:
           SBF_SERVICE_CONFIG:
             MTXS Bookshop API:
@@ -186,7 +187,7 @@ modules:
   - name: mtxs-bookshop-destination-content
     type: com.sap.application.content
     requires:
-      - name: srv-api
+      - name: mtxs-bookshop-srv-api
       - name: mtxs-bookshop-destination
         parameters:
           content-target: true
@@ -202,18 +203,6 @@ modules:
       content:
         subaccount:
           destinations:
-            - Name: mtxs-bookshop
-              ServiceInstanceName: mtxs-bookshop-uaa
-              ServiceKeyName: mtxs-bookshop-uaa-key
-              Description: CAP backend service
-              Authentication: NoAuthentication
-              ProxyType: Internet
-              Type: HTTP
-              URL: ~{srv-api/srv-url}
-              HTML5.DynamicDestination: true
-              HTML5.ForwardAuthToken: true
-              forwardAuthToken: true
-              timeout: 600000
             - Name: mtxs_bookshop_html5_repo_host
               ServiceInstanceName: mtxs-bookshop-html5-repo-host
               ServiceKeyName: mtxs-bookshop-html5-repo-host-key
