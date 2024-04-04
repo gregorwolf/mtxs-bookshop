@@ -202,6 +202,18 @@ modules:
       content:
         subaccount:
           destinations:
+            - Name: mtxs-bookshop
+              ServiceInstanceName: mtxs-bookshop-uaa
+              ServiceKeyName: mtxs-bookshop-uaa-key
+              Description: CAP backend service
+              Authentication: NoAuthentication
+              ProxyType: Internet
+              Type: HTTP
+              URL: ~{srv-api/srv-url}
+              HTML5.DynamicDestination: true
+              HTML5.ForwardAuthToken: true
+              forwardAuthToken: true
+              timeout: 600000
             - Name: mtxs_bookshop_html5_repo_host
               ServiceInstanceName: mtxs-bookshop-html5-repo-host
               ServiceKeyName: mtxs-bookshop-html5-repo-host-key
@@ -211,11 +223,6 @@ modules:
               ServiceInstanceName: mtxs-bookshop-uaa
               ServiceKeyName: mtxs-bookshop-uaa-key
               sap.cloud.service: csw.demo.mtxs.books
-            # - Name: mtxs-bookshop
-            #   Authentication: OAuth2UserTokenExchange
-            #   ServiceInstanceName: mtxs-bookshop-uaa
-            #   ServiceKeyName: mtxs-bookshop-uaa-key
-            #   URL: ~{srv-api/srv-url}
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -280,7 +287,7 @@ resources:
   - name: mtxs-bookshop-workzone
     type: org.cloudfoundry.managed-service
     parameters:
-      service: build-workzone-advanced
+      service: build-workzone-standard
       service-plan: standard
   - name: mtxs-bookshop-html5-repo-host
     type: org.cloudfoundry.managed-service
