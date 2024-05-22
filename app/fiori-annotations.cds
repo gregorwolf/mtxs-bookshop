@@ -3,7 +3,8 @@ using {CatalogService} from '../srv/cat-service';
 annotate CatalogService.Books with @UI: {
   SelectionFields : [
     title,
-    author_ID
+    author_ID,
+    stock
   ],
   LineItem        : [
     {Value: title},

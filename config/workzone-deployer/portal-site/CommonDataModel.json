@@ -1,96 +1,99 @@
 {
-    "_version": "3.0.0",
-    "identification": {
-        "id": "c9aae627-9601-4a11-83c3-41b94a3c8026-1576776549699",
-        "entityType": "bundle"
-    },
-    "payload": {
-        "catalogs": [
+  "_version": "3.0.0",
+  "identification": {
+    "id": "c9aae627-9601-4a11-83c3-41b94a3c8026-1576776549699",
+    "entityType": "bundle"
+  },
+  "payload": {
+    "catalogs": [
+      {
+        "_version": "3.0.0",
+        "identification": {
+          "id": "defaultCatalogId",
+          "title": "{{catalog1.title}}",
+          "entityType": "catalog",
+          "i18n": "i18n/i18n.properties"
+        },
+        "payload": {
+          "viz": []
+        }
+      }
+    ],
+    "groups": [
+      {
+        "_version": "3.0.0",
+        "identification": {
+          "id": "Group1",
+          "title": "{{group1.title}}",
+          "entityType": "group",
+          "i18n": "i18n/i18n.properties"
+        },
+        "payload": {
+          "viz": [
             {
-                "_version": "3.0.0",
-                "identification": {
-                    "id": "defaultCatalogId",
-                    "title": "{{catalog1.title}}",
-                    "entityType": "catalog",
-                    "i18n": "i18n/i18n.properties"
-                },
-                "payload": {
-                    "viz": []
-                }
+              "id": "books",
+              "appId": "csw.demo.mtxs.books",
+              "vizId": "books-display"
+            },
+            {
+              "id": "books",
+              "appId": "csw.demo.mtxs.books",
+              "vizId": "books-displayStock500"
             }
-        ],
-        "groups": [
-            {
-                "_version": "3.0.0",
-                "identification": {
-                    "id": "Group1",
-                    "title": "{{group1.title}}",
-                    "entityType": "group",
-                    "i18n": "i18n/i18n.properties"
+          ]
+        }
+      }
+    ],
+    "sites": [
+      {
+        "_version": "3.0.0",
+        "identification": {
+          "id": "b9ad73bb-384c-4740-b39a-7f0fad5e6acc-1576776549700",
+          "entityType": "site",
+          "title": "SAP Fiori launchpad site on Cloud Foundry",
+          "description": ""
+        },
+        "payload": {
+          "config": {
+            "ushellConfig": {
+              "bootstrapPlugins": {
+                "KeyUserPlugin": {
+                  "component": "sap.ushell.plugins.rta"
                 },
-                "payload": {
-                    "viz": [
-                        {
-                            "id": "books",
-                            "appId": "csw.demo.mtxs.books",
-                            "vizId": "books-display"
-                        }
-                    ]
+                "PersonalizePlugin": {
+                  "component": "sap.ushell.plugins.rta-personalize"
                 }
-            }
-        ],
-        "sites": [
-            {
-                "_version": "3.0.0",
-                "identification": {
-                    "id": "b9ad73bb-384c-4740-b39a-7f0fad5e6acc-1576776549700",
-                    "entityType": "site",
-                    "title": "SAP Fiori launchpad site on Cloud Foundry",
-                    "description": ""
-                },
-                "payload": {
+              },
+              "renderers": {
+                "fiori2": {
+                  "componentData": {
                     "config": {
-                        "ushellConfig": {
-                            "bootstrapPlugins": {
-                                "KeyUserPlugin": {
-                                    "component": "sap.ushell.plugins.rta"
-                                },
-                                "PersonalizePlugin": {
-                                    "component": "sap.ushell.plugins.rta-personalize"
-                                }
-                            },
-                            "renderers": {
-                                "fiori2": {
-                                    "componentData": {
-                                        "config": {
-                                            "applications": {
-                                                "Shell-home": {}
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "groupsOrder": [
-                        "Group1"
-                    ],
-                    "sap.cloud.portal": {
-                        "config": {
-                            "theme.id": "sap_horizon",
-                            "theme.active": [
-                                "sap_horizon",
-                                "sap_horizon_hcb",
-                                "sap_horizon_hcw",
-                                "sap_belize",
-                                "sap_belize_hcb",
-                                "sap_belize_hcw"
-                            ],
-                            "ui5LibraryUrl": "https://ui5.sap.com/"
-                        }
+                      "applications": {
+                        "Shell-home": {}
+                      }
                     }
+                  }
                 }
+              }
             }
-        ]
-    }
+          },
+          "groupsOrder": ["Group1"],
+          "sap.cloud.portal": {
+            "config": {
+              "theme.id": "sap_horizon",
+              "theme.active": [
+                "sap_horizon",
+                "sap_horizon_hcb",
+                "sap_horizon_hcw",
+                "sap_belize",
+                "sap_belize_hcb",
+                "sap_belize_hcw"
+              ],
+              "ui5LibraryUrl": "https://ui5.sap.com/"
+            }
+          }
+        }
+      }
+    ]
+  }
 }
