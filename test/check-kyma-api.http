@@ -1,0 +1,25 @@
+### Get Access Token for Destination Service
+# @name requestDestinationAccessToken
+POST {{$dotenv btp_tokenendpoint}}/oauth/token
+Authorization: Basic {{$dotenv btp_clientid}}:{{$dotenv btp_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+###### Fill Variables from Response
+@access_token = {{requestDestinationAccessToken.response.body.$.access_token}}
+
+###
+GET {{$dotenv kyma_api}}
+Authorization: Bearer {{access_token}}
+
+###
+POST {{$dotenv kyma_api}}/live/rest/erpIntegration/getDesign
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "design": "EXAMPLE_DESIGN",
+  "designAlternative": 0,
+  "singleLevel": true
+}
