@@ -34,6 +34,11 @@
       "localDir": "webapp"
     },
     {
+      "source": "^/reuse/cp.portal(/.*)",
+      "target": "$1",
+      "service": "html5-apps-repo-rt"
+    },
+    {
       "source": "^(.*)$",
       "target": "$1",
       "service": "html5-apps-repo-rt",
