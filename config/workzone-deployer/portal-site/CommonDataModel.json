@@ -89,14 +89,14 @@
                 "sap_belize_hcb",
                 "sap_belize_hcw"
               ],
-              "ui5LibraryUrl": "https://ui5.sap.com/"
-            },
-            "flexibilityServices": [
-              {
-                "connector": "PersonalizationConnector",
-                "url": "/reuse/cp.portal/fdc"
-              }
-            ]
+              "ui5LibraryUrl": "https://ui5.sap.com/",
+              "flexibilityServices": [
+                {
+                  "connector": "PersonalizationConnector",
+                  "url": "/reuse/cp.portal/fdc"
+                }
+              ]
+            }
           }
         }
       }
