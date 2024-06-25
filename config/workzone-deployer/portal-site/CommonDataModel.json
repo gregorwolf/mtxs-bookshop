@@ -80,6 +80,7 @@
           "groupsOrder": ["Group1"],
           "sap.cloud.portal": {
             "config": {
+              "ui5LibraryUrl": "https://ui5.sap.com/1.120.7/",
               "theme.id": "sap_horizon",
               "theme.active": [
                 "sap_horizon",
@@ -89,7 +90,6 @@
                 "sap_belize_hcb",
                 "sap_belize_hcw"
               ],
-              "ui5LibraryUrl": "https://ui5.sap.com/",
               "flexibilityServices": [
                 {
                   "connector": "PersonalizationConnector",
