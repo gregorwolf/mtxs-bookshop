@@ -225,7 +225,6 @@ resources:
       path: ./xs-security.json
       config:
         xsappname: mtxs-bookshop-${space}
-        tenant-mode: shared
         scopes:
           - name: $XSAPPNAME.admin
             description: admin of the Books API

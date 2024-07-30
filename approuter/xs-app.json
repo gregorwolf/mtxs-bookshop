@@ -3,7 +3,7 @@
   "authenticationMethod": "route",
   "logout": {
     "logoutEndpoint": "/do/logout",
-    "logoutPage": "/app/logout.html"
+    "logoutPage": "/logout/"
   },
   "whitelistService": {
     "endpoint": "/allowlist/service"
@@ -32,6 +32,12 @@
       "source": "^/app/(.*)$",
       "target": "$1",
       "localDir": "webapp"
+    },
+    {
+      "source": "^/logout/(.*)$",
+      "target": "$1",
+      "localDir": "logout",
+      "authenticationType": "none"
     },
     {
       "source": "^/reuse/cp.portal/(.*)$",

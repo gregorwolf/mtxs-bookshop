@@ -11,6 +11,7 @@
   "scripts": {
     "start:extended": "node approuter.js",
     "start": "node node_modules/@sap/approuter/approuter.js",
+    "start:local": "node ../node_modules/@sap/approuter/approuter.js",
     "update": "npm update"
   }
 }

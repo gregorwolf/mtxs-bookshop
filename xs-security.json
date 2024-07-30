@@ -1,4 +1,6 @@
 {
+  "xsappname": "mtxs-bookshop-dev",
+  "tenant-mode": "shared",
   "authorities": [
     "$XSAPPNAME.MtxDiagnose",
     "$XSAPPNAME.mtdeployment",
@@ -34,6 +36,11 @@
   ],
   "oauth2-configuration": {
     "credential-types": ["binding-secret"],
-    "redirect-uris": ["https://*.hana.ondemand.com/**", "http://localhost:*/**"]
+    "redirect-uris": [
+      "https://*.hana.ondemand.com/**",
+      "http://localhost:*/**",
+      "http://*.localhost:*/**",
+      "http://dev-azure-sub1-mtxs-bookshop.localhost:5000/login/callback"
+    ]
   }
 }
