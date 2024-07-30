@@ -96,6 +96,7 @@
   ],
   "workspaces": [
     "approuter",
+    "broker",
     "apps/**/*"
   ]
 }
