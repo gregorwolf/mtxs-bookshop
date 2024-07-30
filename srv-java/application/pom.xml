@@ -78,7 +78,6 @@
         -->
 
         <!-- Dependencies for security setup -->
-        <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -87,7 +86,6 @@
             <groupId>com.sap.cloud.security</groupId>
             <artifactId>resourceserver-security-spring-boot-starter</artifactId>
         </dependency>
-        -->
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>

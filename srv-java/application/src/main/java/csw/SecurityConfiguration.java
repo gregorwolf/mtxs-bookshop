@@ -1,7 +1,6 @@
 package csw;
 
 // Example for Spring Boot security configuration
-/*
 import com.sap.cloud.security.spring.config.IdentityServicesPropertySourceFactory;
 import com.sap.cloud.security.spring.token.authentication.AuthenticationToken;
 import com.sap.cloud.security.token.TokenClaims;
@@ -27,18 +26,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Configuration
-@EnableWebSecurity( debug = true ) // TODO "debug" may include sensitive information. Do not use in a production system!
-@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true )
-@PropertySource( factory = IdentityServicesPropertySourceFactory.class, ignoreResourceNotFound = true, value = { "" } )
-public class SecurityConfiguration
-{
+@EnableWebSecurity(debug = true) // TODO "debug" may include sensitive information. Do not use in a production
+                                 // system!
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
+@PropertySource(factory = IdentityServicesPropertySourceFactory.class, ignoreResourceNotFound = true, value = { "" })
+public class SecurityConfiguration {
     @Autowired
     Converter<Jwt, AbstractAuthenticationToken> authConverter; // Required only when Xsuaa is used
 
     @Bean
-    public SecurityFilterChain filterChain( HttpSecurity http )
-        throws Exception
-    {
+    public SecurityFilterChain filterChain(HttpSecurity http)
+            throws Exception {
         // @formatter:off
         return http
             .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -98,4 +96,3 @@ public class SecurityConfiguration
         }
     }
 }
-*/

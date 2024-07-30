@@ -226,6 +226,8 @@ resources:
       config:
         xsappname: mtxs-bookshop-${space}
         scopes:
+          - name: $XSAPPNAME.Display
+            description: Display
           - name: $XSAPPNAME.admin
             description: admin of the Books API
             granted-apps:

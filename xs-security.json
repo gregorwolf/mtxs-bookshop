@@ -25,6 +25,11 @@
       "name": "Admin",
       "description": "Admin",
       "scope-references": ["$XSAPPNAME.admin"]
+    },
+    {
+      "name": "Viewer",
+      "description": "Required to view things in your solution",
+      "scope-references": ["$XSAPPNAME.Display"]
     }
   ],
   "role-collections": [
@@ -32,6 +37,11 @@
       "name": "MTXSBookshopAdmin",
       "description": "MTXS Bookshop Admin",
       "role-template-references": ["$XSAPPNAME.Admin"]
+    },
+    {
+      "name": "MTXSBookshopViewer",
+      "description": "MTXS Bookshop Viewer",
+      "role-template-references": ["$XSAPPNAME.Viewer"]
     }
   ],
   "oauth2-configuration": {
