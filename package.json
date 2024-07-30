@@ -37,6 +37,8 @@
   },
   "scripts": {
     "start": "node ${NODE_ARGS} ./node_modules/@sap/cds/bin/cds-serve",
+    "start:approuter": "cp .cdsrc-private.json approuter/ && cd approuter && cds bind --exec -- npm run start:local",
+    "start:java": "cp .cdsrc-private.json srv-java/application/ && cd srv-java/application && cds bind --exec -- mvn spring-boot:run -D\"spring-boot.run.profiles\"=cf",
     "start:hybrid": "cds build --production && cp gen/srv/resources.tgz . && cds bind --exec cds-serve --profile hybrid",
     "build:cf": "mbt build && npm install",
     "deploy:cf": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e cf-service-broker-private.mtaext --retries 1",

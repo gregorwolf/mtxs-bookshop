@@ -1,4 +1,6 @@
 {
+  "xsappname": "mtxs-bookshop-dev",
+  "tenant-mode": "shared",
   "authorities": [
     "$XSAPPNAME.MtxDiagnose",
     "$XSAPPNAME.mtdeployment",
@@ -23,6 +25,11 @@
       "name": "Admin",
       "description": "Admin",
       "scope-references": ["$XSAPPNAME.admin"]
+    },
+    {
+      "name": "Viewer",
+      "description": "Required to view things in your solution",
+      "scope-references": ["$XSAPPNAME.Display"]
     }
   ],
   "role-collections": [
@@ -30,10 +37,20 @@
       "name": "MTXSBookshopAdmin",
       "description": "MTXS Bookshop Admin",
       "role-template-references": ["$XSAPPNAME.Admin"]
+    },
+    {
+      "name": "MTXSBookshopViewer",
+      "description": "MTXS Bookshop Viewer",
+      "role-template-references": ["$XSAPPNAME.Viewer"]
     }
   ],
   "oauth2-configuration": {
     "credential-types": ["binding-secret"],
-    "redirect-uris": ["https://*.hana.ondemand.com/**", "http://localhost:*/**"]
+    "redirect-uris": [
+      "https://*.hana.ondemand.com/**",
+      "http://localhost:*/**",
+      "http://*.localhost:*/**",
+      "http://dev-azure-sub1-mtxs-bookshop.localhost:5000/login/callback"
+    ]
   }
 }
