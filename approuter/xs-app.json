@@ -51,6 +51,18 @@
       "service": "html5-apps-repo-rt"
     },
     {
+      "source": "^/comsapuitheming.runtime/(.*)$",
+      "target": "$1",
+      "service": "com.sap.ui.theming",
+      "endpoint": "runtime"
+    },
+    {
+      "source": "^/comsapuitheming.repository/(.*)$",
+      "target": "$1",
+      "service": "com.sap.ui.theming",
+      "endpoint": "repository"
+    },
+    {
       "source": "^(.*)$",
       "target": "$1",
       "service": "html5-apps-repo-rt",

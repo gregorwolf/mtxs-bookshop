@@ -10,12 +10,14 @@ const services = xsenv.getServices({
   dest: { tag: "destination" },
   html5rt: { tag: "html5appsrepo" },
   launchpad: { tag: "launchpad" },
+  theming: { tag: "sap-theming" },
 });
 // fill dependencies for cds.env.requires
 const dependencies = [];
 dependencies.push(services.dest.xsappname);
 dependencies.push(services.html5rt.uaa.xsappname);
 dependencies.push(services.launchpad.uaa.xsappname);
+dependencies.push(services.theming.uaa.xsappname);
 cds.env.requires["cds.xt.SaasProvisioningService"] = { dependencies };
 
 async function fillServiceReplacement(req) {

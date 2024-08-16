@@ -54,6 +54,7 @@ modules:
           }
         ]
     requires:
+      - name: mtxs-bookshop-theming
       - name: mtxs-bookshop-workzone
       - name: mtxs-bookshop-logging
       - name: mtxs-bookshop-repo-runtime
@@ -97,6 +98,7 @@ modules:
         properties:
           mtx-url: ${default-url}
     requires:
+      - name: mtxs-bookshop-theming
       - name: mtxs-bookshop-workzone
       - name: mtxs-bookshop-logging
       - name: mtxs-bookshop-repo-runtime
@@ -338,3 +340,8 @@ resources:
       config:
         authentication:
           type: basic
+  - name: mtxs-bookshop-theming
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: theming
+      service-plan: standard
