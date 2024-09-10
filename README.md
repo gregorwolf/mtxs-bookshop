@@ -67,6 +67,7 @@ cds bind -2 mtxs-bookshop-uaa
 cds bind -2 mtxs-bookshop-workzone
 cds bind -2 mtxs-bookshop-repo-runtime
 cds bind -2 mtxs-bookshop-credstore-dev
+cds bind -2 mtxs-bookshop-theming
 ```
 
 ## Run local with dynamic binding
