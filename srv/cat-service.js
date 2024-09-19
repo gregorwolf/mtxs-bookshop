@@ -1,5 +1,44 @@
+const cds = require("@sap/cds");
+const LOG = cds.log("cat-service");
+
+const { sendMail, MailConfig } = require("@sap-cloud-sdk/mail-client");
+const { retrieveJwt } = require("@sap-cloud-sdk/connectivity");
+
 module.exports = cds.service.impl(async function () {
   const catService = await cds.connect.to("srv.external.CatalogService");
+
+  this.on(["sendmail"], async (req) => {
+    if (!req.data.sender) {
+      return req.error("You must specify a sender");
+    }
+    if (!req.data.to) {
+      return req.error("You must specify a recipient");
+    }
+    if (!req.data.subject) {
+      return req.error("You must specify a subject");
+    }
+    if (!req.data.body) {
+      return req.error("You must specify a body");
+    }
+    const destination = req.data.destination || "inbucket";
+    try {
+      const mailConfig = {
+        from: req.data.sender,
+        to: req.data.to,
+        subject: req.data.subject,
+        text: req.data.body,
+      };
+      // use sendmail as you should use it in nodemailer
+      const result = await sendMail(
+        { destinationName: destination, jwt: retrieveJwt(req) },
+        [mailConfig]
+      );
+      return JSON.stringify(result);
+    } catch (error) {
+      LOG.info(error);
+      return req.error(error);
+    }
+  });
 
   this.on("READ", "Authors", (req) => {
     return catService.run(req.query);

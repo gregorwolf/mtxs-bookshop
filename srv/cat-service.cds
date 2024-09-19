@@ -8,6 +8,13 @@ service CatalogService {
 
     @readonly
     entity CS1TAB  as projection on my.CS1TAB;
+
+    action sendmail(sender : String,
+                    to : String,
+                    @UI.ParameterDefaultValue:'Test'
+                    subject : String,
+                    body : String,
+                    destination : String) returns String;
 }
 // Annotations for value help
 

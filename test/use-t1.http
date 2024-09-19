@@ -60,3 +60,16 @@ Content-Type: application/json
 {
   "stock": 650
 }
+
+### Via Deployed Service
+# @name sendmail
+POST http://localhost:4004/odata/v4/catalog/sendmail
+Authorization: Basic carol:carol
+Content-Type: application/json
+
+{
+  "sender" : "{{$dotenv sender}}", 
+  "to" : "{{$dotenv to}}", 
+  "subject" : "{{$dotenv subject}}", 
+  "body" : "{{$dotenv body}}"
+}

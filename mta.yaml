@@ -86,8 +86,9 @@ modules:
       SAP_CALM_SERVICE_NAME: mtxs-bookshop
       SAP_CALM_SERVICE_TYPE: SAP_CP_CF
       OTEL_RESOURCE_ATTRIBUTES: sap.tenancy.tenant_id=d3812a8d-54bb-4995-a452-fdcffed2ff81
-      NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
+    #      NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
     build-parameters:
+      ignore: ["node_modules/"]
       builder: npm-ci
     provides:
       - name: mtxs-bookshop-srv-api # required by consumers of CAP services (e.g. approuter)
@@ -104,6 +105,7 @@ modules:
       - name: mtxs-bookshop-repo-runtime
       - name: mtxs-bookshop-db
       - name: mtxs-bookshop-destination
+      - name: mtxs-bookshop-connectivity
       - name: mtxs-bookshop-uaa
       - name: mtxs-bookshop-registry
       - name: mtxs-bookshop-credstore
@@ -284,6 +286,11 @@ resources:
     parameters:
       service: destination
       service-plan: lite
+  - name: mtxs-bookshop-connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: lite
+      service: connectivity
   - name: mtxs-bookshop-db
     type: org.cloudfoundry.managed-service
     parameters:
