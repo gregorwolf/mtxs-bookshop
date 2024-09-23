@@ -63,6 +63,7 @@ cf csk mtxs-bookshop-credstore-dev mtxs-bookshop-credstore-dev-key
 ```bash
 cds bind -2 mtxs-bookshop-db
 cds bind -2 mtxs-bookshop-destination
+cds bind -2 mtxs-bookshop-connectivity
 cds bind -2 mtxs-bookshop-uaa
 cds bind -2 mtxs-bookshop-workzone
 cds bind -2 mtxs-bookshop-repo-runtime
