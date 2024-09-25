@@ -1,0 +1,405 @@
+[
+  {
+    "_version": "3.0",
+    "identification": {
+      "id": "035B6A3A962B2D95F879E8B398E7D70F",
+      "entityType": "businessapp",
+      "title": "{{title}}"
+    },
+    "payload": {
+      "visualizations": {
+        "42010AEE2B5D1EEC8B9A612F64F6DC5F": {
+          "vizType": "sap.ushell.DynamicAppLauncher",
+          "vizConfig": {
+            "sap.app": {
+              "title": "{{viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title}}",
+              "info": "{{viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info}}"
+            },
+            "sap.flp": {
+              "target": {
+                "type": "IBN",
+                "inboundId": "00O2TRBI954HKLXOIQSVJTV7D"
+              },
+              "indicatorDataSource": {
+                "dataSource": "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.indicator",
+                "path": "APS_COM_CSCN_UI/$count?$filter=UsedByCommunicationArrangement%20eq%20true%20and%20IsDeprecated%20eq%20true",
+                "refresh": 0
+              }
+            },
+            "sap.ui": { "icons": { "icon": "sap-icon://Fiori5/F0550" } }
+          }
+        }
+      },
+      "defaultViz": "42010AEE2B5D1EEC8B9A612F64F6DC5F",
+      "targetAppConfig": {
+        "sap.integrations": [
+          {
+            "urlTemplateId": "urltemplate.fiori",
+            "urlTemplateParams": { "appId": "nw.core.com.cscn" }
+          },
+          {
+            "urlTemplateId": "urltemplate.intent.remote.sa",
+            "urlTemplateParams": {
+              "semanticObject": "CommunicationScenario",
+              "action": "display"
+            },
+            "urlTemplateDestination": "FLP_STANDALONE"
+          }
+        ],
+        "sap.app": {
+          "crossNavigation": {
+            "inbounds": {
+              "00O2TRBI954HKLXOIQSVJTV7D": {
+                "action": "display",
+                "semanticObject": "CommunicationScenario",
+                "signature": {
+                  "parameters": {
+                    "sap-ach": {
+                      "required": false,
+                      "defaultValue": {
+                        "value": "BC-SRV-APS-COM",
+                        "format": "plain"
+                      }
+                    },
+                    "sap-fiori-id": {
+                      "required": false,
+                      "defaultValue": { "value": "F3707", "format": "plain" }
+                    }
+                  },
+                  "additionalParameters": "allowed"
+                },
+                "deviceTypes": {
+                  "desktop": true,
+                  "tablet": true,
+                  "phone": false
+                },
+                "title": "{{inbound.00O2TRBI954HKLXOIQSVJTV7D.title}}"
+              }
+            }
+          }
+        },
+        "sap.ui": { "technology": "URL" }
+      },
+      "commonAppConfig": {
+        "sap.app": {
+          "dataSources": {
+            "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.indicator": {
+              "uri": "/sap/opu/odata/sap/APS_COM_CSCN_SRV",
+              "type": "OData"
+            }
+          },
+          "ach": "BC-SRV-APS-COM"
+        },
+        "sap.fiori": { "registrationIds": ["F3707"] }
+      }
+    },
+    "texts": [
+      {
+        "locale": "",
+        "textDictionary": {
+          "title": "Display Communication Scenarios / Deprecated in use",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Display Communication Scenarios",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Deprecated in use",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Display Communication Scenario"
+        }
+      },
+      {
+        "locale": "ar",
+        "textDictionary": {
+          "title": "عرض سيناريوهات الاتصال / مهمل قيد الاستخدام",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "عرض سيناريوهات الاتصال",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "مهمل قيد الاستخدام",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "عرض سيناريو الاتصال"
+        }
+      },
+      {
+        "locale": "bg",
+        "textDictionary": {
+          "title": "Показване сценарии за комуникация / Непрепоръчителен в използване",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Показване сценарии за комуникация",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Непрепоръчителен в използване",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Показване на сценарий за комуникация"
+        }
+      },
+      {
+        "locale": "cs",
+        "textDictionary": {
+          "title": "Zobrazení komunikačních scénářů / Zastaralé, používá se",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Zobrazení komunikačních scénářů",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Zastaralé, používá se",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Zobrazení komunikačního scénáře"
+        }
+      },
+      {
+        "locale": "da",
+        "textDictionary": {
+          "title": "Vis kommunikationsscenarier / Forældet i anvendelse",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Vis kommunikationsscenarier",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Forældet i anvendelse",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Vis kommunikationsscenario"
+        }
+      },
+      {
+        "locale": "de",
+        "textDictionary": {
+          "title": "Kommunikationsszenarien anzeigen / Abgekündigt, wird verwendet",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Kommunikationsszenarien anzeigen",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Abgekündigt, wird verwendet",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Kommunikationsszenario anzeigen"
+        }
+      },
+      {
+        "locale": "el",
+        "textDictionary": {
+          "title": "Εμφάνιση Σεναρίων Επικοινωνίας / Καταργήθηκε από χρήση",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Εμφάνιση Σεναρίων Επικοινωνίας",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Καταργήθηκε από χρήση",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Εμφάνιση Σεναρίου Επικοινωνίας"
+        }
+      },
+      {
+        "locale": "en",
+        "textDictionary": {
+          "title": "Display Communication Scenarios / Deprecated in use",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Display Communication Scenarios",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Deprecated in use",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Display Communication Scenario"
+        }
+      },
+      {
+        "locale": "es",
+        "textDictionary": {
+          "title": "Visualizar escenarios de comunicación / Obsoleto en uso",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Visualizar escenarios de comunicación",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Obsoleto en uso",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Visualizar escenario de comunicación"
+        }
+      },
+      {
+        "locale": "fi",
+        "textDictionary": {
+          "title": "Näytä tietoliikenneskenaariot / Vanhentunut, käytössä",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Näytä tietoliikenneskenaariot",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Vanhentunut, käytössä",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Näytä tietoliikenneskenaario"
+        }
+      },
+      {
+        "locale": "fr",
+        "textDictionary": {
+          "title": "Afficher scénarios de communication / Obsolète, en cours d'utilisation",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Afficher scénarios de communication",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Obsolète, en cours d'utilisation",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Afficher scénario de communication"
+        }
+      },
+      {
+        "locale": "he",
+        "textDictionary": {
+          "title": "הצג תרחישי תקשורת / הוסר בשימוש",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "הצג תרחישי תקשורת",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "הוסר בשימוש",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "הצג תרחיש תקשורת"
+        }
+      },
+      {
+        "locale": "hr",
+        "textDictionary": {
+          "title": "Prikaz scenarija komunikacije / Ukinuto u upotrebi",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Prikaz scenarija komunikacije",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Ukinuto u upotrebi",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Prikaz scenarija komunikacije"
+        }
+      },
+      {
+        "locale": "hu",
+        "textDictionary": {
+          "title": "Kommunikációs szcenáriók megjelenítése / Elavult, használatban",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Kommunikációs szcenáriók megjelenítése",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Elavult, használatban",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Kommunikációs szcenárió megjelenítése"
+        }
+      },
+      {
+        "locale": "it",
+        "textDictionary": {
+          "title": "Visualizza scenari di comunicazione / Obsoleto, utilizzo in corso",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Visualizza scenari di comunicazione",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Obsoleto, utilizzo in corso",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Visualizza scenario di comunicazione"
+        }
+      },
+      {
+        "locale": "ja",
+        "textDictionary": {
+          "title": "通信シナリオ表示 / 非推奨使用",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "通信シナリオ表示",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "非推奨使用",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "通信シナリオ表示"
+        }
+      },
+      {
+        "locale": "kk",
+        "textDictionary": {
+          "title": "Байланыс сценарийлерін көрсету / Ескірген қолданыста",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Байланыс сценарийлерін көрсету",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Ескірген қолданыста",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Байланыс сценарийін көрсету"
+        }
+      },
+      {
+        "locale": "ko",
+        "textDictionary": {
+          "title": "통신 시나리오 조회 / 사용되지 않음, 사용 중",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "통신 시나리오 조회",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "사용되지 않음, 사용 중",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "통신 시나리오 조회"
+        }
+      },
+      {
+        "locale": "ms",
+        "textDictionary": {
+          "title": "Papar Senario Komunikasi / Dikecam dalam penggunaan",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Papar Senario Komunikasi",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Dikecam dalam penggunaan",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Papar Senario Komunikasi"
+        }
+      },
+      {
+        "locale": "nl",
+        "textDictionary": {
+          "title": "Communicatiescenario's weergeven / Verouderd, wordt gebruikt",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Communicatiescenario's weergeven",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Verouderd, wordt gebruikt",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Communicatiescenario weergeven"
+        }
+      },
+      {
+        "locale": "no",
+        "textDictionary": {
+          "title": "Vis kommunikasjonsscenarioer / Foreldet brukes",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Vis kommunikasjonsscenarioer",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Foreldet brukes",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Vis kommunikasjonsscenario"
+        }
+      },
+      {
+        "locale": "pl",
+        "textDictionary": {
+          "title": "Wyświetlanie scenariuszy komunikacji / Już niezalecane do użytku",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Wyświetlanie scenariuszy komunikacji",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Już niezalecane do użytku",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Wyświetlanie scenariusza komunikacji"
+        }
+      },
+      {
+        "locale": "pt",
+        "textDictionary": {
+          "title": "Exibir cenários de comunicação / Obsoleto sendo utilizado",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Exibir cenários de comunicação",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Obsoleto sendo utilizado",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Exibir cenários de comunicação"
+        }
+      },
+      {
+        "locale": "ro",
+        "textDictionary": {
+          "title": "Afişare scenarii de comunicaţie / Învechit pt.utilizare",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Afişare scenarii de comunicaţie",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Învechit pt.utilizare",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Afişare scenariu de comunicaţie"
+        }
+      },
+      {
+        "locale": "ru",
+        "textDictionary": {
+          "title": "Просмотреть сценарии коммуникации / Используется устаревшее",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Просмотреть сценарии коммуникации",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Используется устаревшее",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Просмотреть сценарий коммуникации"
+        }
+      },
+      {
+        "locale": "sk",
+        "textDictionary": {
+          "title": "Zobraz.komunikačných scenárov / Zastarané, používa sa",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Zobraz.komunikačných scenárov",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Zastarané, používa sa",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Zobrazenie scenára komunikácie"
+        }
+      },
+      {
+        "locale": "sl",
+        "textDictionary": {
+          "title": "Prikaz komunikacijskih scenarijev / Zastarelo v uporabi",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Prikaz komunikacijskih scenarijev",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Zastarelo v uporabi",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Prikaz komunikacijskega scenarija"
+        }
+      },
+      {
+        "locale": "sr-Latn",
+        "textDictionary": {
+          "title": "Prikaži scenarije komunikacije / Zastarelo, u upotrebi",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Prikaži scenarije komunikacije",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Zastarelo, u upotrebi",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Prikaži scenario komunikacije"
+        }
+      },
+      {
+        "locale": "sv",
+        "textDictionary": {
+          "title": "Visa kommunikationsscenarier / Inaktuella som används",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Visa kommunikationsscenarier",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Inaktuella som används",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Visa kommunikationsscenario"
+        }
+      },
+      {
+        "locale": "th",
+        "textDictionary": {
+          "title": "แสดงภาพจำลองการติดต่อสื่อสาร / เลิกใช้แล้ว",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "แสดงภาพจำลองการติดต่อสื่อสาร",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "เลิกใช้แล้ว",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "แสดงภาพจำลองการติดต่อสื่อสาร"
+        }
+      },
+      {
+        "locale": "tr",
+        "textDictionary": {
+          "title": "İletişim senaryolarını görüntüle / Kullanımda kullanım dışı",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "İletişim senaryolarını görüntüle",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Kullanımda kullanım dışı",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "İletişim senaryosunu görüntüle"
+        }
+      },
+      {
+        "locale": "uk",
+        "textDictionary": {
+          "title": "Відобразити сценарії комунікації / Небажане, використовується",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "Відобразити сценарії комунікації",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "Небажане, використовується",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "Відобразити сценарій комунікації"
+        }
+      },
+      {
+        "locale": "zh-CN",
+        "textDictionary": {
+          "title": "显示通信场景 / 不赞成使用",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "显示通信场景",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "不赞成使用",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "显示通信场景"
+        }
+      },
+      {
+        "locale": "zh-TW",
+        "textDictionary": {
+          "title": "顯示通訊方案 / 取代使用",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.title": "顯示通訊方案",
+          "viz.42010AEE2B5D1EEC8B9A612F64F6DC5F.info": "取代使用",
+          "inbound.00O2TRBI954HKLXOIQSVJTV7D.title": "顯示通訊方案"
+        }
+      }
+    ]
+  }
+]

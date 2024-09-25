@@ -1,0 +1,6 @@
+###
+GET http://localhost:4004/rest/flp-content-exposure/
+Authorization: Basic carol:carol
+###
+GET http://localhost:4004/rest/flp-content-exposure/entities
+Authorization: Basic carol:carol
