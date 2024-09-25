@@ -6,7 +6,7 @@
   "license": "UNLICENSED",
   "private": false,
   "engines": {
-    "node": "^20"
+    "node": "^18"
   },
   "files": [
     "db/data-model.cds",

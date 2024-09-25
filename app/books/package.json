@@ -8,7 +8,7 @@
     "sapui5"
   ],
   "engines": {
-    "node": "^20"
+    "node": "^18"
   },
   "main": "webapp/index.html",
   "scripts": {
