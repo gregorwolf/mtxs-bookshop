@@ -8,7 +8,7 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npm install --omit=dev
+        - npm ci
         - npx cds build --production
 modules:
   - name: mtxs-bookshop
