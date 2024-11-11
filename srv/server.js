@@ -6,22 +6,25 @@ const LOG = cds.log("mtxs-custom");
 // Read xsappname of services using xsenv
 const xsenv = require("@sap/xsenv");
 xsenv.loadEnv();
-const services = xsenv.getServices({
-  dest: { tag: "destination" },
-  connectivity: { tag: "connectivity" },
-  html5rt: { tag: "html5appsrepo" },
-  launchpad: { tag: "launchpad" },
-  theming: { tag: "sap-theming" },
-});
-// fill dependencies for cds.env.requires
-const dependencies = [];
-dependencies.push(services.dest.xsappname);
-dependencies.push(services.connectivity.xsappname);
-dependencies.push(services.html5rt.uaa.xsappname);
-dependencies.push(services.launchpad.uaa.xsappname);
-dependencies.push(services.theming.uaa.xsappname);
-cds.env.requires["cds.xt.SaasProvisioningService"] = { dependencies };
-
+if (xsenv.readCFServices() === undefined) {
+  LOG.info("starting locally");
+} else {
+  const services = xsenv.getServices({
+    dest: { tag: "destination" },
+    connectivity: { tag: "connectivity" },
+    html5rt: { tag: "html5appsrepo" },
+    launchpad: { tag: "launchpad" },
+    theming: { tag: "sap-theming" },
+  });
+  // fill dependencies for cds.env.requires
+  const dependencies = [];
+  dependencies.push(services.dest.xsappname);
+  dependencies.push(services.connectivity.xsappname);
+  dependencies.push(services.html5rt.uaa.xsappname);
+  dependencies.push(services.launchpad.uaa.xsappname);
+  dependencies.push(services.theming.uaa.xsappname);
+  cds.env.requires["cds.xt.SaasProvisioningService"] = { dependencies };
+}
 async function fillServiceReplacement(req) {
   if (process.env?.CREATE_ROUTE === "SDK") {
     const {
