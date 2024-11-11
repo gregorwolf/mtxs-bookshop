@@ -2,7 +2,7 @@ const cds = require("@sap/cds");
 const LOG = cds.log("cat-service");
 
 const { sendMail, MailConfig } = require("@sap-cloud-sdk/mail-client");
-const { retrieveJwt } = require("@sap-cloud-sdk/connectivity");
+const { retrieveJwt, getDestination } = require("@sap-cloud-sdk/connectivity");
 
 module.exports = cds.service.impl(async function () {
   const catService = await cds.connect.to("srv.external.CatalogService");
@@ -28,10 +28,25 @@ module.exports = cds.service.impl(async function () {
         subject: req.data.subject,
         text: req.data.body,
       };
+      const resolvedDestination = await getDestination({
+        destinationName: destination,
+        jwt: retrieveJwt(req),
+      });
+
+      const mailClientOptions = {};
+      // mail. properties allow only lowercase
+      if (
+        resolvedDestination.originalProperties[
+          "mail.clientoptions.ignoretls"
+        ] === "true"
+      ) {
+        mailClientOptions.ignoreTLS = true;
+      }
       // use sendmail as you should use it in nodemailer
       const result = await sendMail(
         { destinationName: destination, jwt: retrieveJwt(req) },
-        [mailConfig]
+        [mailConfig],
+        mailClientOptions
       );
       return JSON.stringify(result);
     } catch (error) {

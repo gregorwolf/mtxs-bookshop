@@ -90,10 +90,33 @@ Content-Type: application/json
   "subject" : "{{$dotenv subject}}", 
   "body" : "{{$dotenv body}}"
 }
+### Local
+POST http://localhost:4004/odata/v4/catalog/sendmail
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "sender" : "{{$dotenv sender}}", 
+  "to" : "{{$dotenv to}}", 
+  "subject" : "{{$dotenv subject}}", 
+  "body" : "{{$dotenv body}}"
+}
 
 ### Via Deployed Service
 # @name sendmailViaDestination
 POST {{$dotenv service_url}}/odata/v4/catalog/sendmail
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "sender" : "{{$dotenv sender}}", 
+  "to" : "{{$dotenv to}}", 
+  "subject" : "{{$dotenv subject}}", 
+  "body" : "{{$dotenv body}}", 
+  "destination" : "{{$dotenv destination}}"
+}
+### Local
+POST http://localhost:4004/odata/v4/catalog/sendmail
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
