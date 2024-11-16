@@ -17,6 +17,12 @@ jobs:
         uses: actions/checkout@v3
       - name: pwd
         run: pwd
+      - name: Install sapmachine
+        run: |
+          wget -qO- https://dist.sapmachine.io/debian/sapmachine.key | sudo tee /etc/apt/trusted.gpg.d/sapmachine.asc > /dev/null
+          echo "deb https://dist.sapmachine.io/debian/$(dpkg --print-architecture)/ ./" | sudo tee /etc/apt/sources.list.d/sapmachine.list >/dev/null
+          apt-get update
+          apt-get install sapmachine-21-jdk
       - uses: actions/setup-node@v3
         with:
           node-version: 20
