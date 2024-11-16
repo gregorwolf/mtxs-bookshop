@@ -1,0 +1,5 @@
+general:
+steps:
+  mtaBuild:
+    platform: "CF"
+    mtarName: mtxs-bookshop.mtar
