@@ -55,7 +55,7 @@ async function fillServiceReplacementCloudSDK(req) {
         LOG.error("Error message: " && error.message);
       }
 
-      if (upsGetResult.data.resources[0] === undefined) {
+      if (upsGetResult?.data?.resources[0] === undefined) {
         LOG.error("UPS not found", upsName);
         throw new Error("UPS not found");
       }
