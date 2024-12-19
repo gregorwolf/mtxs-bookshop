@@ -22,7 +22,7 @@
     "@sap-cloud-sdk/mail-client": "^3.22.2",
     "@sap-cloud-sdk/util": "^3",
     "@sap/cds": "^7",
-    "@sap/cds-mtxs": "^1",
+    "@sap/cds-mtxs": "^2",
     "@sap/xsenv": "^5",
     "@sap/xssec": "^4",
     "cfenv": "^1.2.4",
