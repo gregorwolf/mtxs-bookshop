@@ -18,7 +18,7 @@ async function createRouteCAP(tenantHost, domain, uiAppName) {
     `&hosts=${tenantHost}`;
   LOG.info("urlFindRoute", urlFindRoute);
   const routeGetResult = await cfapi.get(urlFindRoute);
-  const routeGuid = routeGetResult?.resources[0].guid;
+  const routeGuid = routeGetResult?.resources[0]?.guid;
   LOG.info("Route GUID: ", routeGuid);
   if (routeGuid) {
     LOG.info("Route already exists");
