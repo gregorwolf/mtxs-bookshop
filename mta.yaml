@@ -17,6 +17,8 @@ modules:
     build-parameters:
       ignore: ["node_modules/"]
     parameters:
+      routes:
+      - route: ${org}-${app-name}.${default-domain}
       memory: 128M
       disk-quota: 2GB
       keep-existing-routes: true
