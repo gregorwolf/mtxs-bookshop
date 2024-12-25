@@ -1,5 +1,6 @@
 const cds = require("@sap/cds");
 const LOG = cds.log("cat-service");
+const eventQueue = require("@cap-js-community/event-queue");
 
 const { sendMail, MailConfig } = require("@sap-cloud-sdk/mail-client");
 const { retrieveJwt, getDestination } = require("@sap-cloud-sdk/connectivity");
@@ -53,6 +54,14 @@ module.exports = cds.service.impl(async function () {
       LOG.info(error);
       return req.error(error);
     }
+  });
+
+  this.on(["sendmailEvent"], async (req) => {
+    await eventQueue.publishEvent(cds.tx(req), {
+      type: "Mail",
+      subType: "Single",
+      payload: JSON.stringify(req.data),
+    });
   });
 
   this.on("READ", "Authors", (req) => {
