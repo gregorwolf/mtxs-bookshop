@@ -90,7 +90,6 @@ modules:
       OTEL_RESOURCE_ATTRIBUTES: sap.tenancy.tenant_id=d3812a8d-54bb-4995-a452-fdcffed2ff81
     #      NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
     build-parameters:
-      ignore: ["node_modules/"]
       builder: npm-ci
     provides:
       - name: mtxs-bookshop-srv-api # required by consumers of CAP services (e.g. approuter)
@@ -111,6 +110,7 @@ modules:
       - name: mtxs-bookshop-uaa
       - name: mtxs-bookshop-registry
       - name: mtxs-bookshop-credstore
+      - name: mtxs-bookshop-redis-cache
   - name: mtxs-bookshop-srv-java
     type: java
     path: srv-java
@@ -354,3 +354,8 @@ resources:
     parameters:
       service: theming
       service-plan: standard
+  - name: mtxs-bookshop-redis-cache
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: redis-cache
+      service-plan: free
