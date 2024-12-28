@@ -15,7 +15,7 @@
   ],
   "xdependencies": {},
   "dependencies": {
-    "@cap-js-community/event-queue": "^1.8.0",
+    "@cap-js-community/event-queue": "github:gregorwolf/event-queue#main",
     "@sap-cloud-sdk/connectivity": "^3",
     "@sap-cloud-sdk/http-client": "^3",
     "@sap-cloud-sdk/mail-client": "^3.22.2",
@@ -51,6 +51,9 @@
   },
   "cds": {
     "eventQueue": {
+      "[hybrid]": {
+        "disableRedis": false
+      },
       "configFilePath": "./srv/eventQueueConfig.yml"
     },
     "features": {
