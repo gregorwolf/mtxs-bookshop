@@ -17,12 +17,6 @@
       "authenticationType": "xsuaa"
     },
     {
-      "source": "/java/(.*)$",
-      "target": "/$1",
-      "destination": "srv-java",
-      "csrfProtection": true
-    },
-    {
       "source": "/catalog/(.*)$",
       "target": "/catalog/$1",
       "destination": "srv",
