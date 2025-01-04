@@ -45,6 +45,45 @@ cf create-service-broker mtxs-bookshop-broker-dev broker-user <broker-url> --spa
 
 - The `broker-url` can be read from e.g. the SAP BTP cockpit by navigating to the broker application in the space where it was deployed.
 
+## Run local with redis
+
+### using redis as a container
+
+To run the project locally with the redis cache you can either start the redis server as a container with the following command:
+
+```bash
+docker run -p 6379:6379 --name redis -d redis
+```
+
+and add the following to the `.cdsrc-private.json` file in the "requires"."[hybrid]" section:
+
+```json
+      "eventqueue-redis-cache": {
+        "credentials": {
+          "hostname": "127.0.0.1",
+          "port": 6379,
+          "uri": "redis://127.0.0.1:6379",
+          "cluster_mode": false
+        }
+      }
+```
+
+### using the redis service from the provider subaccount
+
+or you can SAP BTP redis service. It can only be reached via an SSH tunnel (see: [Access a Redis-cache Instance from Redis-cli](https://help.sap.com/docs/redis-hyperscaler-option/redis-on-sap-btp-hyperscaler-option/access-redis-cache-instance-from-redis-cli)). The command to establish the tunnel is:
+
+```bash
+cf ssh -L 6380:<your-redis-hostname>:6380 mtxs-bookshop-srv
+```
+
+to make the connection work you have to add the redis hostname to the hosts file so that it can be resolved to `localhost` (where the tunnel is listening).
+
+Now you can bind the redis service to the project using the following command:
+
+```bash
+cds bind eventqueue-redis-cache --to mtxs-bookshop-redis-cache
+```
+
 ## Create Services & Service Keys
 
 For an easy creation of the services build the project using `mbt build` and deploy it to the Cloud Foundry provider subaccount using `cf deploy mta_archives/mtxs-bookshop_1.0.0.mtar`. Then create the service keys using the following commands:
