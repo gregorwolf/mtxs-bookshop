@@ -52,7 +52,14 @@
   "cds": {
     "eventQueue": {
       "[hybrid]": {
-        "disableRedis": false
+        "disableRedis": false,
+        "redisOptions": {
+          "socket": {
+            "host": "localhost",
+            "tls": true,
+            "rejectUnauthorized": false
+          }
+        }
       },
       "configFilePath": "./srv/eventQueueConfig.yml"
     },
