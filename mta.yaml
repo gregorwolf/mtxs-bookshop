@@ -85,7 +85,7 @@ modules:
       disk-quota: 2GB
       buildpack: nodejs_buildpack
     properties:
-      SAP_CALM_SERVICE_NAME: mtxs-bookshop
+      SAP_CALM_SERVICE_NAME: mtxs-bookshop-srv
       SAP_CALM_SERVICE_TYPE: SAP_CP_CF
       OTEL_RESOURCE_ATTRIBUTES: sap.tenancy.tenant_id=d3812a8d-54bb-4995-a452-fdcffed2ff81
     #      NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
@@ -111,6 +111,39 @@ modules:
       - name: mtxs-bookshop-registry
       - name: mtxs-bookshop-credstore
       - name: mtxs-bookshop-redis-cache
+  - name: mtxs-bookshop-srv-worker
+    type: nodejs
+    path: gen/srv
+    parameters:
+      memory: 256M
+      disk-quota: 2GB
+      buildpack: nodejs_buildpack
+      no-route: true
+    properties:
+      SAP_CALM_SERVICE_NAME: mtxs-bookshop-srv-worker
+      SAP_CALM_SERVICE_TYPE: SAP_CP_CF
+      OTEL_RESOURCE_ATTRIBUTES: sap.tenancy.tenant_id=d3812a8d-54bb-4995-a452-fdcffed2ff81
+      CDS_CONFIG: >
+        {
+          "eventQueue": {
+            "registerAsEventProcessor": true
+          }
+        }
+    #      NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
+    build-parameters:
+      builder: npm-ci
+    requires:
+      - name: mtxs-bookshop-theming
+      - name: mtxs-bookshop-workzone
+      - name: mtxs-bookshop-logging
+      - name: mtxs-bookshop-repo-runtime
+      - name: mtxs-bookshop-db
+      - name: mtxs-bookshop-destination
+      - name: mtxs-bookshop-connectivity
+      - name: mtxs-bookshop-uaa
+      - name: mtxs-bookshop-registry
+      - name: mtxs-bookshop-credstore
+      - name: mtxs-bookshop-redis-cache        
 #  - name: mtxs-bookshop-srv-java
 #    type: java
 #    path: srv-java
