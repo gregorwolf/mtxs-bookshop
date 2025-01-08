@@ -67,12 +67,12 @@ modules:
           name: srv
           url: ~{srv-url}
           forwardAuthToken: true
-      - name: mtxs-bookshop-srv-java-api
-        group: destinations
-        properties:
-          name: srv-java
-          url: ~{srv-url}
-          forwardAuthToken: true
+#      - name: mtxs-bookshop-srv-java-api
+#        group: destinations
+#        properties:
+#          name: srv-java
+#          url: ~{srv-url}
+#          forwardAuthToken: true
     provides:
       - name: approuter-properties
         properties:
@@ -90,7 +90,6 @@ modules:
       OTEL_RESOURCE_ATTRIBUTES: sap.tenancy.tenant_id=d3812a8d-54bb-4995-a452-fdcffed2ff81
     #      NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
     build-parameters:
-      ignore: ["node_modules/"]
       builder: npm-ci
     provides:
       - name: mtxs-bookshop-srv-api # required by consumers of CAP services (e.g. approuter)
@@ -111,35 +110,36 @@ modules:
       - name: mtxs-bookshop-uaa
       - name: mtxs-bookshop-registry
       - name: mtxs-bookshop-credstore
-  - name: mtxs-bookshop-srv-java
-    type: java
-    path: srv-java
-    properties:
-      SPRING_PROFILES_ACTIVE: cloud
-      JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jre.SAPMachineJRE']"
-      JBP_CONFIG_SAP_MACHINE_JRE: "{ use_offline_repository: false, version: 17.+ }"
-    build-parameters:
-      builder: custom
-      commands:
-        - mvn clean package -DskipTests=true
-      build-result: application/target/*-application.jar
-    parameters:
-      memory: 512M
-      disk-quota: 2GB
-    provides:
-      - name: mtxs-bookshop-srv-java-api # required by consumers of CAP services (e.g. approuter)
-        public: true
-        properties:
-          srv-url: ${default-url}
-    requires:
-      - name: mtxs-bookshop-workzone
-      - name: mtxs-bookshop-logging
-      - name: mtxs-bookshop-repo-runtime
-      - name: mtxs-bookshop-db
-      - name: mtxs-bookshop-destination
-      - name: mtxs-bookshop-uaa
-      - name: mtxs-bookshop-registry
-      - name: mtxs-bookshop-credstore
+      - name: mtxs-bookshop-redis-cache
+#  - name: mtxs-bookshop-srv-java
+#    type: java
+#    path: srv-java
+#    properties:
+#      SPRING_PROFILES_ACTIVE: cloud
+#      JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jre.SAPMachineJRE']"
+#      JBP_CONFIG_SAP_MACHINE_JRE: "{ use_offline_repository: false, version: 17.+ }"
+#    build-parameters:
+#      builder: custom
+#      commands:
+#        - mvn clean package -DskipTests=true
+#      build-result: application/target/*-application.jar
+#    parameters:
+#      memory: 512M
+#      disk-quota: 2GB
+#    provides:
+#      - name: mtxs-bookshop-srv-java-api # required by consumers of CAP services (e.g. approuter)
+#        public: true
+#        properties:
+#          srv-url: ${default-url}
+#    requires:
+#      - name: mtxs-bookshop-workzone
+#      - name: mtxs-bookshop-logging
+#      - name: mtxs-bookshop-repo-runtime
+#      - name: mtxs-bookshop-db
+#      - name: mtxs-bookshop-destination
+#      - name: mtxs-bookshop-uaa
+#      - name: mtxs-bookshop-registry
+#      - name: mtxs-bookshop-credstore
   - name: mtxs-bookshop-api-sb
     type: nodejs
     path: broker/
@@ -354,3 +354,8 @@ resources:
     parameters:
       service: theming
       service-plan: standard
+  - name: mtxs-bookshop-redis-cache
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: redis-cache
+      service-plan: free

@@ -14,7 +14,14 @@ service CatalogService {
                     @UI.ParameterDefaultValue:'Test'
                     subject : String,
                     body : String,
-                    destination : String) returns String;
+                    destination : String)      returns String;
+
+    action sendmailEvent(sender : String,
+                         to : String,
+                         @UI.ParameterDefaultValue:'Test'
+                         subject : String,
+                         body : String,
+                         destination : String) returns String;
 }
 // Annotations for value help
 

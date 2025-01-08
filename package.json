@@ -15,14 +15,15 @@
   ],
   "xdependencies": {},
   "dependencies": {
-    "@sap/xotel-agent-ext-js": "https://73555000100200018064.npmsrv.cdn.repositories.cloud.sap/@sap/xotel-agent-ext-js/-/xotel-agent-ext-js-1.5.19.tgz",
-    "@sap/fesr-to-otel-js": "https://73555000100200018064.npmsrv.cdn.repositories.cloud.sap/@sap/fesr-to-otel-js/-/fesr-to-otel-js-1.5.10.tgz",
+    "@cap-js-community/event-queue": "^1.8.2",
     "@sap-cloud-sdk/connectivity": "^3",
     "@sap-cloud-sdk/http-client": "^3",
     "@sap-cloud-sdk/mail-client": "^3.22.2",
     "@sap-cloud-sdk/util": "^3",
     "@sap/cds": "^7",
     "@sap/cds-mtxs": "^1",
+    "@sap/fesr-to-otel-js": "https://73555000100200018064.npmsrv.cdn.repositories.cloud.sap/@sap/fesr-to-otel-js/-/fesr-to-otel-js-1.5.10.tgz",
+    "@sap/xotel-agent-ext-js": "https://73555000100200018064.npmsrv.cdn.repositories.cloud.sap/@sap/xotel-agent-ext-js/-/xotel-agent-ext-js-1.5.19.tgz",
     "@sap/xsenv": "^5",
     "@sap/xssec": "^4",
     "cfenv": "^1.2.4",
@@ -49,6 +50,19 @@
     "undeploy:cf": "cf undeploy mtxs-bookshop --delete-service-keys --delete-services --delete-service-brokers"
   },
   "cds": {
+    "eventQueue": {
+      "[hybrid]": {
+        "disableRedis": false,
+        "redisOptions": {
+          "socket": {
+            "host": "localhost",
+            "tls": true,
+            "rejectUnauthorized": false
+          }
+        }
+      },
+      "configFilePath": "./srv/eventQueueConfig.yml"
+    },
     "features": {
       "kibana_formatter": false
     },
