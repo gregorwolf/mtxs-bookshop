@@ -70,13 +70,11 @@ and add the following to the `.cdsrc-private.json` file in the "requires"."[hybr
 
 ### using the redis service from the provider subaccount
 
-or you can SAP BTP redis service. It can only be reached via an SSH tunnel (see: [Access a Redis-cache Instance from Redis-cli](https://help.sap.com/docs/redis-hyperscaler-option/redis-on-sap-btp-hyperscaler-option/access-redis-cache-instance-from-redis-cli)). The command to establish the tunnel is:
+Or you can SAP BTP redis service. It can only be reached via an SSH tunnel (see: [Access a Redis-cache Instance from Redis-cli](https://help.sap.com/docs/redis-hyperscaler-option/redis-on-sap-btp-hyperscaler-option/access-redis-cache-instance-from-redis-cli)). The command to establish the tunnel is:
 
 ```bash
 cf ssh -L 6380:<your-redis-hostname>:6380 mtxs-bookshop-srv
 ```
-
-to make the connection work you have to add the redis hostname to the hosts file so that it can be resolved to `localhost` (where the tunnel is listening).
 
 Now you can bind the redis service to the project using the following command:
 
