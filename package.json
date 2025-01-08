@@ -56,7 +56,6 @@
         "redisOptions": {
           "socket": {
             "host": "localhost",
-            "tls": true,
             "rejectUnauthorized": false
           }
         }
