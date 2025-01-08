@@ -15,7 +15,7 @@
   ],
   "xdependencies": {},
   "dependencies": {
-    "@cap-js-community/event-queue": "github:cap-js-community/event-queue#fix/envRequireRedis",
+    "@cap-js-community/event-queue": "^1.8.2",
     "@sap-cloud-sdk/connectivity": "^3",
     "@sap-cloud-sdk/http-client": "^3",
     "@sap-cloud-sdk/mail-client": "^3.22.2",
