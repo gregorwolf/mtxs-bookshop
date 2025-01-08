@@ -127,3 +127,15 @@ Content-Type: application/json
   "body" : "{{$dotenv body}}", 
   "destination" : "{{$dotenv destination}}"
 }
+### Via Deployed Service
+# @name sendmailEvent
+POST {{$dotenv service_url}}/odata/v4/catalog/sendmailEvent
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "sender" : "{{$dotenv sender}}", 
+  "to" : "{{$dotenv to}}", 
+  "subject" : "{{$dotenv subject}}", 
+  "body" : "{{$dotenv body}}"
+}
