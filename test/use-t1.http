@@ -85,3 +85,13 @@ Content-Type: application/json
   "subject" : "{{$dotenv subject}}", 
   "body" : "{{$dotenv body}}"
 }
+
+###
+GET http://localhost:4004/odata/v4/admin/
+Authorization: Basic carol:carol
+Content-Type: application/json
+###
+GET http://localhost:4004/odata/v4/admin/Events
+  ?$orderby=createdAt desc
+Authorization: Basic carol:carol
+Content-Type: application/json
