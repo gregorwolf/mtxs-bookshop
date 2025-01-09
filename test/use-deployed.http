@@ -159,5 +159,7 @@ Content-Type: application/json
 }
 ###
 GET {{$dotenv service_url}}/odata/v4/admin/Events
+  ?$orderby=createdAt desc
+  &$count=true
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
