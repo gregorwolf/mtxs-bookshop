@@ -58,7 +58,7 @@ docker run -p 6379:6379 --name redis -d redis
 and add the following to the `.cdsrc-private.json` file in the "requires"."[hybrid]" section:
 
 ```json
-      "eventqueue-redis-cache": {
+      "redis-eventQueue": {
         "credentials": {
           "hostname": "127.0.0.1",
           "port": 6379,
