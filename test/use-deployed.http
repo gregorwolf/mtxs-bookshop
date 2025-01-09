@@ -127,8 +127,26 @@ Content-Type: application/json
   "body" : "{{$dotenv body}}", 
   "destination" : "{{$dotenv destination}}"
 }
+### sendmailEvent
+### Local
+POST http://localhost:4004/odata/v4/catalog/sendmailEvent
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "sender" : "{{$dotenv sender}}", 
+  "to" : "{{$dotenv to}}", 
+  "subject" : "{{$dotenv subject}}", 
+  "body" : "{{$dotenv body}}"
+}
+###
+GET http://localhost:4004/odata/v4/admin/Events
+  ?$orderby=createdAt desc
+  &$count=true
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
 ### Via Deployed Service
-# @name sendmailEvent
+# @name sendmailEventDeployed
 POST {{$dotenv service_url}}/odata/v4/catalog/sendmailEvent
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
