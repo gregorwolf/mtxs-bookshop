@@ -157,3 +157,7 @@ Content-Type: application/json
   "subject" : "{{$dotenv subject}}", 
   "body" : "{{$dotenv body}}"
 }
+###
+GET {{$dotenv service_url}}/odata/v4/admin/Events
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
