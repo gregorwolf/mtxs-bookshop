@@ -29,6 +29,7 @@
     "cfenv": "^1.2.4",
     "express": "^4",
     "hdb": "^0",
+    "@sap/hdbext": "8.0.8",
     "passport": "^0"
   },
   "devDependencies": {
