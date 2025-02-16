@@ -7,8 +7,10 @@ using {
 using {srv.external.CatalogService as external} from '../srv/external/CatalogService';
 
 entity Books : cuid, managed {
+
   title  : String(200);
-  // description : String(5000);
+  // description : String --> NVARCHAR(5000);
+  // description : LargeString --> NCLOB;
   stock  : Integer;
   author : Association to Authors;
 }
