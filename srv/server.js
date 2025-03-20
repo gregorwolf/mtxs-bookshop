@@ -1,4 +1,5 @@
 const cds = require("@sap/cds");
+const { Worker, isMainThread } = require("node:worker_threads");
 // https://cap.cloud.sap/docs/node.js/cds-log#configuring-log-levels
 const LOG = cds.log("mtxs-custom");
 const { config } = require("@cap-js-community/event-queue");
@@ -146,3 +147,20 @@ cds.middlewares.before = [
   cds.middlewares.ctx_model(),
 ];
 */
+// listening
+cds.on("listening", () => {
+  LOG.info(`Server listening on ${cds.app.server.address().port}`);
+  // Start additional instances as worker threads
+  if (isMainThread) {
+    const worker = new Worker("./node_modules/@sap/cds/bin/cds-serve.js", {
+      env: {
+        CDS_CONFIG: {
+          eventQueue: {
+            registerAsEventProcessor: true,
+          },
+        },
+      },
+    });
+    LOG.info("Worker thread started");
+  }
+});
