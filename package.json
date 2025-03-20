@@ -79,8 +79,8 @@
       "extensibility": true,
       "[hybrid]": {
         "auth": {
-          "kind": "mocked",
-          "xkind": "xsuaa"
+          "xkind": "mocked",
+          "kind": "xsuaa"
         },
         "db": {
           "kind": "hana"
