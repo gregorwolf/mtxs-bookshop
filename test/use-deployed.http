@@ -1,3 +1,5 @@
+#@service_url={{$dotenv service_url}}
+@service_url=http://localhost:4004
 ### Request Access Token
 # @name requestAccessToken
 POST {{$dotenv btp_tokenendpoint}}/oauth/token
@@ -15,27 +17,27 @@ grant_type=password
 @access_token = {{requestAccessToken.response.body.$.access_token}}
 @id_token = {{requestAccessToken.response.body.$.id_token}}
 ###
-GET {{$dotenv service_url}}/odata/v4/catalog
+GET {{service_url}}/odata/v4/catalog
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv service_url}}/odata/v4/catalog/$metadata
+GET {{service_url}}/odata/v4/catalog/$metadata
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv service_url}}/odata/v4/catalog/Books
+GET {{service_url}}/odata/v4/catalog/Books
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv service_url}}/odata/v4/catalog/Books
+GET {{service_url}}/odata/v4/catalog/Books
   ?$expand=author
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv service_url}}/odata/v4/catalog/Books(ID=8c0e80fe-d429-400e-8c20-210e145ab197,IsActiveEntity=true)/author
+GET {{service_url}}/odata/v4/catalog/Books(ID=8c0e80fe-d429-400e-8c20-210e145ab197,IsActiveEntity=true)/author
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv service_url}}/odata/v4/catalog/Authors
+GET {{service_url}}/odata/v4/catalog/Authors
 #  ?$expand=books
 Authorization: Bearer {{access_token}}
 ###
-POST {{$dotenv service_url}}/odata/v4/catalog/Books
+POST {{service_url}}/odata/v4/catalog/Books
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
@@ -46,29 +48,29 @@ Content-Type: application/json
 }
 
 ###
-GET {{$dotenv service_url}}/odata/v4/catalog/CS1TAB
+GET {{service_url}}/odata/v4/catalog/CS1TAB
 Authorization: Bearer {{access_token}}
 
 ###
-GET {{$dotenv service_url}}/odata/v4/books-api
+GET {{service_url}}/odata/v4/books-api
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv service_url}}/odata/v4/books-api/$metadata
+GET {{service_url}}/odata/v4/books-api/$metadata
 Authorization: Bearer {{access_token}}
 ###
 # @name getBooksFromAPI
-GET {{$dotenv service_url}}/odata/v4/books-api/Books
+GET {{service_url}}/odata/v4/books-api/Books
 Authorization: Bearer {{access_token}}
 ###
 @bookId={{getBooksFromAPI.response.body.$.value[0].ID}}
 ### Read Single Book
 # @name getBookFromAPI
-GET {{$dotenv service_url}}/odata/v4/books-api/Books({{bookId}})
+GET {{service_url}}/odata/v4/books-api/Books({{bookId}})
 Authorization: Bearer {{access_token}}
 ###
 @etag={{getBookFromAPI.response.headers.ETag}}
 ### Update Book
-PATCH {{$dotenv service_url}}/odata/v4/books-api/Books({{bookId}})
+PATCH {{service_url}}/odata/v4/books-api/Books({{bookId}})
 Authorization: Bearer {{access_token}}
 If-Match: {{etag}}
 Content-Type: application/json
@@ -80,7 +82,7 @@ Content-Type: application/json
 
 ### Via Deployed Service
 # @name sendmail
-POST {{$dotenv service_url}}/odata/v4/catalog/sendmail
+POST {{service_url}}/odata/v4/catalog/sendmail
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
@@ -104,7 +106,7 @@ Content-Type: application/json
 
 ### Via Deployed Service
 # @name sendmailViaDestination
-POST {{$dotenv service_url}}/odata/v4/catalog/sendmail
+POST {{service_url}}/odata/v4/catalog/sendmail
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
@@ -147,7 +149,7 @@ Authorization: Bearer {{access_token}}
 Content-Type: application/json
 ### Via Deployed Service
 # @name sendmailEventDeployed
-POST {{$dotenv service_url}}/odata/v4/catalog/sendmailEvent
+POST {{service_url}}/odata/v4/catalog/sendmailEvent
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
@@ -158,7 +160,7 @@ Content-Type: application/json
   "body" : "{{$dotenv body}}"
 }
 ###
-GET {{$dotenv service_url}}/odata/v4/admin/Events
+GET {{service_url}}/odata/v4/admin/Events
   ?$orderby=createdAt desc
   &$count=true
 Authorization: Bearer {{access_token}}

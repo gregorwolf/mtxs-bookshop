@@ -94,3 +94,55 @@ cds.on("served", () => {
     LOG.info("There is no service, therefore does not serve multitenancy!");
   }
 });
+
+/*
+cds.middlewares.before = [
+  cds.middlewares.context(),
+  cds.middlewares.trace(),
+  // Instruct CAP to select the XSUAA Instance based on the client_id provided in the JWT token
+  function before_auth(_, __, next) {
+    // Load xsenv
+    const xsenv = require("@sap/xsenv");
+    xsenv.loadEnv();
+    const ctx = cds.context;
+    // Parse the JWT token from the Authorization header
+    const authHeader = ctx.http.req.headers.authorization;
+    if (!authHeader) {
+      return next();
+    }
+    const jwtToken = authHeader.split(" ")[1];
+    if (!jwtToken) {
+      return next();
+    }
+    // Parse the JWT token
+    const jwt = require("jsonwebtoken");
+    const decoded = jwt.decode(jwtToken);
+    if (!decoded) {
+      return next();
+    }
+    // Read the client_id from the JWT token
+    const clientId = decoded.client_id;
+    LOG.info(`Client ID: ${clientId}`);
+    // Read bound XSUAA service instances
+    const xsuaas = xsenv.getServices({ xsuaa: { label: "xsuaa" } });
+    // Find the XSUAA service instance that matches the clientId
+    const xsuaa = Object.values(xsuaas).find((xsuaa) => {
+      return xsuaa.credentials.clientid === clientId;
+    });
+    if (!xsuaa) {
+      return next();
+    }
+    // Set the selector to find the correct XSUAA in
+    delete cds.env.requires.auth.vcap.name;
+    // When clientId contains api
+    if (clientId.includes("api")) {
+      cds.env.requires.auth.vcap.plan = "broker";
+    } else {
+      cds.env.requires.auth.vcap.plan = "application";
+    }
+    next();
+  },
+  cds.middlewares.auth(),
+  cds.middlewares.ctx_model(),
+];
+*/
