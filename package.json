@@ -49,8 +49,7 @@
     "deploy:cf:srv": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e cf-service-broker-private.mtaext -m mtxs-bookshop-srv --retries 1",
     "deploy:cf:ui": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e cf-service-broker-private.mtaext -m mtxs-bookshop --retries 1",
     "deploy:cf:dest": "cf deploy mta_archives/mtxs-bookshop_0.0.1.mtar -e cf-service-broker-private.mtaext -m mtxs-bookshop-destination-content --retries 1",
-    "undeploy:cf": "cf undeploy mtxs-bookshop --delete-service-keys --delete-services --delete-service-brokers",
-    "postinstall": "patch-package"
+    "undeploy:cf": "cf undeploy mtxs-bookshop --delete-service-keys --delete-services --delete-service-brokers"
   },
   "cds": {
     "eventQueue": {

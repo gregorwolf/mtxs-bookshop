@@ -4,6 +4,7 @@ const { Worker, isMainThread } = require("node:worker_threads");
 const LOG = cds.log("mtxs-custom");
 const { config } = require("@cap-js-community/event-queue");
 
+/*
 // read from environment variable EVENT_PROCESSING_TENANTS
 const tenants = JSON.parse(process.env.EVENT_PROCESSING_TENANTS || "[]");
 LOG.info(`Tenants to be processed on this instance: ${tenants}`);
@@ -24,7 +25,7 @@ config.tenantIdFilterEventProcessing = async (tenantId) => {
   // Replace with your custom logic to decide whether to process the tenant
   return await checkIfTenantShouldBeProcessedOnInstance(tenantId);
 };
-
+*/
 // const fesr = require("@sap/fesr-to-otel-js");
 
 // Read xsappname of services using xsenv
@@ -154,11 +155,16 @@ cds.on("listening", () => {
   if (isMainThread) {
     const worker = new Worker("./node_modules/@sap/cds/bin/cds-serve.js", {
       env: {
-        CDS_CONFIG: {
+        PORT: cds.env.server?.port + 1,
+        VCAP_SERVICES: process.env.VCAP_SERVICES,
+        VCAP_APPLICATION: process.env.VCAP_APPLICATION,
+        CDS_ENV: process.env.CDS_ENV,
+        HOME: process.env.HOME,
+        CDS_CONFIG: JSON.stringify({
           eventQueue: {
             registerAsEventProcessor: true,
           },
-        },
+        }),
       },
     });
     LOG.info("Worker thread started");
