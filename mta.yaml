@@ -132,6 +132,7 @@ modules:
       - name: mtxs-bookshop-registry
       - name: mtxs-bookshop-credstore
       - name: mtxs-bookshop-redis-cache
+      - name: mtxs-service-manager-admin
 
   # - name: mtxs-bookshop-srv-worker
   #   type: nodejs
@@ -356,6 +357,11 @@ resources:
       service-plan: container
     properties:
       hdi-service-name: ${service-name}
+  - name: mtxs-service-manager-admin
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: service-manager
+      service-plan: subaccount-admin
   - name: mtxs-bookshop-registry
     type: org.cloudfoundry.managed-service
     requires:
