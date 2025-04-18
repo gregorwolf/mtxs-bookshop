@@ -40,10 +40,18 @@ Build and deploy the MTAR as described in the next step. After the deployment yo
 
 ```sh
  export CF_BROKER_PASSWORD=<broker-password>
-cf create-service-broker mtxs-bookshop-broker-dev broker-user <broker-url> --space-scoped
+cf create-service-broker mtxs-bookshop-api-sb-dev broker-user <broker-url> --space-scoped
 ```
 
 - The `broker-url` can be read from e.g. the SAP BTP cockpit by navigating to the broker application in the space where it was deployed.
+
+Check the broker with:
+
+```sh
+cf service-brokers
+```
+
+When you now navigate to the service marketplace in the Cloud Foundry Space you should see the `MTXS Bookshop API dev` service. Create a service instance and a service key for it. The service key can be used with the REST client script `test/use-deployed-api.http` to test the deployed API.
 
 ## Run local with redis
 
