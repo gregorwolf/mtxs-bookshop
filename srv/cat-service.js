@@ -3,7 +3,11 @@ const LOG = cds.log("cat-service");
 const eventQueue = require("@cap-js-community/event-queue");
 
 const { sendMail, MailConfig } = require("@sap-cloud-sdk/mail-client");
-const { retrieveJwt, getDestination } = require("@sap-cloud-sdk/connectivity");
+const {
+  retrieveJwt,
+  getDestination,
+  alwaysSubscriber,
+} = require("@sap-cloud-sdk/connectivity");
 
 module.exports = cds.service.impl(async function () {
   const catService = await cds.connect.to("srv.external.CatalogService");
@@ -29,9 +33,11 @@ module.exports = cds.service.impl(async function () {
         subject: req.data.subject,
         text: req.data.body,
       };
+      const jwt = retrieveJwt(req);
       const resolvedDestination = await getDestination({
         destinationName: destination,
-        jwt: retrieveJwt(req),
+        jwt,
+        selectionStrategy: alwaysSubscriber,
       });
 
       const mailClientOptions = {};
