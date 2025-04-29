@@ -5,7 +5,7 @@ Welcome this Multitenant CAP project using the new MTXS package. The special fun
 It contains these folders and files, following our recommended project layout:
 
 | File or Folder | Purpose                              |
-| -------------- | ------------------------------------ |
+|----------------|--------------------------------------|
 | `app/`         | content for UI frontends goes here   |
 | `db/`          | your domain models and data go here  |
 | `srv/`         | your service models and code go here |
@@ -40,8 +40,10 @@ Build and deploy the MTAR as described in the next step. After the deployment yo
 
 ```sh
  export CF_BROKER_PASSWORD=<broker-password>
-cf create-service-broker mtxs-bookshop-api-sb-dev broker-user <broker-url> --space-scoped
+cf create-service-broker mtxs-bookshop-api-sb-dev broker-user <broker-url>
 ```
+
+if you want to restrict the broker to a specific space then add `--space-scoped`
 
 - The `broker-url` can be read from e.g. the SAP BTP cockpit by navigating to the broker application in the space where it was deployed.
 
