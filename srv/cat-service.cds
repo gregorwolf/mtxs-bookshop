@@ -9,6 +9,8 @@ service CatalogService {
     @readonly
     entity CS1TAB  as projection on my.CS1TAB;
 
+    action getUsers()                          returns array of String;
+
     action sendmail(sender : String,
                     to : String,
                     @UI.ParameterDefaultValue:'Test'

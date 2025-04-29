@@ -72,8 +72,18 @@ Content-Type: application/json
 {
   "stock": 650
 }
-### sendmail
+###
+### Users
+###
+### Local
+POST http://localhost:4004/odata/v4/catalog/getUsers
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
 
+{}
+###
+### sendmail
+###
 ### Via Deployed Service
 # @name sendmail
 POST {{service_url}}/odata/v4/catalog/sendmail

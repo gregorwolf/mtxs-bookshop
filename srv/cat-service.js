@@ -6,11 +6,44 @@ const { sendMail, MailConfig } = require("@sap-cloud-sdk/mail-client");
 const {
   retrieveJwt,
   getDestination,
+  getDestinationFromDestinationService,
   alwaysSubscriber,
 } = require("@sap-cloud-sdk/connectivity");
+const { executeHttpRequest } = require("@sap-cloud-sdk/http-client");
 
 module.exports = cds.service.impl(async function () {
   const catService = await cds.connect.to("srv.external.CatalogService");
+
+  this.on(["getUsers"], async (req) => {
+    const destinationName =
+      process.env.XSUAA_APIACCESS_DEST || "XSUAA_APIAccess";
+    const apiEndPoint =
+      "/sap/rest/authorization/v2/rolecollections/?showGroups=false&showRoles=false&showUsers=true";
+    const jwt = retrieveJwt(req);
+    const targetDestinationOptions = {
+      destinationName,
+      jwt,
+      selectionStrategy: alwaysSubscriber,
+    };
+    const destination = await getDestinationFromDestinationService(
+      targetDestinationOptions
+    );
+    const apiURL = `${destination?.url}${apiEndPoint}`;
+    try {
+      const response = await executeHttpRequest(destination, {
+        method: "GET",
+        url: apiURL,
+        headers: { "Content-Type": "application/json" },
+      });
+      userList = response.data.flatMap((item) => item.userReferences || []);
+    } catch (error) {
+      console.error(
+        "Error fetching user info!",
+        error.response?.data || error.message
+      );
+    }
+    return userList;
+  });
 
   this.on(["sendmail"], async (req) => {
     if (!req.data.sender) {
@@ -51,7 +84,7 @@ module.exports = cds.service.impl(async function () {
       }
       // use sendmail as you should use it in nodemailer
       const result = await sendMail(
-        { destinationName: destination, jwt: retrieveJwt(req) },
+        resolvedDestination,
         [mailConfig],
         mailClientOptions
       );
