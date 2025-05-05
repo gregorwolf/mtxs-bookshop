@@ -19,7 +19,7 @@ module.exports = cds.service.impl(async function () {
       process.env.XSUAA_APIACCESS_DEST || "XSUAA_APIAccess";
     const apiEndPoint =
       "/sap/rest/authorization/v2/rolecollections/?showGroups=false&showRoles=false&showUsers=true";
-    const jwt = retrieveJwt(req);
+    const jwt = retrieveJwt(cds.context);
     const targetDestinationOptions = {
       destinationName,
       jwt,
