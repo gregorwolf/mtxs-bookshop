@@ -9,7 +9,7 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=client_credentials
 &response_type=token
 ### Fill Variables from Response
-@access_token = {{requestAccessToken.response.body.$.access_token}}
+@access_token={{requestAccessToken.response.body.$.access_token}}
 ###
 GET {{service_url}}/odata/v4/catalog
 Authorization: Bearer {{access_token}}
