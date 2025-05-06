@@ -4,6 +4,9 @@ version: 0.0.1
 description: "MTXS Beershop"
 parameters:
   enable-parallel-deployments: true
+  deploy_mode: html5-repo
+  lepProviderId: mtxs-bookshop-lep-provider # provider id can be changed by admin
+  lepExposureId: cswdemomtxsbookshop # exposure id should match the sap.cloud.service
 build-parameters:
   before-all:
     - builder: custom
@@ -121,15 +124,16 @@ modules:
         properties:
           mtx-url: ${default-url}
     requires:
-      - name: mtxs-bookshop-theming
-      - name: mtxs-bookshop-workzone
-      - name: mtxs-bookshop-logging
-      - name: mtxs-bookshop-repo-runtime
       - name: mtxs-bookshop-db
-      - name: mtxs-bookshop-destination
-      - name: mtxs-bookshop-connectivity
       - name: mtxs-bookshop-uaa
       - name: mtxs-bookshop-registry
+      - name: mtxs-bookshop-html5-repo-host
+      - name: mtxs-bookshop-workzone
+      - name: mtxs-bookshop-repo-runtime
+      - name: mtxs-bookshop-theming
+      - name: mtxs-bookshop-logging
+      - name: mtxs-bookshop-destination
+      - name: mtxs-bookshop-connectivity
       - name: mtxs-bookshop-credstore
       - name: mtxs-bookshop-redis-cache
       - name: mtxs-service-manager-admin
