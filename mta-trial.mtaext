@@ -1,0 +1,12 @@
+ID: mtxs-bookshop.freetier
+_schema-version: "3.3.0"
+version: 0.0.1
+extends: mtxs-bookshop
+
+resources:
+  - name: mtxs-bookshop-credstore
+    parameters:
+      service-plan: trial
+  - name: mtxs-bookshop-redis-cache
+    parameters:
+      service-plan: trial
