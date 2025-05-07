@@ -80,7 +80,7 @@
           "groupsOrder": ["Group1"],
           "sap.cloud.portal": {
             "config": {
-              "ui5LibraryUrl": "https://ui5.sap.com/1.120.7/",
+              "ui5LibraryUrl": "https://ui5.sap.com/1.120.30/",
               "theme.id": "sap_horizon",
               "theme.active": [
                 "sap_horizon",
