@@ -10,3 +10,6 @@ resources:
   - name: mtxs-bookshop-redis-cache
     parameters:
       service-plan: trial
+  - name: mtxs-bookshop-jobscheduler
+    parameters:
+      service-plan: lite

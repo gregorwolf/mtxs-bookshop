@@ -133,7 +133,7 @@ modules:
       - name: mtxs-bookshop-credstore
       - name: mtxs-bookshop-redis-cache
       - name: mtxs-service-manager-admin
-
+      - name: mtxs-bookshop-jobscheduler
   # - name: mtxs-bookshop-srv-worker
   #   type: nodejs
   #   path: gen/srv
@@ -297,6 +297,10 @@ modules:
         parameters:
           service-key:
             name: mtxs-bookshop-uaa-key
+#      - name: mtxs-bookshop-jobscheduler
+#        parameters:
+#          service-key:
+#            name: mtxs-bookshop-jobscheduler-key
     parameters:
       content:
         subaccount:
@@ -310,6 +314,9 @@ modules:
               ServiceInstanceName: mtxs-bookshop-uaa
               ServiceKeyName: mtxs-bookshop-uaa-key
               sap.cloud.service: csw.demo.mtxs.books
+          #            - Name: mtxs_bookshop_jobscheduler
+          #              ServiceInstanceName: mtxs-bookshop-jobscheduler
+          #              ServiceKeyName: mtxs-bookshop-jobscheduler-key
           existing_destinations_policy: update
     build-parameters:
       no-source: true
@@ -330,6 +337,8 @@ resources:
             description: admin of the Books API
             granted-apps:
               - $XSAPPNAME(application,mtxs-reviews-${org}-${space})
+            grant-as-authority-to-apps: 
+              - jobscheduler
           - name: $XSAPPNAME.cds.ExtensionDeveloper
             description: Extend CDS application
           - name: $XSAPPNAME.MtxDiagnose
@@ -421,3 +430,10 @@ resources:
     parameters:
       service: redis-cache
       service-plan: free
+  - name: mtxs-bookshop-jobscheduler
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: jobscheduler
+      service-plan: standard
+      config:
+        enable-xsuaa-support: true

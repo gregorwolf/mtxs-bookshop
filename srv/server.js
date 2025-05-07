@@ -41,7 +41,9 @@ if (xsenv.readCFServices() === undefined) {
     html5rt: { tag: "html5appsrepo" },
     launchpad: { tag: "launchpad" },
     theming: { tag: "sap-theming" },
+    jobscheduler: { tag: "jobscheduler" },
   });
+  LOG.info("Services found: ", services);
   // fill dependencies for cds.env.requires
   const dependencies = [];
   dependencies.push(services.dest.xsappname);
@@ -49,6 +51,15 @@ if (xsenv.readCFServices() === undefined) {
   dependencies.push(services.html5rt.uaa.xsappname);
   dependencies.push(services.launchpad.uaa.xsappname);
   dependencies.push(services.theming.uaa.xsappname);
+  // when jobscheduler is returned as a dependency the subscription update fails with:
+  // updateApplicationSubscription failed
+  // Error build subscription tree : getServiceDependencyAppId
+  // Response from XSUAA invalid: XsuaaApplicationDto(xsappname=jobscheduler
+  //
+  // Try again after  grant-as-authority-to-apps: jobscheduler is set in xs-security.json
+  // No change.
+  // dependencies.push(services.jobscheduler.xsappname);
+  LOG.info("Dependencies: ", dependencies);
   cds.env.requires["cds.xt.SaasProvisioningService"] = { dependencies };
 }
 async function fillServiceReplacement(req) {
