@@ -112,6 +112,7 @@ modules:
     #      NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
     build-parameters:
       builder: npm-ci
+      ignore: ["node_modules/"]
     provides:
       - name: mtxs-bookshop-srv-api # required by consumers of CAP services (e.g. approuter)
         public: true
@@ -334,12 +335,14 @@ resources:
         scopes:
           - name: $XSAPPNAME.Display
             description: Display
+            grant-as-authority-to-apps:
+              - $XSSERVICENAME(mtxs-bookshop-jobscheduler)
           - name: $XSAPPNAME.admin
             description: admin of the Books API
             granted-apps:
               - $XSAPPNAME(application,mtxs-reviews-${org}-${space})
             grant-as-authority-to-apps:
-              - jobscheduler
+              - $XSSERVICENAME(mtxs-bookshop-jobscheduler)
           - name: $XSAPPNAME.cds.ExtensionDeveloper
             description: Extend CDS application
           - name: $XSAPPNAME.MtxDiagnose
