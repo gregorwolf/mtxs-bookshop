@@ -1,5 +1,6 @@
 using my.bookshop as my from '../db/data-model';
 
+@(requires: 'authenticated-user')
 service CatalogService {
     @odata.draft.enabled
     entity Books   as projection on my.Books;
@@ -13,14 +14,14 @@ service CatalogService {
 
     action sendmail(sender : String,
                     to : String,
-                    @UI.ParameterDefaultValue:'Test'
+                    @UI.ParameterDefaultValue: 'Test'
                     subject : String,
                     body : String,
                     destination : String)      returns String;
 
     action sendmailEvent(sender : String,
                          to : String,
-                         @UI.ParameterDefaultValue:'Test'
+                         @UI.ParameterDefaultValue: 'Test'
                          subject : String,
                          body : String,
                          destination : String) returns String;
