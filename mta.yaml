@@ -132,7 +132,8 @@ modules:
       - name: mtxs-bookshop-registry
       - name: mtxs-bookshop-credstore
       - name: mtxs-bookshop-redis-cache
-      - name: mtxs-service-manager-admin
+      ### If bound service_offerings
+      #- name: mtxs-service-manager-admin query with catalog_name eq 'hana' will return no entries
       - name: mtxs-bookshop-jobscheduler
   # - name: mtxs-bookshop-srv-worker
   #   type: nodejs
@@ -297,10 +298,10 @@ modules:
         parameters:
           service-key:
             name: mtxs-bookshop-uaa-key
-#      - name: mtxs-bookshop-jobscheduler
-#        parameters:
-#          service-key:
-#            name: mtxs-bookshop-jobscheduler-key
+    #      - name: mtxs-bookshop-jobscheduler
+    #        parameters:
+    #          service-key:
+    #            name: mtxs-bookshop-jobscheduler-key
     parameters:
       content:
         subaccount:
@@ -337,7 +338,7 @@ resources:
             description: admin of the Books API
             granted-apps:
               - $XSAPPNAME(application,mtxs-reviews-${org}-${space})
-            grant-as-authority-to-apps: 
+            grant-as-authority-to-apps:
               - jobscheduler
           - name: $XSAPPNAME.cds.ExtensionDeveloper
             description: Extend CDS application
