@@ -15,6 +15,7 @@ module.exports = cds.service.impl(async function () {
   const catService = await cds.connect.to("srv.external.CatalogService");
 
   this.on(["getUsers"], async (req) => {
+    let userList = [];
     const destinationName =
       process.env.XSUAA_APIACCESS_DEST || "XSUAA_APIAccess";
     const apiEndPoint =
