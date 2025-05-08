@@ -51,14 +51,18 @@ if (xsenv.readCFServices() === undefined) {
   dependencies.push(services.html5rt.uaa.xsappname);
   dependencies.push(services.launchpad.uaa.xsappname);
   dependencies.push(services.theming.uaa.xsappname);
-  // when jobscheduler is returned as a dependency the subscription update fails with:
+  // when jobscheduler on BTP Trial with plan lite is used and
+  // returned as a dependency the subscription update fails with:
+  //
   // updateApplicationSubscription failed
   // Error build subscription tree : getServiceDependencyAppId
   // Response from XSUAA invalid: XsuaaApplicationDto(xsappname=jobscheduler
   //
   // Try again after  grant-as-authority-to-apps: jobscheduler is set in xs-security.json
   // No change.
-  // dependencies.push(services.jobscheduler.xsappname);
+  //
+  // In normal BTP subaccount the jobscheduler plan standard is used
+  dependencies.push(services.jobscheduler.uaa.xsappname);
   LOG.info("Dependencies: ", dependencies);
   cds.env.requires["cds.xt.SaasProvisioningService"] = { dependencies };
 }
