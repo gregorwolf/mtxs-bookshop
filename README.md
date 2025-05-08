@@ -103,6 +103,8 @@ cf csk mtxs-bookshop-uaa mtxs-bookshop-uaa-key
 cf csk mtxs-bookshop-workzone mtxs-bookshop-workzone-key
 cf csk mtxs-bookshop-repo-runtime mtxs-bookshop-repo-runtime-key
 cf csk mtxs-bookshop-credstore-dev mtxs-bookshop-credstore-dev-key
+cf csk mtxs-bookshop-theming mtxs-bookshop-theming-key
+cf csk mtxs-bookshop-jobscheduler mtxs-bookshop-jobscheduler-key
 ```
 
 ## Bind the CAP App to the service
@@ -116,6 +118,7 @@ cds bind -2 mtxs-bookshop-workzone
 cds bind -2 mtxs-bookshop-repo-runtime
 cds bind -2 mtxs-bookshop-credstore-dev
 cds bind -2 mtxs-bookshop-theming
+cds bind -2 mtxs-bookshop-jobscheduler
 ```
 
 ## Run local with dynamic binding
