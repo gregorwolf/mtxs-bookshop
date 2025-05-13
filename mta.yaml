@@ -59,7 +59,7 @@ modules:
       - name: mtxs-bookshop-theming
       - name: mtxs-bookshop-workzone
       - name: mtxs-bookshop-logging
-      - name: mtxs-bookshop-repo-runtime
+      - name: mtxs-bookshop-html5-app-runtime
       - name: mtxs-bookshop-uaa
       - name: mtxs-bookshop-srv-api
         group: destinations
@@ -125,7 +125,7 @@ modules:
       - name: mtxs-bookshop-theming
       - name: mtxs-bookshop-workzone
       - name: mtxs-bookshop-logging
-      - name: mtxs-bookshop-repo-runtime
+      - name: mtxs-bookshop-html5-app-runtime
       - name: mtxs-bookshop-db
       - name: mtxs-bookshop-destination
       - name: mtxs-bookshop-connectivity
@@ -161,7 +161,7 @@ modules:
   #     - name: mtxs-bookshop-theming
   #     - name: mtxs-bookshop-workzone
   #     - name: mtxs-bookshop-logging
-  #     - name: mtxs-bookshop-repo-runtime
+  #     - name: mtxs-bookshop-html5-app-runtime
   #     - name: mtxs-bookshop-db
   #     - name: mtxs-bookshop-destination
   #     - name: mtxs-bookshop-connectivity
@@ -193,7 +193,7 @@ modules:
   #    requires:
   #      - name: mtxs-bookshop-workzone
   #      - name: mtxs-bookshop-logging
-  #      - name: mtxs-bookshop-repo-runtime
+  #      - name: mtxs-bookshop-html5-app-runtime
   #      - name: mtxs-bookshop-db
   #      - name: mtxs-bookshop-destination
   #      - name: mtxs-bookshop-uaa
@@ -270,6 +270,12 @@ modules:
         - npm install
         - npm run build:cf
       supported-platforms: []
+  - name: mtxs-bookshop-workzone-cdm
+    type: html5
+    path: workzone
+    build-parameters:
+      build-result: .
+      supported-platforms: []
   - name: mtxs-bookshop-app-content
     type: com.sap.application.content
     path: app
@@ -284,6 +290,10 @@ modules:
           artifacts:
             - cswdemomtxsbooks.zip
           target-path: resources/
+        - name: mtxs-bookshop-workzone-cdm
+          artifacts:
+            - cdm.json
+          target-path: resources/
   - name: mtxs-bookshop-destination-content
     type: com.sap.application.content
     requires:
@@ -291,6 +301,10 @@ modules:
       - name: mtxs-bookshop-destination
         parameters:
           content-target: true
+      - name: mtxs-bookshop-html5-app-runtime
+        parameters:
+          service-key:
+            name: mtxs-bookshop-html5-app-runtime-key
       - name: mtxs-bookshop-html5-repo-host
         parameters:
           service-key:
@@ -307,6 +321,12 @@ modules:
       content:
         subaccount:
           destinations:
+            - Name: mtxs-bookshop-dt
+              ServiceInstanceName: mtxs-bookshop-html5-app-runtime
+              ServiceKeyName: mtxs-bookshop-html5-app-runtime-key
+              # Doesn't work with ${default-domain} variable when using extension landscape
+              # URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/cswdemomtxsbookshop
+              URL: https://html5-apps-repo-rt.cfapps.eu20.hana.ondemand.com/applications/cdm/cswdemomtxsbookshop
             - Name: mtxs_bookshop_html5_repo_host
               ServiceInstanceName: mtxs-bookshop-html5-repo-host
               ServiceKeyName: mtxs-bookshop-html5-repo-host-key
@@ -358,6 +378,20 @@ resources:
     parameters:
       service: destination
       service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          subaccount:
+            existing_destinations_policy: update
+            destinations:
+              - Name: mtxs-bookshop-rt
+                Authentication: NoAuthentication
+                ProxyType: Internet
+                Type: HTTP
+                CEP.HTML5contentprovider: true
+                HTML5.DynamicDestination: true
+                HTML5.ForwardAuthToken: true
+                URL: https://dev-azure-mtxs-bookshop.cfapps.eu20.hana.ondemand.com
   - name: mtxs-bookshop-connectivity
     type: org.cloudfoundry.managed-service
     parameters:
@@ -405,11 +439,11 @@ resources:
     parameters:
       service: html5-apps-repo
       service-plan: app-host
-  - name: mtxs-bookshop-repo-runtime
+  - name: mtxs-bookshop-html5-app-runtime
     type: org.cloudfoundry.managed-service
     parameters:
-      service-plan: app-runtime
       service: html5-apps-repo
+      service-plan: app-runtime
   - name: mtxs-bookshop-logging
     type: org.cloudfoundry.managed-service
     parameters:
