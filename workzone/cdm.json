@@ -1,0 +1,90 @@
+[
+  {
+    "_version": "3.2.0",
+    "identification": {
+      "id": "csw.demo.sales",
+      "title": "{{SpaceTitleSales}}",
+      "entityType": "space"
+    },
+    "payload": {
+      "contentNodes": [
+        {
+          "type": "page",
+          "id": "csw.demo.bookshop"
+        }
+      ]
+    },
+    "texts": [
+      {
+        "locale": "",
+        "textDictionary": {
+          "SpaceTitleSales": "Sales"
+        }
+      }
+    ]
+  },
+  {
+    "_version": "3.2.0",
+    "identification": {
+      "id": "csw.demo.bookshop",
+      "entityType": "page"
+    },
+    "payload": {
+      "workpageConfig": {
+        "title": "{{PageTitleBookshop}}"
+      },
+      "sections": [
+        {
+          "id": "section-1",
+          "title": "{{SectionTitleBookshop}}",
+          "viz": [
+            {
+              "appId": "csw.demo.mtxs.books",
+              "vizId": "books-display"
+            },
+            {
+              "appId": "csw.demo.mtxs.books",
+              "vizId": "books-displayStock500"
+            }
+          ]
+        }
+      ]
+    },
+    "texts": [
+      {
+        "locale": "",
+        "textDictionary": {
+          "SectionTitleBookshop": "Bookshop"
+        }
+      }
+    ]
+  },
+  {
+    "_version": "3.2.0",
+    "identification": {
+      "id": "Bookshop_Admin",
+      "entityType": "role",
+      "title": "{{RoleTitleBookshopAdmin}}"
+    },
+    "payload": {
+      "spaces": [
+        {
+          "id": "csw.demo.sales"
+        }
+      ],
+      "apps": [
+        {
+          "id": "csw.demo.mtxs.books"
+        }
+      ]
+    },
+    "texts": [
+      {
+        "locale": "",
+        "textDictionary": {
+          "RoleTitleBookshopAdmin": "Bookshop Admin"
+        }
+      }
+    ]
+  }
+]

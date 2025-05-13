@@ -3,6 +3,7 @@ const { Worker, isMainThread } = require("node:worker_threads");
 // https://cap.cloud.sap/docs/node.js/cds-log#configuring-log-levels
 const LOG = cds.log("mtxs-custom");
 const { config } = require("@cap-js-community/event-queue");
+var CronJob = require("cron").CronJob;
 
 /*
 // read from environment variable EVENT_PROCESSING_TENANTS
@@ -163,12 +164,42 @@ cds.middlewares.before = [
   cds.middlewares.ctx_model(),
 ];
 */
+
+var job = new CronJob(
+  "0 */5 * * * *",
+  async function () {
+    LOG.info("Cron job started");
+    // Read existing tenants
+    const saasProvisioningService = await cds.connect.to(
+      "cds.xt.SaasProvisioningService"
+    );
+    const tenants = await saasProvisioningService.run(SELECT.from("tenant"));
+    if (!tenants || tenants.length === 0) {
+      LOG.info("No tenants found");
+      return;
+    }
+    LOG.debug("Tenants found: ", tenants);
+    // loop over tenants
+    for (const tenant of tenants) {
+      LOG.info("Call destination in teanant: ", tenant.subscribedSubdomain);
+      cds.spawn({ tenant: tenant.subscribedTenantId }, async (tx) => {
+        // const catalogService = await tx.connect.to("CatalogService");
+        LOG.info("Call in spawn");
+      });
+    }
+  },
+  null,
+  false,
+  "Europe/Berlin"
+);
+
 // listening
 cds.on("listening", () => {
   LOG.info(`Server listening on ${cds.app.server.address().port}`);
   // Start additional instances as worker threads
   if (isMainThread) {
-    const worker = new Worker("./node_modules/@sap/cds/bin/cds-serve.js", {
+    job.start();
+    const worker = new Worker("./node_modules/@sap/cds/bin/serve.js", {
       env: {
         PORT: cds.env.server?.port + 1,
         VCAP_SERVICES: process.env.VCAP_SERVICES,
@@ -184,4 +215,9 @@ cds.on("listening", () => {
     });
     LOG.info("Worker thread started");
   }
+});
+
+cds.on("shutdown", () => {
+  LOG.info("--> shutdown");
+  job.stop();
 });
