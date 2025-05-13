@@ -166,7 +166,7 @@ cds.middlewares.before = [
 */
 
 var job = new CronJob(
-  "*/20 * * * * *",
+  "0 */5 * * * *",
   async function () {
     LOG.info("Cron job started");
     // Read existing tenants
@@ -178,12 +178,13 @@ var job = new CronJob(
       LOG.info("No tenants found");
       return;
     }
-    LOG.info("Tenants found: ", tenants);
+    LOG.debug("Tenants found: ", tenants);
     // loop over tenants
     for (const tenant of tenants) {
-      LOG.info("Tenant: ", tenant.subscribedSubdomain);
+      LOG.info("Call destination in teanant: ", tenant.subscribedSubdomain);
       cds.spawn({ tenant: tenant.subscribedTenantId }, async (tx) => {
-        const catalogService = await tx.connect.to("CatalogService");
+        // const catalogService = await tx.connect.to("CatalogService");
+        LOG.info("Call in spawn");
       });
     }
   },
