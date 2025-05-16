@@ -2,6 +2,34 @@
   {
     "_version": "3.2.0",
     "identification": {
+      "id": "csw.demo.bookshop.group",
+      "title": "{{GroupTitleBookshop}}",
+      "entityType": "group"
+    },
+    "payload": {
+      "viz": [
+        {
+          "appId": "csw.demo.mtxs.books",
+          "vizId": "books-display"
+        },
+        {
+          "appId": "csw.demo.mtxs.books",
+          "vizId": "books-displayStock500"
+        }
+      ]
+    },
+    "texts": [
+      {
+        "locale": "",
+        "textDictionary": {
+          "GroupTitleBookshop": "Bookshop"
+        }
+      }
+    ]
+  },
+  {
+    "_version": "3.2.0",
+    "identification": {
       "id": "csw.demo.sales",
       "title": "{{SpaceTitleSales}}",
       "entityType": "space"
@@ -10,7 +38,7 @@
       "contentNodes": [
         {
           "type": "page",
-          "id": "csw.demo.bookshop"
+          "id": "csw.demo.bookshop.page"
         }
       ]
     },
@@ -26,7 +54,7 @@
   {
     "_version": "3.2.0",
     "identification": {
-      "id": "csw.demo.bookshop",
+      "id": "csw.demo.bookshop.page",
       "entityType": "page"
     },
     "payload": {
@@ -54,6 +82,7 @@
       {
         "locale": "",
         "textDictionary": {
+          "PageTitleBookshop": "Bookshop",
           "SectionTitleBookshop": "Bookshop"
         }
       }
@@ -75,6 +104,11 @@
       "apps": [
         {
           "id": "csw.demo.mtxs.books"
+        }
+      ],
+      "groups": [
+        {
+          "id": "csw.demo.bookshop.group"
         }
       ]
     },
