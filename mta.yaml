@@ -241,6 +241,10 @@ modules:
         properties:
           app-name: ${app-name}
           srv-url: ${default-url}
+  # Launchpad Module based on the documentation at:
+  # https://help.sap.com/docs/cloud-portal-service/sap-cloud-portal-service-on-cloud-foundry/developing-launchpad-module
+  # which still mentions the service: portal with service-plan: standard.
+  # But this is replaced by service: build-workzone-standard with service-plan: standard
   - name: mtxs-bookshop-workzone-deployer
     type: com.sap.application.content
     path: config/workzone-deployer
