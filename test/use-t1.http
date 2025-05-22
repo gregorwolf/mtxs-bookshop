@@ -18,6 +18,12 @@ Authorization: Basic carol:carol
 GET http://localhost:4004/odata/v4/catalog/Authors
 #  ?$expand=books
 Authorization: Basic carol:carol
+### For $batch request the file with the actual request must use CRLF line endings
+POST http://localhost:4004/odata/v4/catalog/$batch
+Authorization: Basic carol:carol
+Content-Type: multipart/mixed; boundary=batch_id-1747948963162-182
+
+< ./use-t1-batch.http
 ###
 POST http://localhost:4004/odata/v4/catalog/Books
 Authorization: Basic carol:carol

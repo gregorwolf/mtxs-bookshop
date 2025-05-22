@@ -82,10 +82,23 @@
       "multitenancy": true,
       "toggles": true,
       "extensibility": true,
+      "auth": {
+        "users": {
+          "carol": {
+            "tenant": "t1",
+            "roles": [
+              "admin",
+              "Display",
+              "cds.ExtensionDeveloper",
+              "cds.UIFlexDeveloper"
+            ]
+          }
+        }
+      },
       "[hybrid]": {
         "auth": {
-          "xkind": "mocked",
-          "kind": "xsuaa"
+          "kind": "mocked",
+          "xkind": "xsuaa"
         },
         "db": {
           "kind": "hana"
