@@ -2,7 +2,7 @@
 Content-Type:application/http
 Content-Transfer-Encoding:binary
 
-GET Authors HTTP/1.1
+GET Authors?$count=true&$top=2 HTTP/1.1
 
 --batch_id-1747948963162-182--
 Group ID: $auto.Workers

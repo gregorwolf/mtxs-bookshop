@@ -33,7 +33,8 @@
     "express": "^4",
     "hdb": "^0",
     "passport": "^0",
-    "patch-package": "^8.0.0"
+    "patch-package": "^8.0.0",
+    "@sap-cloud-sdk/resilience": "^3"
   },
   "devDependencies": {
     "@sap/ux-specification": "^1.108.15",
@@ -125,6 +126,14 @@
         "credentials": {
           "destination": "CatalogService",
           "path": "/catalog"
+        }
+      },
+      "CatalogService_v2": {
+        "kind": "odata-v2",
+        "model": "srv/external/CatalogService-v2",
+        "credentials": {
+          "destination": "CatalogService",
+          "path": "/odata/v2/catalog"
         }
       }
     }

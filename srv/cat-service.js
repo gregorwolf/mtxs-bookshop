@@ -13,6 +13,7 @@ const { executeHttpRequest } = require("@sap-cloud-sdk/http-client");
 
 module.exports = cds.service.impl(async function () {
   const catService = await cds.connect.to("srv.external.CatalogService");
+  const catServiceV2 = await cds.connect.to("CatalogService_v2");
 
   this.on(["getUsers"], async (req) => {
     let userList = [];
@@ -105,7 +106,8 @@ module.exports = cds.service.impl(async function () {
   });
 
   this.on("READ", "Authors", (req) => {
-    return catService.run(req.query);
+    return catServiceV2.run(req.query);
+    // return catService.run(req.query);
   });
 
   // Books?$expand=author
