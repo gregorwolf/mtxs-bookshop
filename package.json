@@ -19,24 +19,25 @@
   },
   "dependencies": {
     "@cap-js-community/event-queue": "^1.8.2",
+    "@cap-js/hana": "^2",
     "@sap-cloud-sdk/connectivity": "^3",
     "@sap-cloud-sdk/http-client": "^3",
     "@sap-cloud-sdk/mail-client": "^3.22.2",
+    "@sap-cloud-sdk/resilience": "^3",
     "@sap-cloud-sdk/util": "^3",
-    "@sap/cds": "^8",
-    "@sap/cds-mtxs": "^2",
+    "@sap/cds": "^9",
+    "@sap/cds-mtxs": "^3",
     "@sap/xsenv": "^5",
     "@sap/xssec": "^4",
     "broker": "^1.0.0",
     "cfenv": "^1.2.4",
     "cron": "^4.3.0",
     "express": "^4",
-    "hdb": "^0",
     "passport": "^0",
-    "patch-package": "^8.0.0",
-    "@sap-cloud-sdk/resilience": "^3"
+    "patch-package": "^8.0.0"
   },
   "devDependencies": {
+    "@sap/cds-dk": "^9.0.5",
     "@sap/ux-specification": "^1.108.15",
     "cds-launchpad-plugin": "^2.0.0",
     "sqlite3": "^5"
