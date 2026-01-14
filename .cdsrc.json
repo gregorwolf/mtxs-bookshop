@@ -1,1 +1,31 @@
-{}
+{
+  "log": {
+    "levels": {
+      "cds": "info",
+      "cli": "info",
+      "build": "info",
+      "app": "info",
+      "db": "info",
+      "sql": "info",
+      "hana": "info",
+      "pool": "info",
+      "messaging": "info",
+      "remote": "info",
+      "audit-log": "info",
+      "telemetry": "info",
+      "odata": "info",
+      "rest": "info",
+      "auth": "info",
+      "deploy": "debug",
+      "mtx": "debug",
+      "TENANT": "info",
+      "serving": "info",
+      "ace": "info",
+      "eventQueue/EventQueueProcessorBase": "silent",
+      "eventQueue/initialize": "silent",
+      "eventQueue/redisPubSub": "silent",
+      "eventQueue/runner": "silent",
+      "cov2app": "silent"
+    }
+  }
+}

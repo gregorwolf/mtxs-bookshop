@@ -1,0 +1,17 @@
+ID: mtxs-bookshop.cloud-logging
+_schema-version: "3.3.0"
+version: 0.0.1
+extends: mtxs-bookshop
+
+modules:
+  - name: mtxs-bookshop
+    requires:
+      - name: cloud-logging
+
+  - name: mtxs-bookshop-srv
+    requires:
+      - name: cloud-logging
+
+resources:
+  - name: cloud-logging
+    type: org.cloudfoundry.existing-service
