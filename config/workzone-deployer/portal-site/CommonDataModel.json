@@ -82,7 +82,7 @@
           ],
           "sap.cloud.portal": {
             "config": {
-              "ui5LibraryUrl": "https://ui5.sap.com/1.148/",
+              "ui5LibraryUrl": "https://ui5.sap.com/1.148.6/",
               "theme.id": "sap_horizon",
               "theme.active": [
                 "sap_horizon",
